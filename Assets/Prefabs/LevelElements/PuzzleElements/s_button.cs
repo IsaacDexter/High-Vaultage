@@ -11,18 +11,19 @@ public class s_button : MonoBehaviour
 
     /// <summary>A reference to the buttons plate</summary>
     [SerializeField] private GameObject m_plate;
-    /// <summary>A reference to the plates material</summary>
-    Material m_plateMaterial;
 
     /// <summary>The material to use while the button is not pressed</summary>
     [SerializeField] private Material m_materialUnpressed;
     /// <summary>The material to switch to while the button is pressed</summary>
     [SerializeField] private Material m_materialPressed;
 
+    /// <summary>The game objects to activate when this button is pushed</summary>
+    [SerializeField] private s_output[] m_outputs;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_plateMaterial = m_plate.GetComponent<MeshRenderer>().material; //Gets the material component
+
     }
 
     // Update is called once per frame
@@ -31,23 +32,33 @@ public class s_button : MonoBehaviour
         
     }
 
-    void Press()
+    private void Press()
     {
         m_pressed = true;
         SetPlateMaterial(m_materialPressed);   //Switch to the pressed material
         m_plate.transform.position += new Vector3(0.0f, m_depressionDistance, 0.0f);   //Depress the button by depression distance
+
+        foreach (s_output output in m_outputs)
+        {
+            output.Activate();
+        }
     }
 
-    void SetPlateMaterial(Material material)
+    private void SetPlateMaterial(Material material)
     {
         m_plate.GetComponent<MeshRenderer>().material = material;
     }
 
-    void Release()
+    private void Release()
     {
         m_pressed = false;
         SetPlateMaterial(m_materialUnpressed);    //Switch to the unpressed material
         m_plate.transform.position += new Vector3(0.0f, -m_depressionDistance, 0.0f);   //press the button by negative depression distance
+
+        foreach (s_output output in m_outputs)
+        {
+            output.Deactivate();
+        }
     }
     
     public void OnTriggerEnter(Collider other)
