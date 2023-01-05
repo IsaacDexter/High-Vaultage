@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_output : MonoBehaviour
+public class s_triggerable : MonoBehaviour
 {
     [SerializeField] protected bool m_active = false;
 
     // Start is called before the first frame update
-    protected void Start()
+    virtual protected void Start()
     {
         SetActive(m_active);
     }
 
     // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
 
     }

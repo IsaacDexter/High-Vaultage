@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_gate : s_output
+public class s_gate : s_triggerable
 {
     /// <summary>A reference to the doors lamp</summary>
-    [SerializeField] private s_output m_lamp;
+    [SerializeField] private s_triggerable m_lamp;
     [SerializeField] private GameObject m_door;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void Open()
     {

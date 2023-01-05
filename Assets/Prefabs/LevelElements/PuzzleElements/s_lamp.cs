@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_lamp : s_output
+public class s_lamp : s_triggerable
 {
     /// <summary>A reference to the Lights bulb</summary>
     [SerializeField] private GameObject m_bulb;
@@ -11,12 +11,6 @@ public class s_lamp : s_output
     [SerializeField] private Material m_materialUnlit;
     /// <summary>The material to use while the lamp is lit</summary>
     [SerializeField] private Material m_materialLit;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void SetLampMaterial(Material material)
     {
