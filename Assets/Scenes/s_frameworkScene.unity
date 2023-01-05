@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 527888264}
   - component: {fileID: 527888263}
   - component: {fileID: 527888262}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: o_floorPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 641064609}
   - component: {fileID: 641064610}
   - component: {fileID: 641064611}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,17 +382,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 641064607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b55c48f3253810418d17c1aeca8ad0f, type: 3}
+  m_Script: {fileID: 11500000, guid: f789be709d7304a49b47c00b0fc7db02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_characterController: {fileID: 641064610}
-  m_playerSpeed: 12
+  m_playerSpeed: 2
   m_gravityValue: -15
-  m_jumpHeight: 5
+  m_jumpHeight: 8
   m_groundCheck: {fileID: 1726652853}
   m_groundMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1
 --- !u!1 &669549421
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 798388499}
   - component: {fileID: 798388502}
   - component: {fileID: 798388503}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -618,10 +618,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 798388498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a447ace85e9393428127abf29db89b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 97f3a3d0418f3d440aabfe962f02794f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mouseSensitivity: 5000
+  m_mouseSensitivity: 1000
   m_playerBody: {fileID: 641064609}
 --- !u!1 &829762675
 GameObject:
@@ -941,7 +941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1726652853}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: m_groundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 2049728289}
   - component: {fileID: 2049728288}
   - component: {fileID: 2049728287}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: o_Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,7 +1075,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049728284}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
