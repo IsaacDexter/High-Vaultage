@@ -18,7 +18,7 @@ public class RotationScript : MonoBehaviour
     void Update()
     {
         m_mouseX = Input.GetAxis("Mouse X") * m_mouseSensitivity * Time.deltaTime;
-        m_mouseX = Input.GetAxis("Mouse Y") * m_mouseSensitivity * Time.deltaTime;
+        m_mouseY = Input.GetAxis("Mouse Y") * m_mouseSensitivity * Time.deltaTime;
         xRotation -= m_mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);

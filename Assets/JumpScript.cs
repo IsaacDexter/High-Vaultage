@@ -4,52 +4,39 @@ using UnityEngine;
 
 public class JumpScript : MonoBehaviour
 {
-    private CharacterController m_characterController;
-    private Vector3 m_playerVelocity;
-    private bool  m_groundedPlayer;
+    public CharacterController m_characterController;
     
+    public  float m_playerSpeed    =  2.0f;
+    public  float m_gravityValue   = -15.0f;
+    public  float m_jumpHeight     =  8.0f;
 
-    private float m_playerSpeed = 2.0f;
-    private float m_jumpHeight = 1.0f;
-    private float m_gravityValue = -4.9f;
+    public Transform m_groundCheck;
+    private float    m_groundDistance = 0.4f;
+    public LayerMask m_groundMask;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-      m_characterController = gameObject.AddComponent<CharacterController>(); 
-      Cursor.lockState = CursorLockMode.Locked;
-    }
+    private Vector3 m_playerVelocity;
+    private bool    m_isGrounded;
 
     // Update is called once per frame
     void Update()
     {
-        PlayerMovementController();
-    }
-
-    void PlayerMovementController()
-    {
-        m_groundedPlayer = m_characterController.isGrounded;
-        if (m_groundedPlayer && m_playerVelocity.y < 0)
+        m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
+        if(m_isGrounded && m_playerVelocity.y < 0)
         {
-            m_playerVelocity.y = 0f;
+            m_playerVelocity.y = -0.1f;
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        m_characterController.Move(move * Time.deltaTime * m_playerSpeed);
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 move = transform.right * x + transform.forward * z;
+        m_characterController.Move(move * m_playerSpeed * Time.deltaTime);
 
-        if (move != Vector3.zero)
+        if(Input.GetButtonDown("Jump") && m_isGrounded)
         {
-            gameObject.transform.forward = move;
-        }
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            m_playerVelocity.y += Mathf.Sqrt(m_jumpHeight * -3.0f * m_gravityValue);
+            m_playerVelocity.y = Mathf.Sqrt(m_jumpHeight * -2f * m_gravityValue);
         }
 
         m_playerVelocity.y += m_gravityValue * Time.deltaTime;
         m_characterController.Move(m_playerVelocity * Time.deltaTime);
     }
-
-    
 }
