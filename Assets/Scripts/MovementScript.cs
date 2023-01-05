@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JumpScript : MonoBehaviour
+public class MovementScript : MonoBehaviour
 {
     public CharacterController m_characterController;
     
@@ -43,3 +43,4 @@ public class JumpScript : MonoBehaviour
         m_characterController.Move(m_playerVelocity * Time.deltaTime);
     }
 }
+//
