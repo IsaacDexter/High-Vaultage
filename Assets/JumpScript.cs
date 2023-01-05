@@ -17,7 +17,10 @@ public class JumpScript : MonoBehaviour
     private Vector3 m_playerVelocity;
     private bool    m_isGrounded;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     void Update()
     {
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
