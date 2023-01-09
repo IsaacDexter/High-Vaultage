@@ -46,29 +46,33 @@ public class s_button : s_trigger
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (CheckCollider(other))
+        if (!m_triggered) //Check the button isn't already pressed
         {
-            Trigger();
+            if (CheckCollider(other))
+            {
+                Trigger();
+            }
         }
     }
 
     virtual protected bool CheckCollider(Collider other)
     {
-        if (!m_triggered) //Check the button isn't already pressed
+
+        if (other.tag == "Player")  //If the player is the one colliding with it, press it
         {
-            if (other.tag == "Player")  //If the player is the one colliding with it, press it
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
 
     protected void OnTriggerExit(Collider other)
     {
-        if (CheckCollider(other))
+        if (m_triggered) //Check the button is already pressed
         {
-            Detrigger();
+            if (CheckCollider(other))
+            {
+                Detrigger();
+            }
         }
     }
 }
