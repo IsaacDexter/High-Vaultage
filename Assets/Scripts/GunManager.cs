@@ -96,7 +96,7 @@ public class GunManager : MonoBehaviour
             else
 			{
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true
+                Cursor.visible = true;
 			}
         }
 
