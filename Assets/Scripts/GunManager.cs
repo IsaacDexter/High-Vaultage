@@ -8,20 +8,36 @@ public class GunManager : MonoBehaviour
     [SerializeField] e_weaponType m_primaryWeapon;
     [SerializeField] e_weaponType m_secondaryWeapon;
     [SerializeField] GameObject m_camera;
+
+    [SerializeField] float m_punchForce;
+    [SerializeField] float m_shotgunForce;
+    [SerializeField] float m_dashForce;
+    [SerializeField] float m_dashDuration;
+    [SerializeField] float m_grenadeForce;
     Rigidbody m_rigidBody;
 
     float m_primaryCharge;
     float m_secondaryCharge;
-
+    
     float m_holdTimer;
+    float m_dashTime;
+    Vector3 startingVelcity;
+
     void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
     }
 
+    IEnumerator DashDelay(float delay)
+	{
+        yield return new WaitForSeconds(delay);
+        m_rigidBody.velocity = startingVelcity;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        //Shoot Selected Primary Weapon
         switch (m_primaryWeapon)
         {
             case e_weaponType.GLOVE:
@@ -43,6 +59,7 @@ public class GunManager : MonoBehaviour
                 SheildAttack(KeyCode.Mouse0);
                 break;
         }
+        //Shoot Selected Secondary Weapon
         switch (m_secondaryWeapon)
         {
             case e_weaponType.GLOVE:
@@ -65,14 +82,43 @@ public class GunManager : MonoBehaviour
                 break;
         }
 
+
+
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             //open weapon wheel
             Debug.Log("Wheapon Wheel");
+            if (Cursor.visible == true)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+			{
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true
+			}
         }
 
 
     }
+
+    public void SwitchWeapon(e_weaponType weaponType,float arm)
+	{
+        if (arm == 1)
+		{
+            m_primaryWeapon = weaponType;
+        }
+        if (arm == 2)
+		{
+            m_secondaryWeapon = weaponType;
+        }
+	}
+
+    void SetWeaponModel(e_weaponType weaponType, float arm)
+	{
+
+	}
 
     void GloveAttack(KeyCode mouse)
 	{
@@ -89,7 +135,7 @@ public class GunManager : MonoBehaviour
 			{
                 float velocityCancel = m_rigidBody.velocity.y;
                 Debug.Log("jump");
-                Vector3 jumpforce = new Vector3(0, 10, 0);
+                Vector3 jumpforce = new Vector3(0, m_punchForce, 0);
                 if(velocityCancel < 0)
 				{
                     velocityCancel = 0;
@@ -111,7 +157,14 @@ public class GunManager : MonoBehaviour
     void SwordAttack(KeyCode mouse)
     {
         Debug.Log("Sword Attack");
+        if (Input.GetKeyUp(mouse))
+        {
+            Vector3 startingVelcity = m_rigidBody.velocity;
+            m_rigidBody.AddForce(m_camera.transform.TransformDirection(Vector3.forward) * m_dashForce, ForceMode.Impulse);
+            StartCoroutine(DashDelay(m_dashDuration));
+        }
     }
+
     void ShotgunAttack(KeyCode mouse)
     {
         if (Input.GetKeyUp(mouse))
@@ -120,7 +173,7 @@ public class GunManager : MonoBehaviour
             Vector3 direction = m_camera.transform.TransformDirection(Vector3.forward);
             direction *= -1;
             //m_rigidBody.AddForce(new Vector3(100, 0, 0), ForceMode.Impulse);
-            m_rigidBody.AddForce(direction * 25,ForceMode.Impulse);
+            m_rigidBody.AddForce(direction * m_shotgunForce, ForceMode.Impulse);
             Debug.DrawRay(m_camera.transform.position, direction, Color.green, 14);
         }
 
