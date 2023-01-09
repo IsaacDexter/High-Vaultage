@@ -9,6 +9,8 @@ public class GunManager : MonoBehaviour
     [SerializeField] e_weaponType m_secondaryWeapon;
     [SerializeField] GameObject m_camera;
 
+    bool m_weaponWheel;
+
     [SerializeField] float m_punchForce;
     [SerializeField] float m_shotgunForce;
     [SerializeField] float m_dashForce;
@@ -26,6 +28,8 @@ public class GunManager : MonoBehaviour
     void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     IEnumerator DashDelay(float delay)
@@ -37,67 +41,79 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Shoot Selected Primary Weapon
-        switch (m_primaryWeapon)
+        if (!m_weaponWheel)
         {
-            case e_weaponType.GLOVE:
-                GloveAttack(KeyCode.Mouse0);
-                break;
-            case e_weaponType.SWORD:
-                SwordAttack(KeyCode.Mouse0);
-                break;
-            case e_weaponType.SHOTGUN:
-                ShotgunAttack(KeyCode.Mouse0);
-                break;
-            case e_weaponType.GRENADE:
-                GrenadeAttack(KeyCode.Mouse0);
-                break;
-            case e_weaponType.HARPOON:
-                HarpoonAttack(KeyCode.Mouse0);
-                break;
-            case e_weaponType.SHEILD:
-                SheildAttack(KeyCode.Mouse0);
-                break;
+            //Shoot Selected Primary Weapon
+            switch (m_primaryWeapon)
+            {
+                case e_weaponType.GLOVE:
+                    GloveAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SWORD:
+                    SwordAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SHOTGUN:
+                    ShotgunAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.GRENADE:
+                    GrenadeAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.HARPOON:
+                    HarpoonAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SHEILD:
+                    SheildAttack(KeyCode.Mouse0);
+                    break;
+                    case e_weaponType.REVOLVER:
+                    RevolverAttack(KeyCode.Mouse0);
+                    break;
+            }
+            //Shoot Selected Secondary Weapon
+            switch (m_secondaryWeapon)
+            {
+                case e_weaponType.GLOVE:
+                    GloveAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SWORD:
+                    SwordAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SHOTGUN:
+                    ShotgunAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.GRENADE:
+                    GrenadeAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.HARPOON:
+                    HarpoonAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SHEILD:
+                    SheildAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.REVOLVER:
+                    RevolverAttack(KeyCode.Mouse1);
+                    break;
+            }
         }
-        //Shoot Selected Secondary Weapon
-        switch (m_secondaryWeapon)
-        {
-            case e_weaponType.GLOVE:
-                GloveAttack(KeyCode.Mouse1);
-                break;
-            case e_weaponType.SWORD:
-                SwordAttack(KeyCode.Mouse1);
-                break;
-            case e_weaponType.SHOTGUN:
-                ShotgunAttack(KeyCode.Mouse1);
-                break;
-            case e_weaponType.GRENADE:
-                GrenadeAttack(KeyCode.Mouse1);
-                break;
-            case e_weaponType.HARPOON:
-                HarpoonAttack(KeyCode.Mouse1);
-                break;
-            case e_weaponType.SHEILD:
-                SheildAttack(KeyCode.Mouse1);
-                break;
-        }
-
 
 
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             //open weapon wheel
             Debug.Log("Wheapon Wheel");
-            if (Cursor.visible == true)
+            if (m_weaponWheel == true)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                m_weaponWheel = false;
+                Time.timeScale = 1f;
             }
             else
 			{
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true
-			}
+                Cursor.visible = true;
+                m_weaponWheel = true;
+                Time.timeScale = 0.5f;
+            }
         }
 
 
@@ -108,6 +124,7 @@ public class GunManager : MonoBehaviour
         if (arm == 1)
 		{
             m_primaryWeapon = weaponType;
+
         }
         if (arm == 2)
 		{
@@ -146,7 +163,6 @@ public class GunManager : MonoBehaviour
             else
 			{
                 Debug.Log("punch");
-
             }
         }
 
@@ -181,14 +197,40 @@ public class GunManager : MonoBehaviour
     void GrenadeAttack(KeyCode mouse)
     {
         Debug.Log("Grenade Attack" );
+
+
+
     }
     void HarpoonAttack(KeyCode mouse)
     {
         Debug.Log("Harpoon Attack");
+
     }
     void SheildAttack(KeyCode mouse)
     {
         Debug.Log("Sheild Attack2");
+        if (Input.GetKeyDown(mouse))
+        {
+            m_rigidBody.useGravity = false;
+            m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0,m_rigidBody.velocity.z);
+        }
+        if (Input.GetKeyUp(mouse))
+        {
+            m_rigidBody.useGravity = true;
+        }
+    }
+
+    void RevolverAttack(KeyCode mouse)
+    {
+        Debug.Log("Revolver Attack");
+        if (Input.GetKeyDown(mouse))
+        {
+            Time.timeScale = 0.25f;
+        }
+        if (Input.GetKeyUp(mouse))
+        {
+            Time.timeScale = 1f;
+        }
     }
 
 
@@ -202,6 +244,7 @@ public enum e_weaponType
     SHOTGUN,
     GRENADE,
     HARPOON,
+    REVOLVER,
     SHEILD
 }
 
