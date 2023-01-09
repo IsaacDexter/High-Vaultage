@@ -70,6 +70,8 @@ public class GunManager : MonoBehaviour
             //open weapon wheel
             Debug.Log("Wheapon Wheel");
         }
+
+
     }
 
     void GloveAttack(KeyCode mouse)
@@ -115,9 +117,11 @@ public class GunManager : MonoBehaviour
         if (Input.GetKeyUp(mouse))
         {
             Debug.Log("Shogun");
-            Vector3 forwards = m_camera.transform.forward;
-            m_rigidBody.AddForce(forwards * -50,ForceMode.Impulse);
-            Debug.Log(forwards * -50);
+            Vector3 direction = m_camera.transform.TransformDirection(Vector3.forward);
+            direction *= -1;
+            //m_rigidBody.AddForce(new Vector3(100, 0, 0), ForceMode.Impulse);
+            m_rigidBody.AddForce(direction * 25,ForceMode.Impulse);
+            Debug.DrawRay(m_camera.transform.position, direction, Color.green, 14);
         }
 
     }
