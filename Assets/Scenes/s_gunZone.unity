@@ -1750,13 +1750,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_airDrag
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_jumpForce
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_groundDrag
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_maxVelocity
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_orientation
       value: 
       objectReference: {fileID: 548518181}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_cameraTransform
+      value: 
+      objectReference: {fileID: 226231587}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_groundMask.m_Bits
       value: 192

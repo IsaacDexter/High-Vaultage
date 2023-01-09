@@ -2037,9 +2037,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
+      propertyPath: m_airDrag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
+      propertyPath: m_groundDrag
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
+      propertyPath: m_maxVelocity
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
       propertyPath: m_orientation
       value: 
       objectReference: {fileID: 15881702}
+    - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
+      propertyPath: m_cameraTransform
+      value: 
+      objectReference: {fileID: 990721068}
+    - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
+      propertyPath: m_groundMask.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
       propertyPath: m_airMovementMultiplier
       value: 0.4

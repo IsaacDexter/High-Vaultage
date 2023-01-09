@@ -1721,6 +1721,18 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_maxVelocity
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_orientation
+      value: 
+      objectReference: {fileID: 829524644}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_cameraTransform
+      value: 
+      objectReference: {fileID: 226231587}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_groundMask.m_Bits
       value: 192
       objectReference: {fileID: 0}
@@ -1780,10 +1792,22 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551498, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: dashForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551498, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_cooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551499, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_camera
       value: 
       objectReference: {fileID: 226231587}
+    - target: {fileID: 6184981835223551499, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_orientation
+      value: 
+      objectReference: {fileID: 829524644}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6184981835223551496, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
@@ -1793,6 +1817,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 829715750}
   m_SourcePrefab: {fileID: 100100000, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+--- !u!4 &829524644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6184981834992257989, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+  m_PrefabInstance: {fileID: 829524643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &829715749
 GameObject:
   m_ObjectHideFlags: 0
@@ -3980,6 +4009,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bc0b489a7685c45b4205a60b2239bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_weapon: 0
+  m_player: {fileID: 0}
 --- !u!1 &2137936303
 GameObject:
   m_ObjectHideFlags: 0
