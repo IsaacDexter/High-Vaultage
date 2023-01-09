@@ -9,6 +9,11 @@ public class GunManager : MonoBehaviour
     [SerializeField] e_weaponType m_secondaryWeapon;
     [SerializeField] GameObject m_camera;
 
+<<<<<<< HEAD
+=======
+    bool m_weaponWheel;
+
+>>>>>>> Chris
     [SerializeField] float m_punchForce;
     [SerializeField] float m_shotgunForce;
     [SerializeField] float m_dashForce;
@@ -26,6 +31,11 @@ public class GunManager : MonoBehaviour
     void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
+<<<<<<< HEAD
+=======
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+>>>>>>> Chris
     }
 
     IEnumerator DashDelay(float delay)
@@ -37,6 +47,7 @@ public class GunManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         //Shoot Selected Primary Weapon
         switch (m_primaryWeapon)
         {
@@ -82,22 +93,92 @@ public class GunManager : MonoBehaviour
                 break;
         }
 
+=======
+        if (!m_weaponWheel)
+        {
+            //Shoot Selected Primary Weapon
+            switch (m_primaryWeapon)
+            {
+                case e_weaponType.GLOVE:
+                    GloveAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SWORD:
+                    SwordAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SHOTGUN:
+                    ShotgunAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.GRENADE:
+                    GrenadeAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.HARPOON:
+                    HarpoonAttack(KeyCode.Mouse0);
+                    break;
+                case e_weaponType.SHEILD:
+                    SheildAttack(KeyCode.Mouse0);
+                    break;
+                    case e_weaponType.REVOLVER:
+                    RevolverAttack(KeyCode.Mouse0);
+                    break;
+            }
+            //Shoot Selected Secondary Weapon
+            switch (m_secondaryWeapon)
+            {
+                case e_weaponType.GLOVE:
+                    GloveAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SWORD:
+                    SwordAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SHOTGUN:
+                    ShotgunAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.GRENADE:
+                    GrenadeAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.HARPOON:
+                    HarpoonAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.SHEILD:
+                    SheildAttack(KeyCode.Mouse1);
+                    break;
+                case e_weaponType.REVOLVER:
+                    RevolverAttack(KeyCode.Mouse1);
+                    break;
+            }
+        }
+>>>>>>> Chris
 
 
         if (Input.GetKeyDown(KeyCode.Mouse2))
         {
             //open weapon wheel
             Debug.Log("Wheapon Wheel");
+<<<<<<< HEAD
             if (Cursor.visible == true)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+=======
+            if (m_weaponWheel == true)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                m_weaponWheel = false;
+                Time.timeScale = 1f;
+>>>>>>> Chris
             }
             else
 			{
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+<<<<<<< HEAD
 			}
+=======
+                m_weaponWheel = true;
+                Time.timeScale = 0.5f;
+            }
+>>>>>>> Chris
         }
 
 
@@ -108,6 +189,10 @@ public class GunManager : MonoBehaviour
         if (arm == 1)
 		{
             m_primaryWeapon = weaponType;
+<<<<<<< HEAD
+=======
+
+>>>>>>> Chris
         }
         if (arm == 2)
 		{
@@ -146,7 +231,10 @@ public class GunManager : MonoBehaviour
             else
 			{
                 Debug.Log("punch");
+<<<<<<< HEAD
 
+=======
+>>>>>>> Chris
             }
         }
 
@@ -181,14 +269,49 @@ public class GunManager : MonoBehaviour
     void GrenadeAttack(KeyCode mouse)
     {
         Debug.Log("Grenade Attack" );
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> Chris
     }
     void HarpoonAttack(KeyCode mouse)
     {
         Debug.Log("Harpoon Attack");
+<<<<<<< HEAD
+=======
+
+>>>>>>> Chris
     }
     void SheildAttack(KeyCode mouse)
     {
         Debug.Log("Sheild Attack2");
+<<<<<<< HEAD
+=======
+        if (Input.GetKeyDown(mouse))
+        {
+            m_rigidBody.useGravity = false;
+            m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0,m_rigidBody.velocity.z);
+        }
+        if (Input.GetKeyUp(mouse))
+        {
+            m_rigidBody.useGravity = true;
+        }
+    }
+
+    void RevolverAttack(KeyCode mouse)
+    {
+        Debug.Log("Revolver Attack");
+        if (Input.GetKeyDown(mouse))
+        {
+            Time.timeScale = 0.25f;
+        }
+        if (Input.GetKeyUp(mouse))
+        {
+            Time.timeScale = 1f;
+        }
+>>>>>>> Chris
     }
 
 
@@ -202,6 +325,10 @@ public enum e_weaponType
     SHOTGUN,
     GRENADE,
     HARPOON,
+<<<<<<< HEAD
+=======
+    REVOLVER,
+>>>>>>> Chris
     SHEILD
 }
 
