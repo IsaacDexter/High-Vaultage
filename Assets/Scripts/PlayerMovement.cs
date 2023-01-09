@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
         else
             m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
 
+
     }
     private void Jump()
     {
