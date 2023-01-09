@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        m_isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, 1, 0), 0.4f, m_groundMask);
+        m_isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, m_playerHeight / 2, 0), 0.4f, m_groundMask);
         MyInput();
         ControlDrag();
 
@@ -57,7 +58,9 @@ public class PlayerMovement : MonoBehaviour
         if(m_isGrounded)
             m_rigidBody.AddForce(m_moveDirection.normalized * moveSpeed * m_MovementMultiplier, ForceMode.Acceleration);
         else
-            m_rigidBody.AddForce(m_moveDirection.normalized * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Acceleration);
+            m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
+
+        Debug.Log(m_rigidBody.velocity.magnitude);
     }
     private void Jump()
     {
