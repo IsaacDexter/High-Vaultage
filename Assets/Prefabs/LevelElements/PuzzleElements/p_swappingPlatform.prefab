@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1915738651612246832
+--- !u!1 &3179165003323027983
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4803577150200674903}
-  - component: {fileID: 8660735447845071927}
+  - component: {fileID: 3943118158370946000}
+  - component: {fileID: 3795679020230187480}
   m_Layer: 0
-  m_Name: p_movingPlatform
+  m_Name: p_swappingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4803577150200674903
+--- !u!4 &3943118158370946000
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915738651612246832}
+  m_GameObject: {fileID: 3179165003323027983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4720900204935535024}
+  - {fileID: 2636172064982368553}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8660735447845071927
+--- !u!114 &3795679020230187480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915738651612246832}
+  m_GameObject: {fileID: 3179165003323027983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2119ed0cdf5ec794d9efd9dc88f8fa1f, type: 3}
+  m_Script: {fileID: 11500000, guid: d15c56ea338025d43903aaca66bdfce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_active: 0
-  m_waypoints:
-  - {fileID: 0}
-  m_speed: 0.05
---- !u!1001 &601000041611206715
+  m_waypoints: []
+  m_speed: 0.01
+--- !u!1001 &7874191441120884898
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 2
-    m_TransformParent: {fileID: 4803577150200674903}
+    m_TransformParent: {fileID: 3943118158370946000}
     m_Modifications:
     - target: {fileID: 1290930276198434424, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
       propertyPath: m_Name
@@ -108,8 +107,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
---- !u!4 &4720900204935535024 stripped
+--- !u!4 &2636172064982368553 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5319648240373299595, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
-  m_PrefabInstance: {fileID: 601000041611206715}
+  m_PrefabInstance: {fileID: 7874191441120884898}
   m_PrefabAsset: {fileID: 0}

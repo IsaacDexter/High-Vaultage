@@ -5,13 +5,13 @@ using UnityEngine;
 public class s_movingPlatform : s_triggerable
 {
     /// <summary>The waypoints for the platform to move to, in order of the array given</summary>
-    [SerializeField] private List<s_waypoint> m_waypoints;
+    [SerializeField] protected List<s_waypoint> m_waypoints;
     /// <summary>The speed of the moving platform</summary>
-    [SerializeField] private float m_speed = 0.01f;
+    [SerializeField] protected float m_speed = 0.01f;
     /// <summary>The position of the current waypoint</summary>
-    Vector3 m_destination;
+    protected Vector3 m_destination;
     /// <summary>The index of the current waypoint</summary>
-    int m_waypointIndex = 0;
+    protected int m_waypointIndex = 0;
 
 
     override protected void Start()
@@ -77,7 +77,7 @@ public class s_movingPlatform : s_triggerable
     }
 
     /// <returns>Increments m_waypointIndex, or resets it. Returns that waypoint</returns>
-    s_waypoint GetNextWaypoint()
+    virtual protected s_waypoint GetNextWaypoint()
     {
         m_waypointIndex++;  //Increment the waypoint index to get the next waypoint
         if (m_waypointIndex >= m_waypoints.Count)  //If we've exceeded the waypoint array...
@@ -88,7 +88,7 @@ public class s_movingPlatform : s_triggerable
     }
 
     /// <returns>Increments m_waypointIndex, and returns that waypoints direction</returns>
-    Vector3 GetNextDestination()
+    protected Vector3 GetNextDestination()
     {
         return GetNextWaypoint().transform.position;
     }
