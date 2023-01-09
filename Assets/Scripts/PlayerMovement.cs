@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 6f;
     [SerializeField] float m_playerHeight = 2f;
     [SerializeField] float m_jumpForce = 5f;
+
     [SerializeField] float m_airMovementMultiplier = 0.03f;
     [SerializeField] LayerMask m_groundMask;
     [SerializeField] float m_groundDrag;
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     float m_timeLeft = 0;
     float m_MovementMultiplier = 10f;
+
     float m_horizontalMovement;
     float m_verticalMovement;
     Vector3 m_moveDirection;
@@ -23,9 +25,12 @@ public class PlayerMovement : MonoBehaviour
     bool m_isGrounded;
     bool m_canJump = true;
 
+    bool m_canJump = true;
+
     [SerializeField] Transform m_cameraTransform;
     Vector3 oldCameraPosition;
     Vector3 positionShift;
+
     [SerializeField] Transform m_orientation;
 
     private void Start()
@@ -77,6 +82,8 @@ public class PlayerMovement : MonoBehaviour
             m_rigidBody.AddForce(m_moveDirection.normalized * moveSpeed * m_MovementMultiplier, ForceMode.Acceleration);
         else
             m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
+
+
     }
     private void Jump()
     {
