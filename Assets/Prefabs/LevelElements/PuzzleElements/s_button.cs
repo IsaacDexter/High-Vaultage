@@ -35,13 +35,13 @@ public class s_button : s_trigger
     protected void Press()
     {
         SetPlateMaterial(m_materialPressed);   //Switch to the pressed material
-        m_plate.transform.position += new Vector3(0.0f, m_depressionDistance, 0.0f);   //Depress the button by depression distance
+        m_plate.transform.position += m_plate.transform.up * m_depressionDistance;
     }
 
     protected void Release()
     {
         SetPlateMaterial(m_materialUnpressed);    //Switch to the unpressed material
-        m_plate.transform.position += new Vector3(0.0f, -m_depressionDistance, 0.0f);   //press the button by negative depression distance
+        m_plate.transform.position += m_plate.transform.up * -m_depressionDistance;   //press the button by negative depression distance
     }
 
     protected void OnTriggerEnter(Collider other)
