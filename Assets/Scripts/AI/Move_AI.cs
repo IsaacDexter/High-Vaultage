@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class Move_AI : MonoBehaviour
 {
     [SerializeField]
-    Transform _destination;
+    Transform _destination1;
+    Transform _destination2;
     NavMeshAgent _navMeshAgent;
 
 
@@ -28,12 +29,17 @@ public class Move_AI : MonoBehaviour
 
     private void SetDestination() //Sets the Navigation Destination
     {
-        if (_destination != null)
+        if (_destination1 != null)
         {
-            Vector3 targetVector = _destination.transform.position;
+            Vector3 targetVector = _destination1.transform.position;
             _navMeshAgent.SetDestination(targetVector);
         }
 
+        if( _destination2 != null)
+        {
+            Vector3 targetVector = _destination2.transform.position;
+            _navMeshAgent.SetDestination(targetVector);
+        }
 
     }
 }

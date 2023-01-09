@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         else
             m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
 
-        Debug.Log(m_rigidBody.velocity.magnitude);
+       
     }
     private void Jump()
     {
