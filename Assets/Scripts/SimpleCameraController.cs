@@ -178,17 +178,17 @@ namespace UnityTemplateProjects
             }
 
             // Hide and lock cursor when right mouse button pressed
-            if (IsRightMouseButtonDown())
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+            //if (IsRightMouseButtonDown())
+            //{
+                //Cursor.lockState = CursorLockMode.Locked;
+            //}
 
             // Unlock and show cursor when right mouse button released
-            if (IsRightMouseButtonUp())
-            {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
+            //if (IsRightMouseButtonUp())
+            //{
+                //Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+            //}
 
             // Rotation
             if (IsCameraRotationAllowed())
