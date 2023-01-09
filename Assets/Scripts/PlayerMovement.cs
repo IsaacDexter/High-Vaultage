@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 6f;
     [SerializeField] float m_playerHeight = 2f;
     [SerializeField] float m_jumpForce = 5f;
+
     [SerializeField] float m_airMovementMultiplier = 0.03f;
     [SerializeField] LayerMask m_groundMask;
     [SerializeField] float m_groundDrag;
@@ -16,29 +17,35 @@ public class PlayerMovement : MonoBehaviour
 
     float m_timeLeft = 0;
     float m_MovementMultiplier = 10f;
+
     float m_horizontalMovement;
     float m_verticalMovement;
     Vector3 m_moveDirection;
     Rigidbody m_rigidBody;
     bool m_isGrounded;
+
     bool m_canJump = true;
 
     [SerializeField] Transform m_cameraTransform;
     Vector3 oldCameraPosition;
     Vector3 positionShift;
+
     [SerializeField] Transform m_orientation;
 
     private void Start()
     {
+
         oldCameraPosition = m_cameraTransform.transform.position;
         positionShift = oldCameraPosition;
         positionShift.y -= 0.5f;
+
 
         m_rigidBody = GetComponent<Rigidbody>();
         m_rigidBody.freezeRotation = true;
     }
     private void Update()
     {
+
         if (m_isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, m_playerHeight / 2, 0), 0.4f, m_groundMask))
         {
             m_canJump = true;
@@ -56,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 normalized = m_rigidBody.velocity.normalized;
         if (m_rigidBody.velocity.magnitude > m_maxVelocity)
             m_rigidBody.velocity = normalized * m_maxVelocity;
+
     }
     void MyInput()
     {
@@ -77,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
             m_rigidBody.AddForce(m_moveDirection.normalized * moveSpeed * m_MovementMultiplier, ForceMode.Acceleration);
         else
             m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
+
     }
     private void Jump()
     {
@@ -90,5 +99,6 @@ public class PlayerMovement : MonoBehaviour
             m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
             m_rigidBody.AddForce(transform.up * m_jumpForce, ForceMode.Impulse);
         }
+
     }
 }
