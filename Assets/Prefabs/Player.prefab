@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6184981835223551494}
   - component: {fileID: 6184981835223551499}
   - component: {fileID: 6184981835223551498}
+  - component: {fileID: 3772949363838183404}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   dashForce: 25
   m_cooldown: 3
   m_orientation: {fileID: 6184981834992257989}
+--- !u!65 &3772949363838183404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184981835223551495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6184981835837141291
 GameObject:
   m_ObjectHideFlags: 0
