@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shooting : MonoBehaviour
 {
     public GameObject projectile;
-    [SerializeField] private float m_firingForce = 20f;
+    [SerializeField] private float m_firingForce;
     [SerializeField] private float shootTimer;
 
 
@@ -32,6 +32,6 @@ public class Shooting : MonoBehaviour
 
     void ResetShootTimer()
     {
-        shootTimer = 3f;
+        shootTimer = 3f; 
     }
 }
