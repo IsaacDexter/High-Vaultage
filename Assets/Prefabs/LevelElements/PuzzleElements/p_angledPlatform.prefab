@@ -246,7 +246,8 @@ MonoBehaviour:
   m_platform: {fileID: 3100564635059547168}
   m_activeAngle: 0
   m_inactiveAngle: 0
-  m_speed: 0
+  m_activeSpeed: 0
+  m_inactiveSpeed: 0
 --- !u!1001 &4246090863270570584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5319648240373299595, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5319648240373299595, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
       propertyPath: m_LocalPosition.x
@@ -273,7 +274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5319648240373299595, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5319648240373299595, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
       propertyPath: m_LocalPosition.z
@@ -311,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a5aaee4111611af43b5abbff184fe5fa, type: 2}
+    - target: {fileID: 6596913936347164176, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: f01993e8bf5366a4f9c3ebabcea5e198, type: 3}

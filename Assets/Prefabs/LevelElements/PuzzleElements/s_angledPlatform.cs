@@ -10,11 +10,13 @@ public class s_angledPlatform : s_triggerable
     [SerializeField] protected GameObject m_platform;
     [SerializeField] protected float m_activeAngle;
     [SerializeField] protected float m_inactiveAngle;
-    [SerializeField] protected float m_speed;
+    [SerializeField] protected float m_activeSpeed;
+    [SerializeField] protected float m_inactiveSpeed;
 
     protected float m_currentAngle = 0.0f;
     protected float m_targetAngle;
     protected bool m_swinging = false;
+    float m_speed;
 
     protected void Swing(float angle)
     {
@@ -79,11 +81,11 @@ public class s_angledPlatform : s_triggerable
             m_swinging = true;
             if (m_currentAngle > m_targetAngle) //If we are further than the desired angle...
             {
-                m_speed = -1 * Math.Abs(m_speed);   //set speed to inverse
+                m_speed = -1 * Math.Abs(m_activeSpeed);   //set speed to inverse
             }
             else    //If we are before the desired angle
             {
-                m_speed = Math.Abs(m_speed);   //set speed to normal
+                m_speed = Math.Abs(m_activeSpeed);   //set speed to normal
             }
         }
     }
@@ -97,11 +99,11 @@ public class s_angledPlatform : s_triggerable
             m_swinging = true;
             if (m_currentAngle > m_targetAngle) //If we are further than the desired angle...
             {
-                m_speed = -1 * Math.Abs(m_speed);   //set speed to inverse
+                m_speed = -1 * Math.Abs(m_inactiveSpeed);   //set speed to inverse
             }
             else    //If we are before the desired angle
             {
-                m_speed = Math.Abs(m_speed);   //set speed to normal
+                m_speed = Math.Abs(m_inactiveSpeed);   //set speed to normal
             }
         }
     }
