@@ -18,10 +18,7 @@ public class s_chargingWeapon : s_weapon
     {
         m_chargeTime = Time.time - m_startTime;
         m_charging = false;
-        if (CheckAmmo())
-        {
-            Fire();
-        }
+        Fire();
     }
 
     virtual protected void Charge()
@@ -34,10 +31,6 @@ public class s_chargingWeapon : s_weapon
         if (m_charging)
         {
             Charge();
-        }
-        else
-        {
-            Regen();
         }
     }
 }
