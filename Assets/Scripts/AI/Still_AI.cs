@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class Still_AI : MonoBehaviour
 {
+
     [SerializeField]
     NavMeshAgent navMeshAgent;
     public Transform target;
