@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class s_weaponManager : MonoBehaviour
 {
+    /// <summary>The left hand, which holds the left weapon</summary>
     [SerializeField] s_hand m_leftHand;
+    /// <summary>The right hand, which holds the right weapon</summary>
     [SerializeField] s_hand m_rightHand;
+    /// <summary>Used in calculating elapsedTime (Time.time - m_time)</summary>
     private float m_time;
 
-    // Update is called once per frame
+    /// <summary>Handles the users input events and prompts the hands to regenerate charge</summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -30,6 +33,7 @@ public class s_weaponManager : MonoBehaviour
         Regen();
     }
 
+    /// <summary>Calculates the elapsed time and calls the hands to regenerate. Done here as opposed to in each hand to avoid duplicate calculations.</summary>
     private void Regen()
     {
         float elapsedTime = Time.time - m_time;
