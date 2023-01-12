@@ -43,4 +43,9 @@ public class s_hand : MonoBehaviour
             }
         }
     }
+
+	private void Update()
+	{
+        Regen(Time.deltaTime);
+	}
 }

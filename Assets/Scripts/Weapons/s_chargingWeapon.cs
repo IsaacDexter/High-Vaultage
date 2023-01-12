@@ -9,14 +9,12 @@ public class s_chargingWeapon : s_weapon
     protected float m_startTime = 0.0f;
     /// <summary>How long the weapon has been charging. Used to modify the power of certain fire functions.</summary>
     protected float m_chargeTime = 0.0f;
-    protected float m_time = 0.0f;
     /// <summary>Called when the trigger starts to be held. Stops the hand from regening ammo and starts charging in update</summary>
 
 
     override public void Press()
     {
-        m_time = Time.time;         //Initialise timers
-        m_startTime = m_time;
+        m_startTime = Time.time;
 
         m_charging = true;          //Start the weapon charging
         m_hand.m_regening = false;  //Prevent the hand from regenning ammo while charging
@@ -52,11 +50,8 @@ public class s_chargingWeapon : s_weapon
     override protected void Update()
     {
         if (m_charging)
-        {
-            float elapsedTime = Time.time - m_time; 
-            m_time = Time.time;     //Calculate elapsed time since last frame
-
-            Charge(elapsedTime);    //Charge according to that time
+        { 
+            Charge(Time.deltaTime);    //Charge according to that time
         }
     }
 

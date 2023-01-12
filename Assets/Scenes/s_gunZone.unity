@@ -858,8 +858,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d3f77843ffc364b86e1d7ee0f7862b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_primaryWeapon: 2
-  m_secondaryWeapon: 5
+  m_primaryWeapon: 5
+  m_secondaryWeapon: 4
   m_camera: {fileID: 226231583}
   m_gunpoint: {fileID: 226231587}
   m_punchForce: 50
@@ -875,8 +875,8 @@ MonoBehaviour:
   m_grenadeForce: 200
   m_grenadeRadius: 5
   m_harpoonShot: {fileID: 3307444071152787805, guid: 9342606e27e40b94f864789252898089, type: 3}
-  m_harpoonSpeed: 1000
-  m_harpoonForce: 200
+  m_harpoonSpeed: 2000
+  m_harpoonForce: 50
   m_revolverRange: 25
   m_revolverShot: {fileID: 3587482509649262851, guid: d5ebb87a09241ba4a9de1af2633595a1, type: 3}
 --- !u!4 &482793649 stripped
@@ -1782,6 +1782,10 @@ PrefabInstance:
     - target: {fileID: 6184981835223551495, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_Name
       value: GunPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551495, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551496, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_RootOrder
@@ -3274,7 +3278,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479716425}
   m_LocalRotation: {x: -0.012699717, y: -0, z: -0, w: 0.9999194}
-  m_LocalPosition: {x: 1.7605078, y: 3.3226643, z: -0.931256}
+  m_LocalPosition: {x: 1.7605078, y: -5.84, z: -0.931256}
   m_LocalScale: {x: 1, y: 1, z: 2.8562}
   m_ConstrainProportionsScale: 0
   m_Children: []
