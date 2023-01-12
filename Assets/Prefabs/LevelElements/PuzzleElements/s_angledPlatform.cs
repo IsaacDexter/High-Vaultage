@@ -17,6 +17,7 @@ public class s_angledPlatform : s_triggerable
     protected float m_targetAngle;
     protected bool m_swinging = false;
     float m_speed;
+    private float m_time;
 
     protected void Swing(float angle)
     {
@@ -31,15 +32,15 @@ public class s_angledPlatform : s_triggerable
     }
 
     /// <returns>if we have reached our target angle</returns>
-    protected bool CheckAngle()
+    protected bool CheckAngle(float elapsedTime)
     {
         if (m_speed > 0)    //If we have positive speed, check to see if we have exceeded our target angle
         {
-            return m_currentAngle + m_speed > m_targetAngle;
+            return m_currentAngle + m_speed * elapsedTime > m_targetAngle;
         }
         else    //If speed is negative, check to see if we are under our target angle
         {
-            return m_currentAngle + m_speed < m_targetAngle;
+            return m_currentAngle + m_speed * elapsedTime < m_targetAngle;
         }
     }
 
@@ -60,14 +61,14 @@ public class s_angledPlatform : s_triggerable
     {
         if (m_swinging) //If we are swinging...
         {
-            if (CheckAngle())   //if the next angle were to exceed the desired angle
+            if (CheckAngle(Time.deltaTime))   //if the next angle were to exceed the desired angle
             {
                 SwingTo(m_targetAngle); //Swing to that desired angle
                 m_swinging = false; //Stop swinging
             }
             else
             {
-                Swing(m_speed); //Otherwise, swing by speed.
+                Swing(m_speed * Time.deltaTime); //Otherwise, swing by speed.
             }
         }
     }
