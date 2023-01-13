@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 6184981835223551497}
   - component: {fileID: 6184981835223551494}
   - component: {fileID: 6184981835223551499}
-  - component: {fileID: 6184981835223551498}
   m_Layer: 0
   m_Name: GunPlayer
   m_TagString: Untagged
@@ -97,14 +96,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd60c8807d78d384da9ccc2b5c291ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 10
   m_playerHeight: 2
-  m_jumpForce: 5
+  m_jumpForce: 20
   m_airMovementMultiplier: 0.04
   m_groundMask:
     serializedVersion: 2
-    m_Bits: 0
-  m_orientation: {fileID: 0}
+    m_Bits: 192
+  m_groundDrag: 6
+  m_airDrag: 0.1
+  m_maxVelocity: 16
+  m_isGrounded: 0
+  m_cameraTransform: {fileID: 0}
+  m_orientation: {fileID: 6184981834992257989}
 --- !u!114 &6184981835223551499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,22 +124,7 @@ MonoBehaviour:
   m_sensitivityX: 200
   m_sensitivityY: 200
   m_camera: {fileID: 0}
-  m_orientation: {fileID: 0}
---- !u!114 &6184981835223551498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6184981835223551495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab46cd7d10284d41bd6f0a9f6852e2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dashForce: 0
-  m_cooldown: 0
-  m_orientation: {fileID: 0}
+  m_orientation: {fileID: 6184981834992257989}
 --- !u!1 &6184981835837141291
 GameObject:
   m_ObjectHideFlags: 0
