@@ -405,15 +405,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_airDrag
-      value: 0.16
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: moveSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_jumpForce
-      value: 25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_groundDrag
-      value: 4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_maxVelocity
@@ -433,11 +437,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551494, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_airMovementMultiplier
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551495, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_Name
       value: GunPlayer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184981835223551495, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551496, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_RootOrder
@@ -489,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551498, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: dashForce
-      value: 20
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6184981835223551498, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
       propertyPath: m_cooldown
@@ -507,6 +515,10 @@ PrefabInstance:
       propertyPath: m_orientation
       value: 
       objectReference: {fileID: 1135356274}
+    - target: {fileID: 6184981836326336229, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6184981835223551496, guid: cfbf28ef4ba15bc429cdae145b511387, type: 3}
