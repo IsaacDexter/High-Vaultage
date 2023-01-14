@@ -106,7 +106,7 @@ public class Shooting : MonoBehaviour
 
         Gizmos.matrix = transform.localToWorldMatrix;
 
-        Gizmos.DrawCube(new Vector3(0f, 0f, targetDetectionDistance / 2f), new Vector3(rayCastRadius, rayCastRadius, targetDetectionDistance));
+        //Gizmos.DrawCube(new Vector3(0f, 0f, targetDetectionDistance / 2f), new Vector3(rayCastRadius, rayCastRadius, targetDetectionDistance));
         Gizmos.DrawSphere(transform.position, rayCastRadius);
     }
 }
