@@ -10,13 +10,15 @@ public class s_grenadeGun : s_weapon
 	[SerializeField] float m_grenadeRadius;
 	private GameObject m_currentGrenade;
 	bool m_grenadeSwitch;
+	private Transform m_firePoint;
 
 	override protected void Fire()
 	{
+		m_firePoint = gameObject.transform;
 		if (!m_grenadeSwitch)
 		{
 			Debug.Log("Grenade Attack");
-			m_currentGrenade = Instantiate(m_grenadeShot, m_gunpoint.position, m_camera.transform.rotation);
+			m_currentGrenade = Instantiate(m_grenadeShot, m_firePoint.position, transform.parent.transform.rotation);
 			m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_grenadeSpeed);
 			m_grenadeSwitch = true;
 		}

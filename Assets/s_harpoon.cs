@@ -10,8 +10,10 @@ public class s_harpoon : s_chargingWeapon
 	private GameObject m_currentHarpoon;
 	SpringJoint m_joint;
 	bool m_harpoonCheck;
+	private Transform m_firePoint;
 	override protected void Fire()
 	{
+		m_firePoint = gameObject.transform;
 		m_rigidBody.AddExplosionForce(-m_harpoonForce, m_currentHarpoon.transform.position, 9999, 2f, ForceMode.Impulse);
 		Destroy(m_currentHarpoon);
 		m_currentHarpoon = null;
@@ -25,7 +27,7 @@ public class s_harpoon : s_chargingWeapon
 		{
 			Debug.Log("Harpoon Attack");
 			//AttachHarpoon();
-			m_currentHarpoon = Instantiate(m_harpoonShot, m_gunpoint.position, m_camera.transform.rotation);
+			m_currentHarpoon = Instantiate(m_harpoonShot, m_firePoint.position, transform.parent.transform.rotation);
 			m_currentHarpoon.GetComponent<Rigidbody>().AddForce(m_currentHarpoon.transform.forward * m_harpoonSpeed);
 			Vector3 swingPoint = m_currentHarpoon.transform.position;
 			m_joint = gameObject.AddComponent<SpringJoint>();
