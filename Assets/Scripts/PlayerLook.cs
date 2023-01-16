@@ -36,4 +36,10 @@ public class PlayerLook : MonoBehaviour
         m_xRotation -= m_deltaY * m_sensitivityY * m_multiplier;
         m_xRotation = Mathf.Clamp(m_xRotation, -90f, 90f);
     }
+
+    public void SetRotation(Quaternion rotation)
+    {
+        m_xRotation = rotation.x;
+        m_yRotation = rotation.y;
+    }
 }
