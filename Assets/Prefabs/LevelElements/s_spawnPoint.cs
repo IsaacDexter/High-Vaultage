@@ -11,7 +11,7 @@ public class s_spawnPoint : MonoBehaviour
             s_playerHealthManager healthManager = other.gameObject.GetComponentInParent<s_playerHealthManager>();   //Get the health manager
             if (healthManager != null)
             {
-                healthManager.m_spawnPoint = this;  //Set this to be its respawn point
+                healthManager.m_spawnPoint = gameObject.transform;  //Set this to be its respawn point
             }
         }
     }

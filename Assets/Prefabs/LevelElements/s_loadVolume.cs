@@ -21,6 +21,8 @@ public class s_loadVolume : MonoBehaviour
                 levelLoader.UnloadLevel(m_sceneToUnload);   //Unload the previous level.
                 levelLoader.LoadLevel(m_corridorToLoad);
                 levelLoader.LoadLevel(m_sceneToLoad);   //Load the next one. Load this last so we know which to reload on respawn.
+
+                Destroy(levelLoader.gameObject);    //Destroy the load volume so we no longer have to worry about loading twice.
             }
         }
     }
