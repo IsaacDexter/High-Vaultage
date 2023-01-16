@@ -13,7 +13,7 @@ public class s_playerHealthManager : MonoBehaviour
     private float m_recoveryTime;
     [SerializeField] private float m_recoveryDuration = 3.0f;
     [SerializeField] private CollisionDetectionMode m_collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-    [SerializeField] public Stack<Transform> m_spawnPoints = new Stack<Transform>();
+    public s_spawnPoint m_spawnPoint;
 
     private void Start()
     {
@@ -56,9 +56,14 @@ public class s_playerHealthManager : MonoBehaviour
 
     public void Respawn()
     {
-        Transform spawnTransform = m_spawnPoints.Peek();
+        Transform spawnTransform = m_spawnPoint.transform;
         m_transform.position = spawnTransform.position;
         GetComponent<PlayerLook>().SetRotation(spawnTransform.rotation);
+
+        string scene = m_spawnPoint.m_scene;
+
+        GetComponent<s_levelLoader>().UnloadLevel(scene);
+        GetComponent<s_levelLoader>().LoadLevel(scene);
     }
 
     #endregion
