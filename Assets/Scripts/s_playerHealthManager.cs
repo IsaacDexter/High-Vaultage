@@ -60,10 +60,11 @@ public class s_playerHealthManager : MonoBehaviour
         m_transform.position = spawnTransform.position;
         GetComponent<PlayerLook>().SetRotation(spawnTransform.rotation);
 
-        string scene = m_spawnPoint.m_scene;
+        //string scene = m_spawnPoint.m_scene;
 
-        GetComponent<s_levelLoader>().UnloadLevel(scene);
-        GetComponent<s_levelLoader>().LoadLevel(scene);
+        //GetComponent<s_levelLoader>().UnloadLevel(scene);
+        //GetComponent<s_levelLoader>().LoadLevel(scene);
+        GetComponent<s_levelLoader>().ReloadLevel();
     }
 
     #endregion
