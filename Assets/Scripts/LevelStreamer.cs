@@ -9,6 +9,8 @@ public class LevelStreamer
     { 
         if (loadLevel)
         {
+            Debug.Log("Called load " + scene);
+
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
 
             while (!asyncLoad.isDone)
@@ -18,6 +20,8 @@ public class LevelStreamer
         }
         else if (!loadLevel)
         {
+            Debug.Log("Called unload " + scene);
+
             AsyncOperation asyncDeload = SceneManager.UnloadSceneAsync(scene);
 
             while (!asyncDeload.isDone)
