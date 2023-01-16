@@ -10,6 +10,7 @@ public class HoverScript : MonoBehaviour
     float g;
     float b;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +22,11 @@ public class HoverScript : MonoBehaviour
    public void HoverEnter()
     {
         gameObject.GetComponent<TMPro.TextMeshProUGUI>().color = new Color(255,235,0);
-        Debug.Log(gameObject.name);
     }
 
     public void HoverExit()
     {
        gameObject.GetComponent<TMPro.TextMeshProUGUI>().color = new Color(r,g,b);
-        Debug.Log("Exit");
     }
+
 }
