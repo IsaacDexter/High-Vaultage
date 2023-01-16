@@ -7,7 +7,7 @@ public class PlayerSlide : MonoBehaviour
     [SerializeField] Rigidbody m_rigidBody;
     [SerializeField] Transform m_Camera;
     [SerializeField] LayerMask m_LayerMask;
-    [SerializeField] int m_slideDrag;
+    [SerializeField] float m_slideDrag;
     Vector3 m_oldTransform;
     bool m_isSliding = false;
     bool m_isGrounded;
@@ -37,11 +37,15 @@ public class PlayerSlide : MonoBehaviour
         if(m_isSliding)
         {
             m_rigidBody.drag = m_slideDrag;
-            m_Camera.transform.transform.localPosition = Vector3.one;
+            m_Camera.transform.transform.localPosition = new Vector3(0, 0.1f, 0);
         }
         else
         {
-            m_rigidBody.drag = GetComponent<PlayerMovement>().m_groundDrag;
+            if (m_isGrounded)
+                m_rigidBody.drag = GetComponent<PlayerMovement>().m_groundDrag;
+            else
+                m_rigidBody.drag = GetComponent<PlayerMovement>().m_airDrag;
+
             m_Camera.transform.transform.localPosition = m_oldTransform;
         }        
     }

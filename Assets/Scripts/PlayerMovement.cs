@@ -58,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 normalized = m_rigidBody.velocity.normalized;
         if (m_rigidBody.velocity.magnitude > m_maxVelocity)
             m_rigidBody.velocity = normalized * m_maxVelocity;
+
+        Debug.Log(m_rigidBody.drag);
     }
     void MyInput()
     {
