@@ -7,7 +7,7 @@ public class s_hand : MonoBehaviour
     /// <summary>The speed that the hand regains charge</summary>
     [SerializeField] float m_chargeSpeed;
     /// <summary>The current weapon the hand is holding. Should be a reference to a child of camera</summary>
-    [SerializeField] s_weapon m_weapon;
+    public GameObject m_weapon;
     /// <summary>If the weapon is currently regaining charge (set to false while charging weapons are charging.)</summary>
     public bool m_regening = true;
     /// <summary>The charge (ammo) this fist has, shared between weapons</summary>
@@ -18,7 +18,8 @@ public class s_hand : MonoBehaviour
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
-            m_weapon.Press();   //...tell the weapon that it's triggers been pulled
+            //m_regening = false;
+            m_weapon.GetComponent<s_weapon>().Press();   //...tell the weapon that it's triggers been pulled
         }
     }
 
@@ -27,7 +28,8 @@ public class s_hand : MonoBehaviour
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
-            m_weapon.Release(); //...tell the weapon that it's triggers been pulled
+            //m_regening = false;
+            m_weapon.GetComponent<s_weapon>().Release(); //...tell the weapon that it's triggers been pulled
         }
     }
 
@@ -44,6 +46,15 @@ public class s_hand : MonoBehaviour
         }
     }
 
+    public void Equip(GameObject weapon)
+	{
+        Destroy(m_weapon);
+        m_weapon = Instantiate(weapon, transform.position, transform.rotation);
+        m_weapon.transform.SetParent(transform, true);
+        m_weapon.transform.localPosition = new Vector3(0, 0, 0);
+        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        m_weapon.GetComponent<s_weapon>().m_hand = this;
+    }
 	private void Update()
 	{
         Regen(Time.deltaTime);

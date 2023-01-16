@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         if (m_rigidBody.velocity.magnitude > m_maxVelocity)
             m_rigidBody.velocity = normalized * m_maxVelocity;
 
-        Debug.Log(m_rigidBody.drag);
     }
     void MyInput()
     {

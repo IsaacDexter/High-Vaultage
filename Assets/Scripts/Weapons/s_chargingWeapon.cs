@@ -10,7 +10,7 @@ public class s_chargingWeapon : s_weapon
     /// <summary>How long the weapon has been charging. Used to modify the power of certain fire functions.</summary>
     protected float m_chargeTime = 0.0f;
     /// <summary>Called when the trigger starts to be held. Stops the hand from regening ammo and starts charging in update</summary>
-
+    [SerializeField] protected float m_holdChargeCost = 0.0f;
 
     override public void Press()
     {
@@ -33,13 +33,13 @@ public class s_chargingWeapon : s_weapon
     }
 
 
-    /// <summary>Builds up charge in the weapon so long as there is enough charge or Ammo to accomodate it. Overwrite for weapons which do things while charging, e.g. time slow</summary>
+    /// <summary>MUST GO AT BOTTOM Builds up charge in the weapon so long as there is enough charge or Ammo to accomodate it. Overwrite for weapons which do things while charging, e.g. time slow</summary>
     /// <param name="elapsedTime">The time elapsed since the last frame.</param>
     virtual protected void Charge(float elapsedTime)
     {
-        if (m_hand.m_charge > 0) //Check if there is enough charge to charge the weapon. If there is...
+        if (m_hand.m_charge > m_chargeCost) //Check if there is enough charge to charge the weapon. If there is...
         {
-            m_hand.m_charge = Mathf.Max(m_hand.m_charge - (m_chargeCost * elapsedTime), 0.0f); //Reduce charge according to the weapon's cost
+            m_hand.m_charge = Mathf.Max(m_hand.m_charge - (m_holdChargeCost * elapsedTime), 0.0f); //Reduce charge according to the weapon's cost
         }
         else
         {
