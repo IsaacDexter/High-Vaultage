@@ -13,15 +13,18 @@ public class AISensor : MonoBehaviour
     [SerializeField] LayerMask m_occlusionLayers;
     [SerializeField] float m_rotateSpeed;
     [SerializeField] List<GameObject> m_objects = new List<GameObject>();
-    [SerializeField] List<Transform> m_firePoint = new List<Transform>();
+    [SerializeField] Transform m_gunpoint;
 
+    bool m_shooting;
     Vector3 m_targetDirection;
     Collider[] m_colliders = new Collider[50];
     Mesh m_mesh;
     int m_count;
     GameObject m_detectedPlayer;
 
+    [SerializeField] GameObject m_enemyShot;
     [SerializeField] float m_fireDelay=0.5f;
+    [SerializeField] float m_fireSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -89,18 +92,31 @@ public class AISensor : MonoBehaviour
             {
                 m_detectedPlayer = obj;
                 Debug.Log("Player in range");
+                if(!m_shooting)
+				{
+                    StartCoroutine(Fire(m_fireDelay));
+
+                    m_shooting = true;
+                }
             }
 			else
 			{
                 m_detectedPlayer = null;
+                m_shooting = false;
             }
         }
     }
 
     void Shoot()
 	{
+        Debug.Log("shoot");
+        Vector3 direction = gameObject.transform.TransformDirection(Vector3.forward);
+        GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, gameObject.transform.rotation);
+        shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);
+        Destroy(shot, 2);
 
-	}
+    }
+
 
     public bool IsInSight(GameObject obj)
     {

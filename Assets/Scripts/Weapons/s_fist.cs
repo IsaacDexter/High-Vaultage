@@ -11,7 +11,7 @@ public class s_fist : s_chargingWeapon
     {
         if(m_chargeTime>m_minCharge)
 		{
-            Vector3 direction = m_camera.up; //Get the player's cameras upwards direction
+            Vector3 direction = m_rigidBody.gameObject.transform.up; //Get the player's cameras upwards direction
             float velocityCancel = m_rigidBody.velocity.y;
             if (velocityCancel < 0)
             {
