@@ -18,7 +18,8 @@ public class s_harpoon : s_chargingWeapon
 	{
 		if (m_currentHarpoon != null)
 		{
-			m_rigidBody.AddExplosionForce(-m_harpoonForce, m_currentHarpoon.transform.position, 9999, 2f, ForceMode.Impulse);
+			//m_rigidBody.AddExplosionForce(-m_harpoonForce, m_currentHarpoon.transform.position, 9999, 2f, ForceMode.Impulse);
+			m_rigidBody.AddForce(m_camera.TransformDirection(Vector3.forward) * m_harpoonForce, ForceMode.Impulse);
 			Destroy(m_currentHarpoon);
 			m_currentHarpoon = null;
 			Destroy(m_joint);
