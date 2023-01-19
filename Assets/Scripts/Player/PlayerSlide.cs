@@ -14,6 +14,7 @@ public class PlayerSlide : MonoBehaviour
     bool m_isGrounded;
     bool m_shouldBeSliding;
     [SerializeField] Transform m_body;
+    [SerializeField] float m_slideHeight = 1.0f;
 
     private void Start()
     {
@@ -53,7 +54,7 @@ public class PlayerSlide : MonoBehaviour
         {
             m_body.localScale = new Vector3(1, 0.5f, 1);
             m_rigidBody.drag = m_slideDrag;
-            m_Camera.transform.transform.localPosition = new Vector3(0, 0.15f, 0);
+            m_Camera.transform.transform.localPosition = new Vector3(0, m_slideHeight, 0);
             GetComponent<PlayerMovement>().m_playerHeight = 1.0f;
         }
         else
