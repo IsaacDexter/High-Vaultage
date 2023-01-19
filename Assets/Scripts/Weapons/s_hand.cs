@@ -53,8 +53,6 @@ public class s_hand : MonoBehaviour
         m_weapon.transform.SetParent(transform, true);                              //Set the weapon to be a child of the hand
         m_weapon.transform.localPosition = new Vector3(0, 0, 0);                    
         m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));  //Reset the local position and rotation for that weapon
-
-        m_weapon.GetComponent<s_weapon>().m_hand = this;    //Set the weapon's reference to it's hand
     }
 	private void Update()
 	{
