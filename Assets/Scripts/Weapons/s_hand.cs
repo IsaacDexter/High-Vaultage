@@ -18,7 +18,6 @@ public class s_hand : MonoBehaviour
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
-            //m_regening = false;
             m_weapon.GetComponent<s_weapon>().Press();   //...tell the weapon that it's triggers been pulled
         }
     }
@@ -28,35 +27,39 @@ public class s_hand : MonoBehaviour
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
-            //m_regening = false;
             m_weapon.GetComponent<s_weapon>().Release(); //...tell the weapon that it's triggers been pulled
         }
     }
 
     /// <summary>Regenerates charge or ammo in this hand over time. Will not regenerate if a charge weapon is telling it not to.</summary>
-    /// <param name="elapsedTime">The time elapsed since the last frame (Time.time - m_time in most cases)</param>
-    public void Regen(float elapsedTime)
+    public void Regen()
     {
         if (m_regening)
         {
             if (m_charge < 1.0f)
             {
-                m_charge = Mathf.Min(m_charge + (m_chargeSpeed * elapsedTime), 1.0f);    //Multiply that by the charge speed and add it to the charge
+                m_charge = Mathf.Min(m_charge + (m_chargeSpeed * Time.deltaTime), 1.0f);    //Multiply that by the charge speed and add it to the charge
             }
         }
     }
 
+    /// <summary>Destroys the current one, and instanciate a new one of the desired weapon type.</summary>
+    /// <param name="weapon">The weapon prefab to instanciate</param>
     public void Equip(GameObject weapon)
 	{
-        Destroy(m_weapon);
-        m_weapon = Instantiate(weapon, transform.position, transform.rotation);
-        m_weapon.transform.SetParent(transform, true);
-        m_weapon.transform.localPosition = new Vector3(0, 0, 0);
-        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
-        m_weapon.GetComponent<s_weapon>().m_hand = this;
+
+        Destroy(m_weapon);                                                          //Destroy the currently equipped weapon
+        m_weapon = Instantiate(weapon, transform.position, transform.rotation);     //Instanciate a new weapon object
+
+        m_weapon.transform.SetParent(transform, true);                              //Set the weapon to be a child of the hand
+        m_weapon.transform.localPosition = new Vector3(0, 0, 0);                    
+        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));  //Reset the local position and rotation for that weapon
+
+        m_weapon.GetComponent<s_weapon>().m_hand = this;    //Set the weapon's reference to it's hand
+
     }
 	private void Update()
 	{
-        Regen(Time.deltaTime);
+        Regen();  //Attempt to regenerate ammo
 	}
 }

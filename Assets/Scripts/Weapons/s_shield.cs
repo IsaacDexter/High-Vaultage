@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class s_sheild : s_chargingWeapon
+public class s_shield : s_chargingWeapon
 {
 	[SerializeField] bool m_shielding = false;
 	override protected void Fire()
