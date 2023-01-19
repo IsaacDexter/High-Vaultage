@@ -7,15 +7,19 @@ public class s_revolver : s_chargingWeapon
 {
 	/// <summary>The position to spawn projectiles at.</summary>
 	private Vector3 m_firePoint;
-	/// <summary>The speed for time to move at while the weapon is charging.</summary>
-	[SerializeField] private float m_timeDilation;
-	/// <summary>The range in units of the beam.</summary>
-	[SerializeField] private float m_range;
 
+    [Header("Projectile Settings")]
 	/// <summary>The projectile to spawn when the weapon is fired.</summary>
 	[SerializeField] private GameObject m_projectile;
 	/// <summary>The lifetime in seconds before the projectile deletes itself.</summary>
 	[SerializeField] private float m_projectileLifetime;
+	/// <summary>The range in units of the beam.</summary>
+	[SerializeField] private float m_range;
+
+    [Header("Weapon Settings")]
+	/// <summary>The speed for time to move at while the weapon is charging.</summary>
+	[SerializeField] private float m_timeDilation;
+
 
 
 	/// <summary></summary>
@@ -24,7 +28,7 @@ public class s_revolver : s_chargingWeapon
 		m_firePoint = gameObject.transform.position;	//Get the position to fire from
 		Time.timeScale = 1f;							//Reset time dilation
 
-		if (CheckCharge())	//If we can afford to fire, pay the cost
+		if (CheckCost())	//If we can afford to fire, pay the cost
 		{
 			SpawnProjectile();	//Fire a projectile...
 			CheckHit();			//...and check if it hit anything.
@@ -34,7 +38,7 @@ public class s_revolver : s_chargingWeapon
 	private void SpawnProjectile()
     {
 		Debug.DrawRay(m_firePoint, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
-		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint, Quaternion.Euler(m_camera.transform.forward));   //Instanciate a shot facing in the direction of the camera
+		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint, m_camera.rotation);   //Instanciate a shot facing in the direction of the camera
 
 		LineRenderer shotline = shotLineObject.GetComponent<LineRenderer>();            //Get the shot's line
 		shotline.SetPosition(0, m_firePoint);                                           //Set one end to the point the weapon fired from...

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class s_weapon : MonoBehaviour
 {
-    /// <summary>The cost of the weapon to fire per shot. For charging weapons, the cost each second.</summary>
-    [SerializeField] public float m_chargeCost;
     /// <summary>The hand that is holding the weapon, used to reduce the charge as the weapon fires.</summary>
     protected s_hand m_hand;
     /// <summary>The collision of the player for the weapon to apply force to.</summary>
@@ -14,6 +12,9 @@ public class s_weapon : MonoBehaviour
     protected Transform m_camera;
     /// <summary>The transform of the camera to avoid a sea of .parents</summary>
     protected Transform m_player;
+    [Header("Cost Settings")]
+    /// <summary>The cost of the weapon to fire per shot. For charging weapons, the cost each second.</summary>
+    [SerializeField] public float m_cost;
 
     /// <summary>Called when the trigger is pulled. Calculates if there is enough ammo to fire, then fires, if possible.</summary>
     virtual public void Press()
@@ -48,16 +49,22 @@ public class s_weapon : MonoBehaviour
 
     /// <summary>Checks if we can afford to fire and pays the cost.</summary>
     /// <returns>Whether the weapon could be fired. If not, no charge is consumed.</returns>
-    protected bool CheckCharge()
+    protected bool CheckCost()
     {
-        if (m_hand.m_charge >= m_chargeCost)    //If we can afford to fire...
+        if (m_hand.m_charge >= m_cost)    //If we can afford to fire...
         {
-            m_hand.m_charge -= m_chargeCost;    //...Pay the cost.
+            m_hand.m_charge -= m_cost;    //...Pay the cost.
             return true;
         }
         else
         {
             return false;
         }
+    }
+
+    /// <summary>Deletes the weapon and any of its lingering projectiles. Called when replaced by a new weapon.</summary>
+    virtual public void Dequip()
+    {
+        Destroy(gameObject);
     }
 }

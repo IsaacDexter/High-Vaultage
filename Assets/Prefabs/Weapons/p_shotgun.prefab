@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a360b80e49e55f548bc72398d69f552f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeCost: 0.5
-  m_shotgunShot: {fileID: 6401435605650204769, guid: e1e5cf8822677d641a68014859ca4c13, type: 3}
-  m_shotgunPellets: 25
-  m_shotgunSpread: 50
-  m_shotgunSpeed: 1000
-  m_shotgunForce: 25
+  m_cost: 0.5
+  m_projectile: {fileID: 6401435605650204769, guid: e1e5cf8822677d641a68014859ca4c13, type: 3}
+  m_projectileCount: 25
+  projectileForce: 1000
+  m_projectileLifetime: 1
+  m_kickback: 25
+  m_spread: 50

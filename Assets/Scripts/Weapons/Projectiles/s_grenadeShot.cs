@@ -2,36 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class s_grenadeShot : s_stickyProjectile
 {
-    Rigidbody m_rigidbody;
-    bool m_hasJoint;
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_rigidbody = GetComponent<Rigidbody>();
-        
-    }
-
-
+    /// <summary>Once something has entered the trigger i.e. the grenade has hit an object</summary>
+    /// <param name="other">The other thing that entered the trigger i.e. whatever the object attatched itself to</param>
 	private void OnTriggerEnter(Collider other)
-	{
-        if (other.gameObject.GetComponent<Rigidbody>() != null && !m_hasJoint && other.gameObject.tag != "Player")
-        {
-            gameObject.AddComponent<FixedJoint>();
-            gameObject.GetComponent<FixedJoint>().connectedBody = other.gameObject.GetComponent<Rigidbody>();
-            m_hasJoint = true;
-            m_rigidbody.isKinematic = true;
-        }
-        else if(other.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint && other.gameObject.tag != "Player")
-		{
-            m_rigidbody.isKinematic = true;
-		}
-	}
-
-	// Update is called once per frame
-	void Update()
     {
-        
+        if (!m_stuck)                               //If we havent yet attatched ourselves to something...
+        {
+            if (other.gameObject.tag != "Player")   //And whatever we've hit isnt a player
+            {
+                m_stuck = Stick(other.gameObject);  //Stick to whatever we hit
+            }
+        }
     }
 }

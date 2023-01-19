@@ -26,18 +26,18 @@ public class ClickableObject : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        switch (eventData.button)
         {
-            Debug.Log("Left click");
-            m_leftHand.Equip(m_weapon);
+            case PointerEventData.InputButton.Left:
+                m_leftHand.Equip(m_weapon);
+                break;
+            case PointerEventData.InputButton.Right:
+                m_rightHand.Equip(m_weapon);
+                break;
+            case PointerEventData.InputButton.Middle:
+                break;
+            default:
+                break;
         }
-        else if (eventData.button == PointerEventData.InputButton.Middle)
-            Debug.Log("Middle click");
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            Debug.Log("Right click");
-            m_rightHand.Equip(m_weapon);
-        }
-
     }
 }
