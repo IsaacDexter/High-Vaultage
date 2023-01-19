@@ -47,14 +47,16 @@ public class s_hand : MonoBehaviour
     /// <param name="weapon">The weapon prefab to instanciate</param>
     public void Equip(GameObject weapon)
 	{
+
         Destroy(m_weapon);                                                          //Destroy the currently equipped weapon
         m_weapon = Instantiate(weapon, transform.position, transform.rotation);     //Instanciate a new weapon object
 
         m_weapon.transform.SetParent(transform, true);                              //Set the weapon to be a child of the hand
         m_weapon.transform.localPosition = new Vector3(0, 0, 0);                    
-        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));  //Reset the local position and rotation for that weapon
+        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));  //Reset the local position and rotation for that weapon
 
         m_weapon.GetComponent<s_weapon>().m_hand = this;    //Set the weapon's reference to it's hand
+
     }
 	private void Update()
 	{
