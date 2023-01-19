@@ -10,8 +10,8 @@ public class s_playerInput : MonoBehaviour
     s_hand m_leftHand;
     /// <summary>The right hand, which holds the right weapon</summary>
     s_hand m_rightHand;
+    /// <summary>The player's game object.</summary>
     GameObject m_player;
-
 
     /// <summary>The key to press to fire the left weapon</summary>
     private KeyCode m_leftFireKey = KeyCode.Mouse0;
@@ -23,7 +23,7 @@ public class s_playerInput : MonoBehaviour
     private void Start()
     {
         m_player = gameObject;
-        m_weaponWheel = new s_weaponWheel();
+        m_weaponWheel = m_player.AddComponent<s_weaponWheel>();
         s_hand[] hands = m_player.GetComponentsInChildren<s_hand>();
         if (hands[0].name == "m_leftHand")
         {

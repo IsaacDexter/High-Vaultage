@@ -5,54 +5,72 @@ using UnityEngine.XR;
 
 public class s_revolver : s_chargingWeapon
 {
-	private LineRenderer m_lineRenderer;
-	private RaycastHit m_hit;
-	[SerializeField] int m_revolverRange;
-	[SerializeField] GameObject m_revolverShot;
-	private Transform m_firePoint;
+	/// <summary>The position to spawn projectiles at.</summary>
+	private Vector3 m_firePoint;
+	/// <summary>The speed for time to move at while the weapon is charging.</summary>
+	[SerializeField] private float m_timeDilation;
+	/// <summary>The range in units of the beam.</summary>
+	[SerializeField] private float m_range;
 
-	/// <summary>Sends the player upward according to cameras upwards vector with force proportional to the time spent charging</summary>
-	/// 
+	/// <summary>The projectile to spawn when the weapon is fired.</summary>
+	[SerializeField] private GameObject m_projectile;
+	/// <summary>The lifetime in seconds before the projectile deletes itself.</summary>
+	[SerializeField] private float m_projectileLifetime;
+
+
+	/// <summary></summary>
 	override protected void Fire()
 	{
-		m_firePoint = gameObject.transform;
+		m_firePoint = gameObject.transform.position;	//Get the position to fire from
+		Time.timeScale = 1f;							//Reset time dilation
 
-		Time.timeScale = 1f;
-		if (m_hand.m_charge >= m_chargeCost)
+		if (CheckCharge())	//If we can afford to fire, pay the cost
 		{
-			Debug.DrawRay(m_firePoint.position, m_camera.transform.forward * m_revolverRange, Color.green, 20);
-			GameObject shotLineObject = Instantiate(m_revolverShot, m_firePoint.position, Quaternion.Euler(m_camera.transform.forward));
-			LineRenderer shotline = shotLineObject.GetComponent<LineRenderer>();
-
-			shotline.SetPosition(0, m_firePoint.position);
-			shotline.SetPosition(1, m_firePoint.position+(m_camera.transform.forward * m_revolverRange));
-
-			Destroy(shotLineObject, 1);
-			if (Physics.Raycast(m_firePoint.position, transform.parent.transform.forward, out m_hit, m_revolverRange))
-			{
-				if (m_hit.rigidbody != null)
-				{
-					GameObject hitEnemy = m_hit.rigidbody.transform.gameObject;
-					Debug.Log("hit " + hitEnemy);
-					if (hitEnemy.tag == "Enemy")
-					{
-						// call destroy on enemy
-						Destroy(hitEnemy);
-					}
-				}
-			}
-			m_hand.m_charge -= m_chargeCost;
-		}
-		else
-		{
-			Debug.Log("Slash");
+			SpawnProjectile();	//Fire a projectile...
+			CheckHit();			//...and check if it hit anything.
 		}
 	}
 
-	protected override void Charge(float elapsedTime)
+	private void SpawnProjectile()
+    {
+		Debug.DrawRay(m_firePoint, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
+		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint, Quaternion.Euler(m_camera.transform.forward));   //Instanciate a shot facing in the direction of the camera
+
+		LineRenderer shotline = shotLineObject.GetComponent<LineRenderer>();            //Get the shot's line
+		shotline.SetPosition(0, m_firePoint);                                           //Set one end to the point the weapon fired from...
+		shotline.SetPosition(1, m_firePoint + (m_camera.transform.forward * m_range));  //... and the other to the end of the pistols range
+
+		Destroy(shotLineObject, m_projectileLifetime);  //Queue the object for destruction
+	}
+
+	/// <summary>Checks to see if the weapon hit anything substantial, and calls hit on anything it did</summary>
+	private void CheckHit()
+    {
+		RaycastHit hit;
+		if (Physics.Raycast(m_firePoint, transform.parent.transform.forward, out hit, m_range))	//Use  raycast to find the point where the gun hit.
+		{										//If it hit anything...
+			if (hit.rigidbody != null)			//...and the hit object has a rigidbody...
+			{
+				Hit(hit.rigidbody.gameObject);	//...call hit on that enemy
+			}
+		}
+	}
+
+	/// <summary>Checks if the hit object is an enemy, and if it is, destroys it</summary>
+	/// <param name="hitObject">The object that was hit</param>
+	private void Hit(GameObject hitObject)
+    {
+		Debug.Log("hit " + hitObject);
+		if (hitObject.tag == "Enemy")        //if the hit object has the tag enemy...
+		{
+			Destroy(hitObject);				//...destroy the enemy
+		}
+	}
+
+	/// <summary>Slows down time by m_timeDilation</summary>
+	protected override void Charge()
 	{
-		Time.timeScale = 0.25f;
-		print("charging revolver...");
-		base.Charge(elapsedTime);
+		Time.timeScale = m_timeDilation;
+		base.Charge();
 	}
 }

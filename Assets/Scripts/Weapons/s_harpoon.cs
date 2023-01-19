@@ -27,7 +27,7 @@ public class s_harpoon : s_chargingWeapon
 		}
 	}
 
-	protected override void Charge(float elapsedTime)
+	protected override void Charge()
 	{
 		if (m_hand.m_charge >= m_chargeCost)
 		{
@@ -48,7 +48,7 @@ public class s_harpoon : s_chargingWeapon
 				}
 
 			}
-			base.Charge(elapsedTime);
+			base.Charge();
 		}
 	}
 	public void AttachHarpoon()

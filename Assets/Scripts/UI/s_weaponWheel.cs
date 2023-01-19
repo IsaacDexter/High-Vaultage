@@ -6,10 +6,8 @@ public class s_weaponWheel : MonoBehaviour
 {
     /// <summary>If the weapon wheel is open at the moment.</summary>
     private bool m_open = false;
-
     /// <summary>The speed time should move at when the weapon wheel is open</summary>
     private float m_timeDilation = 0.5f;
-
     /// <summary>If the weapon wheel's open, close it and vice versa.</summary>
     public void ToggleWeaponWheel()
     {
