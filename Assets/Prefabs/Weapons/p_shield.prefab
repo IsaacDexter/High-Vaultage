@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6709354688545970214}
-  - component: {fileID: 3629159715341847058}
+  - component: {fileID: 806852456481582581}
   m_Layer: 0
-  m_Name: p_harpoon
+  m_Name: p_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3629159715341847058
+--- !u!114 &806852456481582581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4790702096226290139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86e78ef2465ddfb4883f54f3d93920a4, type: 3}
+  m_Script: {fileID: 11500000, guid: c2fa983b67971da41a3dad31aa8495a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_chargeCost: 0
   m_hand: {fileID: 0}
-  m_holdChargeCost: 0
-  m_harpoonShot: {fileID: 3307444071152787805, guid: 9342606e27e40b94f864789252898089, type: 3}
-  m_harpoonSpeed: 3000
-  m_harpoonForce: 60
-  m_harpoonReelSpeed: 2
-  m_harpoonMinDistance: 1
-  m_harpoonMaxDistance: 0
+  m_holdChargeCost: 0.33
+  m_shielding: 0

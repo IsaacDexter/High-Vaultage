@@ -8,51 +8,42 @@ public class s_weaponManager : MonoBehaviour
     [SerializeField] s_hand m_leftHand;
     /// <summary>The right hand, which holds the right weapon</summary>
     [SerializeField] s_hand m_rightHand;
-    GameObject m_leftWeapon;
-    GameObject m_rightWeapon;
-    private bool m_weaponWheel;
+    /// <summary>A reference to a s_weaponwheel class, which handles opening events etc</summary>
+    private s_weaponWheel m_weaponWheel = new s_weaponWheel();
+
+    /// <summary>The key to press to fire the left weapon</summary>
+    private KeyCode m_leftFireKey = KeyCode.Mouse0;
+    /// <summary>The key to press to fire the right weapon</summary>
+    private KeyCode m_rightFireKey = KeyCode.Mouse1;
+    /// <summary>The key to press to open the weapon wheel</summary>
+    private KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
+
+
+
 
     /// <summary>Handles the users input events and prompts the hands to regenerate charge</summary>
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(m_leftFireKey))
         {
             m_leftHand.PullTrigger();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(m_leftFireKey))
         {
             m_leftHand.ReleaseTrigger();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(m_rightFireKey))
         {
             m_rightHand.PullTrigger();
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(m_rightFireKey))
         {
             m_rightHand.ReleaseTrigger();
         }
 
-
-        if (Input.GetKeyDown(KeyCode.Mouse2))
+        if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
-            //open weapon wheel
-            Debug.Log("Wheapon Wheel");
-
-            if (m_weaponWheel == true)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                m_weaponWheel = false;
-                Time.timeScale = 1f;
-
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                m_weaponWheel = true;
-                Time.timeScale = 0.5f;
-            }
+            m_weaponWheel.ToggleWeaponWheel();
         }
     }
     public void SwitchWeapon(GameObject weapon, float arm)
