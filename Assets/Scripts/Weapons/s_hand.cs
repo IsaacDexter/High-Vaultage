@@ -52,7 +52,7 @@ public class s_hand : MonoBehaviour
         m_weapon = Instantiate(weapon, transform.position, transform.rotation);
         m_weapon.transform.SetParent(transform, true);
         m_weapon.transform.localPosition = new Vector3(0, 0, 0);
-        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
         m_weapon.GetComponent<s_weapon>().m_hand = this;
     }
 	private void Update()
