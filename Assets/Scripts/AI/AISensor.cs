@@ -22,9 +22,12 @@ public class AISensor : MonoBehaviour
     int m_count;
     GameObject m_detectedPlayer;
 
+    bool m_resetCheck;
+    bool m_reseting;
     [SerializeField] GameObject m_enemyShot;
     [SerializeField] float m_fireDelay=0.5f;
     [SerializeField] float m_fireSpeed;
+    [SerializeField] float m_resetTime;
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +52,27 @@ public class AISensor : MonoBehaviour
         }
     }
 
+    IEnumerator ResetAngle()
+    {
+        
+        yield return new WaitForSeconds(m_resetTime);
+        if (m_resetCheck == true)
+        {
+            m_reseting= true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         if(m_detectedPlayer!=null)
 		{
+            if (m_resetCheck == true)
+            {
+                m_resetCheck = false;
+                m_reseting = false;
+            }
             Vector3 dir = m_detectedPlayer.transform.position - transform.position; //a vector pointing from pointA to pointB
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up); //calc a rotation that
             Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed);//Quaternion.Euler(new Vector3(0, rot.y,0))
@@ -62,6 +80,26 @@ public class AISensor : MonoBehaviour
 
             Quaternion bRot = Quaternion.LookRotation(dir, Vector3.up);
 		}
+        else
+		{
+            if (m_resetCheck == false)
+            {
+                m_resetCheck = true;
+                StartCoroutine(ResetAngle());
+            }
+            if(m_reseting)
+			{
+                Quaternion rot = Quaternion.Euler( new Vector3(transform.rotation.x, 0, transform.rotation.z));
+                Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed/4);
+                gameObject.transform.rotation = rotation;
+                if(gameObject.transform.rotation==rot)
+				{
+                    m_reseting = false;
+                    m_resetCheck = false;
+                }
+            }
+            StartCoroutine(ResetAngle());
+        }
 
   //      for(int i = 0; i < m_firePoint.Length; i++)
 		//{
@@ -104,6 +142,11 @@ public class AISensor : MonoBehaviour
                 m_detectedPlayer = null;
                 m_shooting = false;
             }
+        }
+        if(m_count<1)
+		{
+            m_detectedPlayer = null;
+            m_shooting = false;
         }
     }
 
