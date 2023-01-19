@@ -17,10 +17,14 @@ public class s_grenadeGun : s_weapon
 		m_firePoint = gameObject.transform;
 		if (!m_grenadeSwitch)
 		{
-			Debug.Log("Grenade Attack");
-			m_currentGrenade = Instantiate(m_grenadeShot, m_firePoint.position, transform.parent.transform.rotation);
-			m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_grenadeSpeed);
-			m_grenadeSwitch = true;
+			if (m_hand.m_charge >= m_chargeCost)
+			{
+				Debug.Log("Grenade Attack");
+				m_currentGrenade = Instantiate(m_grenadeShot, m_firePoint.position, m_camera.transform.rotation);
+				m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_grenadeSpeed);
+				m_grenadeSwitch = true;
+				m_hand.m_charge -= m_chargeCost;
+			}
 		}
 		else
 		{
