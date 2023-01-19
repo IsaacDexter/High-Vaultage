@@ -11,7 +11,7 @@ public class s_fist : s_chargingWeapon
     {
         if(m_chargeTime>m_minCharge)
 		{
-            Vector3 direction = transform.parent.up; //Get the player's cameras upwards direction
+            Vector3 direction = m_camera.up; //Get the player's cameras upwards direction
             float velocityCancel = m_rigidBody.velocity.y;
             if (velocityCancel < 0)
             {
@@ -19,6 +19,7 @@ public class s_fist : s_chargingWeapon
             }
             m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, velocityCancel, m_rigidBody.velocity.z);
             m_rigidBody.AddForce(direction * m_force * (1+m_chargeTime), ForceMode.Impulse);   //Use recoil to move the rigidbody back
+            m_hand.m_charge -= m_chargeCost;
         }
         else
 		{
@@ -28,7 +29,7 @@ public class s_fist : s_chargingWeapon
 
 	protected override void Charge(float elapsedTime)
 	{
-		base.Charge(elapsedTime);
         print("charging fist...");
+		base.Charge(elapsedTime);
 	}
 }
