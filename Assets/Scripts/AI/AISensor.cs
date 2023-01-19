@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class AISensor : MonoBehaviour
 {
     public float distance = 10;
@@ -48,6 +47,7 @@ public class AISensor : MonoBehaviour
             if (IsInSight(obj))
             {
                 Objects.Add(obj);
+                Debug.Log("Player in range");
             }
         }
     }
