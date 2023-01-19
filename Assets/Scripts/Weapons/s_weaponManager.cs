@@ -12,7 +12,9 @@ public class s_weaponManager : MonoBehaviour
     private s_weaponWheel m_weaponWheel = new s_weaponWheel();
 
     /// <summary>The key to press to fire the left weapon</summary>
-    private KeyCode m_primaryFireKey = KeyCode.Mouse0;
+    private KeyCode m_leftFireKey = KeyCode.Mouse0;
+    /// <summary>The key to press to fire the right weapon</summary>
+    private KeyCode m_rightFireKey = KeyCode.Mouse1;
     /// <summary>The key to press to open the weapon wheel</summary>
     private KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
 
@@ -22,19 +24,19 @@ public class s_weaponManager : MonoBehaviour
     /// <summary>Handles the users input events and prompts the hands to regenerate charge</summary>
     void Update()
     {
-        if (Input.GetKeyDown(m_weaponWheelOpenKey))
+        if (Input.GetKeyDown(m_leftFireKey))
         {
             m_leftHand.PullTrigger();
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(m_leftFireKey))
         {
             m_leftHand.ReleaseTrigger();
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(m_rightFireKey))
         {
             m_rightHand.PullTrigger();
         }
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetKeyUp(m_rightFireKey))
         {
             m_rightHand.ReleaseTrigger();
         }
