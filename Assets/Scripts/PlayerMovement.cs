@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         m_rigidBody = GetComponent<Rigidbody>();
         m_rigidBody.freezeRotation = true;
     }
-    private void Update()
+    void Update()
     {
         if (isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, m_playerHeight / 2, 0), 0.4f, m_groundMask))
         {

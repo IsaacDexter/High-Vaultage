@@ -31,4 +31,9 @@ public class s_smashButton : s_button
         Vector3 direction = transform.up * -1;  //Get the buttons downwards direction
         return Vector3.Project(velocity, direction); //Get the velocity of the player in the direction of the button
     }
+
+    override public void Detrigger()
+    {
+        return;
+    }
 }

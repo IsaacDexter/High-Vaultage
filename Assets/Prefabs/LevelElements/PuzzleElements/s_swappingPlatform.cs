@@ -35,7 +35,7 @@ public class s_swappingPlatform : s_movingPlatform
     {
         if (!m_arrived) //Make sure not to waste time by moving if the platform is at its destination
         {
-            MoveToDestination();
+            MoveToDestination(Time.deltaTime);
         }
     }
 
