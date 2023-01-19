@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 6f;
-    [SerializeField] float m_playerHeight = 2f;
+    public float m_playerHeight = 2f;
     [SerializeField] float m_jumpForce = 5f;
 
     [SerializeField] float m_airMovementMultiplier = 0.03f;
@@ -59,7 +59,6 @@ public class PlayerMovement : MonoBehaviour
         if (m_rigidBody.velocity.magnitude > m_maxVelocity)
             m_rigidBody.velocity = normalized * m_maxVelocity;
 
-        //Debug.Log(m_rigidBody.drag);
     }
     void MyInput()
     {
@@ -77,12 +76,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(isGrounded)
+        if (isGrounded && !GetComponent<PlayerSlide>().m_isSliding)
             m_rigidBody.AddForce(m_moveDirection.normalized * moveSpeed * m_MovementMultiplier, ForceMode.Acceleration);
-        else
+        else if (!isGrounded)
             m_rigidBody.AddForce(m_moveDirection * moveSpeed * m_MovementMultiplier * m_airMovementMultiplier, ForceMode.Force);
-
-
+        else
+            m_rigidBody.AddForce(new Vector3(0, 0, 0));
     }
     private void Jump()
     {

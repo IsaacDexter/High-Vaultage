@@ -26,7 +26,7 @@ public class s_sword : s_chargingWeapon
             if (m_hand.m_charge>=m_chargeCost)
             {
                 Vector3 startingVelcity = m_rigidBody.velocity;
-                m_rigidBody.AddForce(transform.parent.TransformDirection(Vector3.forward) * m_dashForce, ForceMode.Impulse);
+                m_rigidBody.AddForce(m_camera.TransformDirection(Vector3.forward) * m_dashForce, ForceMode.Impulse);
                 StartCoroutine(DashDelay(m_dashDuration));
                 m_hand.m_charge -= m_chargeCost;
             }
@@ -40,7 +40,7 @@ public class s_sword : s_chargingWeapon
 
 	protected override void Charge(float elapsedTime)
 	{
-		base.Charge(elapsedTime);
         print("charging sword...");
+		base.Charge(elapsedTime);
 	}
 }

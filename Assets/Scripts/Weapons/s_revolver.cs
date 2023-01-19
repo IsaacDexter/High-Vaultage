@@ -17,16 +17,16 @@ public class s_revolver : s_chargingWeapon
 	{
 		m_firePoint = gameObject.transform;
 
+		Time.timeScale = 1f;
 		if (m_hand.m_charge >= m_chargeCost)
 		{
-			Time.timeScale = 1f;
-
-
-			Debug.DrawRay(m_firePoint.position, transform.parent.transform.forward * m_revolverRange, Color.green, 20);
-			GameObject shotLineObject = Instantiate(m_revolverShot, m_firePoint.position, Quaternion.Euler(transform.parent.transform.forward));
+			Debug.DrawRay(m_firePoint.position, m_camera.transform.forward * m_revolverRange, Color.green, 20);
+			GameObject shotLineObject = Instantiate(m_revolverShot, m_firePoint.position, Quaternion.Euler(m_camera.transform.forward));
 			LineRenderer shotline = shotLineObject.GetComponent<LineRenderer>();
+
 			shotline.SetPosition(0, m_firePoint.position);
-			shotline.SetPosition(1, transform.parent.transform.forward.normalized * m_revolverRange);
+			shotline.SetPosition(1, m_firePoint.position+(m_camera.transform.forward * m_revolverRange));
+
 			Destroy(shotLineObject, 1);
 			if (Physics.Raycast(m_firePoint.position, transform.parent.transform.forward, out m_hit, m_revolverRange))
 			{
@@ -41,6 +41,7 @@ public class s_revolver : s_chargingWeapon
 					}
 				}
 			}
+			m_hand.m_charge -= m_chargeCost;
 		}
 		else
 		{
@@ -50,8 +51,8 @@ public class s_revolver : s_chargingWeapon
 
 	protected override void Charge(float elapsedTime)
 	{
-		base.Charge(elapsedTime);
 		Time.timeScale = 0.25f;
 		print("charging revolver...");
+		base.Charge(elapsedTime);
 	}
 }
