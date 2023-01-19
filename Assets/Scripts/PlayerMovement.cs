@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, m_playerHeight / 2, 0), 0.4f, m_groundMask))
+        if (isGrounded = Physics.CheckSphere(transform.position - new Vector3(0, m_playerHeight / 2 - 1, 0), 0.4f, m_groundMask))
         {
             m_canJump = true;
         }
