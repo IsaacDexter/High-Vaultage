@@ -4,43 +4,68 @@ using UnityEngine;
 
 public class s_fist : s_chargingWeapon
 {
-    [SerializeField] private float m_force; //The force to launch the player upwards by, multiplied by the time spent charging.
-    [SerializeField] private float m_minCharge;
     [SerializeField] private GameObject m_meleeBox;
     [SerializeField] private float m_fistDamage;
 
     RaycastHit[] hit;
     List<GameObject> targets = new List<GameObject>();
+
+    [Header("Uppercut Settings")]
+    /// <summary>The force to launch the player upwards by, multiplied by the time spent charging.</summary>
+    [SerializeField] private float m_uppercutForce;
+    /// <summary>The minimum force to be launched upwards by</summary>
+    [SerializeField] private float m_minForce;
+    /// <summary>The maximum force to be launched forwards by</summary>
+    [SerializeField] private float m_maxForce;
+    /// <summary>The amount of charge required to uppercut instead of punch</summary>
+    [SerializeField] private float m_uppercutCharge;
+    [Header("Punch Settings")]
+    /// <summary>How much it costs to perfom an punch as opposed to a big uppercut</summary>
+    [SerializeField] private float m_punchCost;
+
     /// <summary>Sends the player upward according to cameras upwards vector with force proportional to the time spent charging</summary>
     override protected void Fire()
     {
+        if(m_chargeTime>m_uppercutCharge)   //If we've accumulated enough charge to perform an uppercut...
 
-
-
-        if (m_chargeTime>m_minCharge)
 		{
-            Vector3 direction = m_rigidBody.gameObject.transform.up; //Get the player's cameras upwards direction
-            float velocityCancel = m_rigidBody.velocity.y;
-            if (velocityCancel < 0)
+            if(CheckCost())                 //...And can afford it...
             {
-                velocityCancel = 0;
+                Uppercut();                 //...Uppercut.
             }
-            m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, velocityCancel, m_rigidBody.velocity.z);
-            m_rigidBody.AddForce(direction * m_force * (1+m_chargeTime), ForceMode.Impulse);   //Use recoil to move the rigidbody back
-            m_hand.m_charge -= m_chargeCost;
         }
-        else
+        else                        //If we've only accumulated enough charge to perform a punch...
 		{
-            Debug.Log("pung");
-
-
-        }
+            if (CheckPunchCost())   //...And can afford it...
+            {
+                Punch();            //...Punch.
+            }
+		}
     }
 
-	protected override void Charge(float elapsedTime)
-	{
-        print("charging fist...");
-		base.Charge(elapsedTime);
-	}
+    private void Uppercut()
+    {
+        Vector3 direction = m_rigidBody.transform.up;   //Get the player's upwards direction
+        m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, Mathf.Max(m_rigidBody.velocity.y, 0), m_rigidBody.velocity.z);   //Set the y to be at least 0
+        float force = Mathf.Clamp(m_uppercutForce * m_chargeTime, m_minForce, m_maxForce);   //Calculate how much force to send the player up by
+        m_rigidBody.AddForce(direction * force, ForceMode.Impulse);   //Apply an upwards force to the player
+    }
 
+    private void Punch()
+    {
+        Debug.Log("Punch!");
+    }
+
+    private bool CheckPunchCost()
+    {
+        if (m_hand.m_charge >= m_punchCost)    //If we can afford to punch...
+        {
+            m_hand.m_charge -= m_punchCost;    //...Pay the cost.
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

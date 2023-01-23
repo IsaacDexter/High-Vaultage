@@ -44,12 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e78ef2465ddfb4883f54f3d93920a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeCost: 0.5
-  m_hand: {fileID: 0}
-  m_holdChargeCost: 0
-  m_harpoonShot: {fileID: 3307444071152787805, guid: 9342606e27e40b94f864789252898089, type: 3}
-  m_harpoonSpeed: 3000
-  m_harpoonForce: 60
-  m_harpoonReelSpeed: 2
-  m_harpoonMinDistance: 2
-  m_harpoonDammage: 5
+  m_cost: 0.5
+  m_chargeCost: 0
+  m_projectile: {fileID: 3307444071152787805, guid: 9342606e27e40b94f864789252898089, type: 3}
+  m_projectileForce: 3000
+  m_releaseForce: 60
+  m_reelSpeed: 2
+  m_ropeMinDistance: 1
+  m_ropeSpring: 4.5
+  m_ropeDamper: 7
+  m_ropeMassScale: 4.5
