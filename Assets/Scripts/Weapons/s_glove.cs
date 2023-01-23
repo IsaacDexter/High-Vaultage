@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_fist : s_chargingWeapon
+public class s_glove : s_chargingWeapon
 {
     [SerializeField] private GameObject m_meleeBox;
     [SerializeField] private float m_fistDamage;
