@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_fist : s_chargingWeapon
+public class s_glove : s_chargingWeapon
 {
     [Header("Uppercut Settings")]
     /// <summary>The force to launch the player upwards by, multiplied by the time spent charging.</summary>
