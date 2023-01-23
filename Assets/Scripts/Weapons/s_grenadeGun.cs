@@ -7,7 +7,7 @@ public class s_grenadeGun : s_weapon
 
 	[SerializeField] float m_grenadeDamage;
 
-	s_grenade m_grenadeScript;
+	s_grenadeShot m_grenadeScript;
 
     [Header("Projectile Settings")]
 	/// <summary>The projectile to spawn m_grenadeShot</summary>
@@ -54,7 +54,7 @@ public class s_grenadeGun : s_weapon
 	{
 		m_currentGrenade = Instantiate(m_projectile, m_firePoint, m_camera.transform.rotation);							//Spawn a new grenade
 		m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_projectileForce);	//Fire it forwards
-		m_grenadeScript = m_currentGrenade.GetComponent<s_grenade>();
+		m_grenadeScript = m_currentGrenade.GetComponent<s_grenadeShot>();
 		m_armed = true;	//Indicate we are armed.
 	}
 
@@ -67,7 +67,7 @@ public class s_grenadeGun : s_weapon
     {
 		if (m_currentGrenade != null)
 		{
-			m_rigidBody.AddExplosionForce(m_explosionForce, m_currentGrenade.transform.position, m_explosionRadius, 0f, ForceMode.Impulse); //Apply a force. Note this will only affect the player at current.
+			//m_rigidBody.AddExplosionForce(m_explosionForce, m_currentGrenade.transform.position, m_explosionRadius, 0f, ForceMode.Impulse); //Apply a force. Note this will only affect the player at current.
 			m_grenadeScript.Detonate(m_explosionForce, m_explosionRadius, m_grenadeDamage);
 		}
 		ReleaseProjectile();    //Destroy the grenade now its detonated.

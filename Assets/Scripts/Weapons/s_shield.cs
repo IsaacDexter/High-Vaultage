@@ -18,4 +18,11 @@ public class s_shield : s_chargingWeapon
 		m_rigidBody.useGravity = false;
 		m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
 	}
+
+	/// <summary>Reenables gravity when released</summary>
+	public override void Dequip()
+	{
+		Fire();
+		base.Dequip();
+	}
 }

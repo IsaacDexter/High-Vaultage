@@ -92,4 +92,11 @@ public class s_revolver : s_chargingWeapon
 		base.Charge();
 
 	}
+
+	/// <summary>Reenables gravity when released</summary>
+	public override void Dequip()
+	{
+		Time.timeScale = 1f;
+		base.Dequip();
+	}
 }

@@ -48,6 +48,6 @@ public class s_stickyProjectile : MonoBehaviour
     {
         gameObject.AddComponent<FixedJoint>();  //Add a fixed joint to the grenade
         gameObject.GetComponent<FixedJoint>().connectedBody = rigidbody;   //And connect it to the other objects rigidbody
-        m_rigidbody.isKinematic = true; //make this kinematic i.e. fixed
+        //m_rigidbody.isKinematic = true; //make this kinematic i.e. fixed
     }
 }
