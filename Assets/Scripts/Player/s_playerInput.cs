@@ -23,7 +23,10 @@ public class s_playerInput : MonoBehaviour
     private void Start()
     {
         m_player = gameObject;
-        m_weaponWheel = m_player.AddComponent<s_weaponWheel>();
+
+        m_weaponWheel = m_player.GetComponentInChildren<s_weaponWheel>();   //Attatch the weapon wheel...
+        m_weaponWheel.Close();                                              //...then close it
+
         s_hand[] hands = m_player.GetComponentsInChildren<s_hand>();
         if (hands[0].name == "m_leftHand")
         {
@@ -57,7 +60,7 @@ public class s_playerInput : MonoBehaviour
         }
         if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
-            m_weaponWheel.ToggleWeaponWheel();
+            m_weaponWheel.Toggle();
         }
     }
 }
