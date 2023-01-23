@@ -7,8 +7,6 @@ public class s_shotgun : s_weapon
 
     [SerializeField] float m_shotgunDamage;
 
-    private Transform m_firePoint;
-
     /// <summary>The position to spawn projectiles at.</summary>
     private Vector3 m_firePoint;
 

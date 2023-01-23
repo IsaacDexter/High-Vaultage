@@ -68,7 +68,7 @@ public class s_grenadeGun : s_weapon
 		if (m_currentGrenade != null)
 		{
 			m_rigidBody.AddExplosionForce(m_explosionForce, m_currentGrenade.transform.position, m_explosionRadius, 0f, ForceMode.Impulse); //Apply a force. Note this will only affect the player at current.
-			m_grenadeScript.Detonate(m_grenadeForce, m_grenadeRadius,m_grenadeDamage);
+			m_grenadeScript.Detonate(m_explosionForce, m_explosionRadius, m_grenadeDamage);
 		}
 		ReleaseProjectile();    //Destroy the grenade now its detonated.
 	}

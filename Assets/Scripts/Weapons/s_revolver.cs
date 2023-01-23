@@ -39,7 +39,7 @@ public class s_revolver : s_chargingWeapon
 			SpawnProjectile();	//Fire a projectile...
 			CheckHit();			//...and check if it hit anything.
 		}
-		m_revolverCharge = m_revolverDammage;
+		m_revolverCharge = m_revolverDamage;
 	}
 
 	private void SpawnProjectile()
@@ -62,7 +62,7 @@ public class s_revolver : s_chargingWeapon
 		{										//If it hit anything...
 			if (hit.rigidbody != null)			//...and the hit object has a rigidbody...
 			{
-				Hit(m_hit.rigidbody.transform.root.gameObject);	//...call hit on that enemy
+				Hit(hit.rigidbody.transform.root.gameObject);	//...call hit on that enemy
 			}
 		}
 	}
@@ -74,21 +74,21 @@ public class s_revolver : s_chargingWeapon
 		Debug.Log("hit " + hitObject);
 		if (hitObject.tag == "Enemy")        //if the hit object has the tag enemy...
 		{
-			Debug.Log("hit " + hitEnemy);
+			Debug.Log("hit " + hitObject);
 
-			hitEnemy.GetComponent<s_enemyHealth>().DamageEnemy(m_revolverCharge);			//...destroy the enemy
+			hitObject.GetComponent<s_enemyHealth>().DamageEnemy(m_revolverCharge);			//...destroy the enemy
 		}
 	}
 
 	/// <summary>Slows down time by m_timeDilation</summary>
 	protected override void Charge()
 	{
-		if(m_revolverCharge <= m_revolverMaxDammage)
+		if(m_revolverCharge <= m_revolverMaxDamage)
 		{
 			m_revolverCharge += 3*Time.deltaTime;
 		}
 		Time.timeScale = m_timeDilation;
-		print("charging revolver... "+ m_revolverDammage);
+		print("charging revolver... "+ m_revolverDamage);
 		base.Charge();
 
 	}
