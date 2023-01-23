@@ -237,7 +237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2646917895703002626}
-  - component: {fileID: 5964046899211152961}
   m_Layer: 0
   m_Name: Turret Top
   m_TagString: Untagged
@@ -263,20 +262,6 @@ Transform:
   m_Father: {fileID: 5563808903216396401}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &5964046899211152961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005378092289633920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff32db0034c3939478061dabb07eea37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshAgent: {fileID: 0}
-  target: {fileID: 6184981835223551496, guid: d846c2d940567114b8e967ee6a9a814c, type: 3}
 --- !u!1 &6083492194449279670
 GameObject:
   m_ObjectHideFlags: 0

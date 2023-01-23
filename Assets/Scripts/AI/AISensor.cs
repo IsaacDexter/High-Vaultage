@@ -4,53 +4,162 @@ using UnityEngine;
 
 public class AISensor : MonoBehaviour
 {
-    public float distance = 10;
-    public float angle = 30;
-    public float height = 1.0f;
-    public Color meshColor = Color.red;
-    public int scanFrequency = 30;
-    public LayerMask layers;
-    public LayerMask occlusionLayers;
-    public List<GameObject> Objects = new List<GameObject>();
+    [SerializeField] float m_distance = 10;
+    [SerializeField] float m_angle = 30;
+    [SerializeField] float m_height = 1.0f;
+    [SerializeField] Color m_meshColor = Color.red;
+    [SerializeField] int m_scanFrequency;
+    [SerializeField] LayerMask m_layers;
+    [SerializeField] LayerMask m_occlusionLayers;
+    [SerializeField] float m_rotateSpeed;
+    [SerializeField] List<GameObject> m_objects = new List<GameObject>();
+    [SerializeField] Transform m_gunpoint;
 
-    Collider[] colliders = new Collider[50];
-    Mesh mesh;
-    int count;
-    float scanInterval;
-    float scanTimer;
+    bool m_shooting;
+    Vector3 m_targetDirection;
+    Collider[] m_colliders = new Collider[50];
+    Mesh m_mesh;
+    int m_count;
+    GameObject m_detectedPlayer;
+
+    bool m_resetCheck;
+    bool m_reseting;
+    [SerializeField] GameObject m_enemyShot;
+    [SerializeField] float m_fireDelay=0.5f;
+    [SerializeField] float m_fireSpeed;
+    [SerializeField] float m_resetTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        scanInterval = 1.0f / scanFrequency;
+        StartCoroutine(ScanDelay(m_scanFrequency));
     }
+
+    IEnumerator ScanDelay(float delay)
+    {
+        Scan();
+        Debug.Log("scan");
+        yield return new WaitForSeconds(delay);
+        StartCoroutine(ScanDelay(m_scanFrequency));
+    }
+    IEnumerator Fire(float delay)
+    {
+        Shoot();
+        yield return new WaitForSeconds(delay);
+        if (m_detectedPlayer != null)
+        {
+            StartCoroutine(Fire(m_fireDelay));
+        }
+    }
+
+    IEnumerator ResetAngle()
+    {
+        
+        yield return new WaitForSeconds(m_resetTime);
+        if (m_resetCheck == true)
+        {
+            m_reseting= true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
-        scanTimer = Time.deltaTime;
-        if (scanTimer > 0)
-        {
-            scanTimer += scanInterval;
-            Scan();
+        if(m_detectedPlayer!=null)
+		{
+            if (m_resetCheck == true)
+            {
+                m_resetCheck = false;
+                m_reseting = false;
+            }
+            Vector3 dir = m_detectedPlayer.transform.position - transform.position; //a vector pointing from pointA to pointB
+            Quaternion rot = Quaternion.LookRotation(dir, Vector3.up); //calc a rotation that
+            Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed);//Quaternion.Euler(new Vector3(0, rot.y,0))
+            gameObject.transform.rotation = rotation;
+
+            Quaternion bRot = Quaternion.LookRotation(dir, Vector3.up);
+		}
+        else
+		{
+            if (m_resetCheck == false)
+            {
+                m_resetCheck = true;
+                StartCoroutine(ResetAngle());
+            }
+            if(m_reseting)
+			{
+                Quaternion rot = Quaternion.Euler( new Vector3(transform.rotation.x, 0, transform.rotation.z));
+                Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed/4);
+                gameObject.transform.rotation = rotation;
+                if(gameObject.transform.rotation==rot)
+				{
+                    m_reseting = false;
+                    m_resetCheck = false;
+                }
+            }
+            StartCoroutine(ResetAngle());
         }
+
+  //      for(int i = 0; i < m_firePoint.Length; i++)
+		//{
+
+		//}
+
+        //m_scanTimer = Time.deltaTime;
+        //if (m_scanTimer > 0)
+        //{
+        //    m_scanTimer += m_scanInterval;
+        //    Scan();
+        //    Quaternion toRotation = Quaternion.FromToRotation(transform.forward, m_targetDirection);
+        //    transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, m_rotateSpeed * Time.time);
+        //}
+        
+
     }
 
     private void Scan()
     {
-        count = Physics.OverlapSphereNonAlloc(transform.position, distance, colliders, layers, QueryTriggerInteraction.Collide);
+        m_count = Physics.OverlapSphereNonAlloc(transform.position, m_distance, m_colliders, m_layers, QueryTriggerInteraction.Collide);
 
-        Objects.Clear();
-        for (int i = 0; i < count; ++i)
+        m_objects.Clear();
+        for (int i = 0; i < m_count; ++i)
         {
-            GameObject obj = colliders[i].gameObject;
+            GameObject obj = m_colliders[i].gameObject;
             if (IsInSight(obj))
             {
-                Objects.Add(obj);
+                m_detectedPlayer = obj;
                 Debug.Log("Player in range");
+                if(!m_shooting)
+				{
+                    StartCoroutine(Fire(m_fireDelay));
+
+                    m_shooting = true;
+                }
+            }
+			else
+			{
+                m_detectedPlayer = null;
+                m_shooting = false;
             }
         }
+        if(m_count<1)
+		{
+            m_detectedPlayer = null;
+            m_shooting = false;
+        }
     }
+
+    void Shoot()
+	{
+        Debug.Log("shoot");
+        Vector3 direction = gameObject.transform.TransformDirection(Vector3.forward);
+        GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, gameObject.transform.rotation);
+        shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);
+        Destroy(shot, 2);
+
+    }
+
 
     public bool IsInSight(GameObject obj)
     {
@@ -58,22 +167,22 @@ public class AISensor : MonoBehaviour
         Vector3 dest = obj.transform.position;
         Vector3 direction = dest - origin;
         
-        if (direction.y < 0 || direction.y > height)
+        if (direction.y < 0 || direction.y > m_height)
         {
             return false;
         }
 
         direction.y = 0;
         float deltaAngle = Vector3.Angle(direction, transform.forward);
-        if (deltaAngle > angle)
+        if (deltaAngle > m_angle)
         {
             return false;
         }
 
-        origin.y += height / 2;
+        origin.y += m_height / 2;
         dest.y = origin.y;
 
-        if (Physics.Linecast(origin, dest, occlusionLayers))
+        if (Physics.Linecast(origin, dest, m_occlusionLayers))
         {
             return false;
         }
@@ -92,12 +201,12 @@ public class AISensor : MonoBehaviour
         int[] triangles = new int[numVertices];
 
         Vector3 bottomCenter = Vector3.zero;
-        Vector3 bottomLeft = Quaternion.Euler(0, -angle, 0) * Vector3.forward * distance;
-        Vector3 bottomRight = Quaternion.Euler(0, angle, 0) * Vector3.forward * distance;
+        Vector3 bottomLeft = Quaternion.Euler(0, -m_angle, 0) * Vector3.forward * m_distance;
+        Vector3 bottomRight = Quaternion.Euler(0, m_angle, 0) * Vector3.forward * m_distance;
 
-        Vector3 topCenter = bottomCenter + Vector3.up * height;
-        Vector3 topRight = bottomRight + Vector3.up * height;
-        Vector3 topLeft = bottomLeft + Vector3.up * height;
+        Vector3 topCenter = bottomCenter + Vector3.up * m_height;
+        Vector3 topRight = bottomRight + Vector3.up * m_height;
+        Vector3 topLeft = bottomLeft + Vector3.up * m_height;
 
         int vert = 0;
 
@@ -119,16 +228,16 @@ public class AISensor : MonoBehaviour
         vertices[vert++] = bottomRight; 
         vertices[vert++] = bottomCenter; 
 
-        float currentAngle = -angle;
-        float deltaAngle = (angle * 2) / segments;
+        float currentAngle = -m_angle;
+        float deltaAngle = (m_angle * 2) / segments;
         for(int i =0; i < segments; i++)
         {
             
-             bottomLeft = Quaternion.Euler(0, currentAngle, 0) * Vector3.forward * distance;
-             bottomRight = Quaternion.Euler(0, currentAngle + deltaAngle, 0) * Vector3.forward * distance;
+             bottomLeft = Quaternion.Euler(0, currentAngle, 0) * Vector3.forward * m_distance;
+             bottomRight = Quaternion.Euler(0, currentAngle + deltaAngle, 0) * Vector3.forward * m_distance;
 
-             topRight = bottomRight + Vector3.up * height;
-             topLeft = bottomLeft + Vector3.up * height;
+             topRight = bottomRight + Vector3.up * m_height;
+             topLeft = bottomLeft + Vector3.up * m_height;
 
             //Far Side
             vertices[vert++] = bottomLeft;
@@ -166,27 +275,26 @@ public class AISensor : MonoBehaviour
 
     private void OnValidate()
     {
-        mesh = CreateWedgeMesh();
-        scanInterval = 1.0f / scanFrequency;
+        m_mesh = CreateWedgeMesh();
     }
 
     private void OnDrawGizmos()
     {
-        if (mesh)
+        if (m_mesh)
         {
-            Gizmos.color = meshColor;
-            Gizmos.DrawMesh(mesh, transform.position, transform.rotation);
+            Gizmos.color = m_meshColor;
+            Gizmos.DrawMesh(m_mesh, transform.position, transform.rotation);
         }
 
-        Gizmos.DrawWireSphere(transform.position, distance);
-        for (int i = 0; i < count; ++i)
+        Gizmos.DrawWireSphere(transform.position, m_distance);
+        for (int i = 0; i < m_count; ++i)
         {
-            Gizmos.DrawSphere(colliders[i].transform.position, 0.2f);
+            Gizmos.DrawSphere(m_colliders[i].transform.position, 0.2f);
         }
 
         Gizmos.color = Color.green;
 
-        foreach (var obj in Objects)
+        foreach (var obj in m_objects)
         {
             Gizmos.DrawSphere(obj.transform.position, 0.2f);
         }
