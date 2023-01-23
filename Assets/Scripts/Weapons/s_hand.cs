@@ -43,18 +43,26 @@ public class s_hand : MonoBehaviour
         }
     }
 
+    /// <summary>Dequip the currently equipped weapon and set it to null, if it exists</summary>
+    public void Dequip()
+    {
+        if(m_weapon != null)
+        {
+            m_weapon.GetComponent<s_weapon>().Dequip();
+            m_weapon = null;
+        }
+    }
+
     /// <summary>Destroys the current one, and instanciate a new one of the desired weapon type.</summary>
     /// <param name="weapon">The weapon prefab to instanciate</param>
     public void Equip(GameObject weapon)
 	{
-        Destroy(m_weapon);                                                          //Destroy the currently equipped weapon
+        Dequip();                                                                   //Dequip the currently equipped weapon
         m_weapon = Instantiate(weapon, transform.position, transform.rotation);     //Instanciate a new weapon object
 
         m_weapon.transform.SetParent(transform, true);                              //Set the weapon to be a child of the hand
         m_weapon.transform.localPosition = new Vector3(0, 0, 0);                    
         m_weapon.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));  //Reset the local position and rotation for that weapon
-
-        m_weapon.GetComponent<s_weapon>().m_hand = this;    //Set the weapon's reference to it's hand
     }
 	private void Update()
 	{

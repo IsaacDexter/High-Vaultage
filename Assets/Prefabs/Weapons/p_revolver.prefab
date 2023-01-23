@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3855ecf664003d94c9fa33bb605be126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeCost: 0.33
-  m_hand: {fileID: 0}
-  m_holdChargeCost: 0.2
-  m_revolverRange: 25
-  m_revolverShot: {fileID: 3587482509649262851, guid: d5ebb87a09241ba4a9de1af2633595a1, type: 3}
+  m_cost: 0.3
+  m_chargeCost: 0.2
+  m_timeDilation: 0.25
+  m_range: 25
+  m_projectile: {fileID: 3587482509649262851, guid: d5ebb87a09241ba4a9de1af2633595a1, type: 3}
+  m_projectileLifetime: 1

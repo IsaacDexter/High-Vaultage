@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class s_chargingWeapon : s_weapon
 {
-    /// <summary>If the weapon is currently being charged, i.e. the trigger is being held</summary>
+    /// <summary>If the weapon is currently being charged, i.e. the trigger is being held.</summary>
     protected bool m_charging = false;
+    /// <summary>The time stored when the player begins charging.</summary>
     protected float m_startTime = 0.0f;
     /// <summary>How long the weapon has been charging. Used to modify the power of certain fire functions.</summary>
     protected float m_chargeTime = 0.0f;
-    /// <summary>Called when the trigger starts to be held. Stops the hand from regening ammo and starts charging in update</summary>
-    [SerializeField] protected float m_holdChargeCost = 0.0f;
+    [Header("Charge Settings")]
+    /// <summary>Called when the trigger starts to be held. Stops the hand from regening ammo and starts charging in update.</summary>
+    [SerializeField] protected float m_chargeCost = 0.0f;
 
     override public void Press()
     {
-        m_startTime = Time.time;
+        m_startTime = Time.time;    //Store the time the weapon started charging
 
         m_charging = true;          //Start the weapon charging
         m_hand.m_regening = false;  //Prevent the hand from regenning ammo while charging
@@ -34,26 +36,23 @@ public class s_chargingWeapon : s_weapon
 
 
     /// <summary>MUST GO AT BOTTOM Builds up charge in the weapon so long as there is enough charge or Ammo to accomodate it. Overwrite for weapons which do things while charging, e.g. time slow</summary>
-    /// <param name="elapsedTime">The time elapsed since the last frame.</param>
-    virtual protected void Charge(float elapsedTime)
+    virtual protected void Charge()
     {
-        if (m_hand.m_charge > m_chargeCost) //Check if there is enough charge to charge the weapon. If there is...
+        if (m_hand.m_charge - (m_chargeCost * Time.deltaTime) > m_cost) //Check if there would be enough charge to fire the weapon next frame. If there is...
         {
-            m_hand.m_charge = Mathf.Max(m_hand.m_charge - (m_holdChargeCost * elapsedTime), 0.0f); //Reduce charge according to the weapon's cost
+            m_hand.m_charge = Mathf.Max(m_hand.m_charge - (m_chargeCost * Time.deltaTime), 0.0f); //Reduce charge according to the weapon's cost
         }
         else
         {
             Release();  //If we're out of charge, stop charging the weapon and fire it.
         }
     }
-    /// <summary>Calculates elapsed time and charges according to it if we're charging the weapon</summary>
+    /// <summary>Charges the weapon if necessary</summary>
     override protected void Update()
     {
-        if (m_charging)
+        if (m_charging) //If were charging,
         { 
-            Charge(Time.deltaTime);    //Charge according to that time
+            Charge();   //Charge
         }
     }
-
-
 }

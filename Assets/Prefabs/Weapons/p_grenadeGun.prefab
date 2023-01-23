@@ -44,9 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db76e6db06c06b546ba048aa4a699605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_chargeCost: 0.5
-  m_hand: {fileID: 0}
-  m_grenadeShot: {fileID: 6621947793516563856, guid: 5c42b72f7783042498fb567febdbeb24, type: 3}
-  m_grenadeSpeed: 2000
-  m_grenadeForce: 100
-  m_grenadeRadius: 10
+  m_cost: 0.75
+  m_projectile: {fileID: 6621947793516563856, guid: 5c42b72f7783042498fb567febdbeb24, type: 3}
+  m_projectileForce: 2000
+  m_explosionForce: 100
+  m_explosionRadius: 10
