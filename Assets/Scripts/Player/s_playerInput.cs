@@ -19,6 +19,8 @@ public class s_playerInput : MonoBehaviour
     private KeyCode m_rightFireKey = KeyCode.Mouse1;
     /// <summary>The key to press to open the weapon wheel</summary>
     private KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
+    /// <summary>Whether or not the player is accepting buttoninput, stops the player from moving or firing weapons with the weapon wheel open</summary>
+    [HideInInspector] public bool m_acceptingInput {set; private get; } = true;
 
     private void Start()
     {
@@ -42,25 +44,28 @@ public class s_playerInput : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(m_leftFireKey))
-        {
-            m_leftHand.PullTrigger();
-        }
-        if (Input.GetKeyUp(m_leftFireKey))
-        {
-            m_leftHand.ReleaseTrigger();
-        }
-        if (Input.GetKeyDown(m_rightFireKey))
-        {
-            m_rightHand.PullTrigger();
-        }
-        if (Input.GetKeyUp(m_rightFireKey))
-        {
-            m_rightHand.ReleaseTrigger();
-        }
         if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
             m_weaponWheel.Toggle();
+        }
+        if (m_acceptingInput)
+        {
+            if (Input.GetKeyDown(m_leftFireKey))
+            {
+                m_leftHand.PullTrigger();
+            }
+            if (Input.GetKeyUp(m_leftFireKey))
+            {
+                m_leftHand.ReleaseTrigger();
+            }
+            if (Input.GetKeyDown(m_rightFireKey))
+            {
+                m_rightHand.PullTrigger();
+            }
+            if (Input.GetKeyUp(m_rightFireKey))
+            {
+                m_rightHand.ReleaseTrigger();
+            }
         }
     }
 }
