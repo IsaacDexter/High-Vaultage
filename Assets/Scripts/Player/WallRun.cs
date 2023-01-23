@@ -5,8 +5,10 @@ using UnityEngine;
 public class WallRun : MonoBehaviour
 {
     [SerializeField] Transform m_orientation;
-    [SerializeField] float m_wallDistance = 1f;
+    [SerializeField] float m_wallDistance = .6f;
     [SerializeField] float m_minJumpHeight = 1.5f;
+    [SerializeField] float wallRunGravity;
+    [SerializeField] float wallRunJumpForce;
     
     bool m_wallOnLeft = false;
     bool m_wallOnRight = false;
@@ -22,26 +24,30 @@ public class WallRun : MonoBehaviour
 
     bool CanWallRun()
     {
-        return !Physics.Raycast(transform.position, Vector3.down, m_minJumpHeight);
+        return !(Physics.Raycast(transform.position, Vector3.down, m_minJumpHeight));
     }
 
     void CheckWalls()
     {
-        m_wallOnLeft  = Physics.Raycast(transform.position, -m_orientation.right, out m_leftWallHit, m_wallDistance);
-        m_wallOnRight = Physics.Raycast(transform.position, m_orientation.right, out m_rightWallHit, m_wallDistance);
+        m_wallOnLeft  = Physics.Raycast(transform.position, -m_orientation.right, out m_leftWallHit, m_wallDistance, LayerMask.GetMask("RunnableWall"));
+        m_wallOnRight = Physics.Raycast(transform.position, m_orientation.right, out m_rightWallHit, m_wallDistance, LayerMask.GetMask("RunnableWall"));
     }
 
     private void Update()
     {
-        if(CanWallRun())
-        {
-            CheckWalls();
+        CheckWalls();
 
-            if (m_wallOnLeft || m_wallOnRight)
+        if (CanWallRun())
+        {
+           if(m_wallOnLeft)
             {
                 StartWallRun();
             }
-            else if(!m_wallOnLeft && !m_wallOnRight)
+           else if(m_wallOnRight)
+            {
+                StartWallRun();
+            }
+            else
             {
                 StopWallRun();
             }
@@ -55,23 +61,23 @@ public class WallRun : MonoBehaviour
     void StartWallRun()
     {
         m_rigidBody.useGravity = false;
-        m_rigidBody.AddForce(Vector3.down, ForceMode.Force);
+        m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
 
-        //if(Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (m_wallOnLeft)
-        //    {
-        //        Vector3 jumpDirection = transform.up + m_leftWallHit.normal;
-        //        m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-        //        m_rigidBody.AddForce(jumpDirection * 50, ForceMode.Impulse);
-        //    }
-        //    else if(m_wallOnRight)
-        //    {
-        //        Vector3 jumpDirection = transform.up + m_rightWallHit.normal;
-        //        m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-        //        m_rigidBody.AddForce(jumpDirection * 50, ForceMode.Impulse);
-        //    }
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (m_wallOnLeft)
+            {
+                Vector3 jumpDirection = transform.up + m_leftWallHit.normal;
+                m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
+                m_rigidBody.AddForce(jumpDirection * 50, ForceMode.Impulse);
+            }
+            else if (m_wallOnRight)
+            {
+                Vector3 jumpDirection = transform.up + m_rightWallHit.normal;
+                m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
+                m_rigidBody.AddForce(jumpDirection * 50, ForceMode.Impulse);
+            }
+        }
     }
 
     void StopWallRun()
