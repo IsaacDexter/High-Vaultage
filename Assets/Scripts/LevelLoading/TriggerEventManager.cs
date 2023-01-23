@@ -20,4 +20,13 @@ public class TriggerEventManager : MonoBehaviour
             onTriggerEvent(id);
         }
     }
+
+    public event Action<int> onTriggerEventExit;
+    public void TriggerEventExit(int id)
+    {
+        if (onTriggerEventExit != null)
+        {
+            onTriggerEventExit(id);
+        }
+    }
 }
