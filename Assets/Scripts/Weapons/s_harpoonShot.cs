@@ -21,9 +21,14 @@ public class s_harpoonShot : MonoBehaviour
             gameObject.AddComponent<FixedJoint>();
             gameObject.GetComponent<FixedJoint>().connectedBody = collision.gameObject.GetComponent<Rigidbody>();
             m_hasJoint = true;
-            m_rigidbody.isKinematic = true;
+            //m_rigidbody.isKinematic = true;
 
             m_owner.AttachHarpoon();
+
+            if(collision.gameObject.tag=="Enemy")
+			{
+                m_owner.DammageTarget(collision.gameObject);
+            }                
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint&& collision.gameObject.tag != "Player")
         {
@@ -31,6 +36,8 @@ public class s_harpoonShot : MonoBehaviour
 
             m_owner.AttachHarpoon();
         }
+
+
     }
 
 }

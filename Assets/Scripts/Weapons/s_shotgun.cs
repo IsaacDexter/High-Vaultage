@@ -10,6 +10,8 @@ public class s_shotgun : s_weapon
     [SerializeField] float m_shotgunSpread;
     [SerializeField] float m_shotgunSpeed;
     [SerializeField] float m_shotgunForce;
+    [SerializeField] float m_shotgunDamage;
+
     private Transform m_firePoint;
 
 	/// <summary>Gets the cameras forward vector and launch the player in the opposite direction</summary>
@@ -31,6 +33,7 @@ public class s_shotgun : s_weapon
                 shot.transform.rotation = Quaternion.RotateTowards(shot.transform.rotation, angle, m_shotgunSpread);
                 shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_shotgunSpeed);
                 Destroy(shot, 1);
+                shot.GetComponent<s_bullet>().m_damage = m_shotgunDamage;
 
             }
             direction *= -1;

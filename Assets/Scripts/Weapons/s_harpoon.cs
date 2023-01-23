@@ -9,7 +9,8 @@ public class s_harpoon : s_chargingWeapon
 	[SerializeField] float m_harpoonForce;
 	[SerializeField] float m_harpoonReelSpeed;
 	[SerializeField] float m_harpoonMinDistance;
-	[SerializeField] float m_harpoonMaxDistance;
+	float m_harpoonMaxDistance;
+	[SerializeField] float m_harpoonDammage;
 	private GameObject m_currentHarpoon=null;
 	SpringJoint m_joint;
 	bool m_harpoonCheck;
@@ -68,5 +69,10 @@ public class s_harpoon : s_chargingWeapon
 		m_joint.spring = 4.5f;
 		m_joint.damper = 7f;
 		m_joint.massScale = 4.5f;
+	}
+
+	public void DammageTarget(GameObject target)
+	{
+		target.GetComponent<s_enemyHealth>().DamageEnemy(m_harpoonDammage); 
 	}
 }

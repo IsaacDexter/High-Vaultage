@@ -10,6 +10,7 @@ public class s_sword : s_chargingWeapon
     Vector3 startingVelcity;
     [SerializeField] float m_dashForce;
     [SerializeField] float m_dashDuration;
+    [SerializeField] private GameObject m_meleeBox;
 
     /// <summary>Sends the player upward according to cameras upwards vector with force proportional to the time spent charging</summary>
     /// 

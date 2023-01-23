@@ -6,10 +6,18 @@ public class s_fist : s_chargingWeapon
 {
     [SerializeField] private float m_force; //The force to launch the player upwards by, multiplied by the time spent charging.
     [SerializeField] private float m_minCharge;
+    [SerializeField] private GameObject m_meleeBox;
+    [SerializeField] private float m_fistDamage;
+
+    RaycastHit[] hit;
+    List<GameObject> targets = new List<GameObject>();
     /// <summary>Sends the player upward according to cameras upwards vector with force proportional to the time spent charging</summary>
     override protected void Fire()
     {
-        if(m_chargeTime>m_minCharge)
+
+
+
+        if (m_chargeTime>m_minCharge)
 		{
             Vector3 direction = m_rigidBody.gameObject.transform.up; //Get the player's cameras upwards direction
             float velocityCancel = m_rigidBody.velocity.y;
@@ -24,7 +32,9 @@ public class s_fist : s_chargingWeapon
         else
 		{
             Debug.Log("pung");
-		}
+
+
+        }
     }
 
 	protected override void Charge(float elapsedTime)
@@ -32,4 +42,5 @@ public class s_fist : s_chargingWeapon
         print("charging fist...");
 		base.Charge(elapsedTime);
 	}
+
 }

@@ -8,9 +8,11 @@ public class s_grenadeGun : s_weapon
 	[SerializeField] float m_grenadeSpeed;
 	[SerializeField] float m_grenadeForce;
 	[SerializeField] float m_grenadeRadius;
+	[SerializeField] float m_grenadeDamage;
 	private GameObject m_currentGrenade;
 	bool m_grenadeSwitch;
 	private Transform m_firePoint;
+	s_grenade m_grenadeScript;
 
 	override protected void Fire()
 	{
@@ -22,6 +24,7 @@ public class s_grenadeGun : s_weapon
 				Debug.Log("Grenade Attack");
 				m_currentGrenade = Instantiate(m_grenadeShot, m_firePoint.position, m_camera.transform.rotation);
 				m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_grenadeSpeed);
+				m_grenadeScript = m_currentGrenade.GetComponent<s_grenade>();
 				m_grenadeSwitch = true;
 				m_hand.m_charge -= m_chargeCost;
 			}
@@ -30,11 +33,11 @@ public class s_grenadeGun : s_weapon
 		{
 			Debug.Log("Grenade Explode");
 			m_rigidBody.AddExplosionForce(m_grenadeForce, m_currentGrenade.transform.position, m_grenadeRadius, 0f, ForceMode.Impulse);
+			m_grenadeScript.Detonate(m_grenadeForce, m_grenadeRadius,m_grenadeDamage);
 
-			Destroy(m_currentGrenade);
+			//Destroy(m_currentGrenade);
 			m_grenadeSwitch = false;
 			m_currentGrenade = null;
 		}
 	}
-
 }

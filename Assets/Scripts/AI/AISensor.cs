@@ -38,7 +38,7 @@ public class AISensor : MonoBehaviour
     IEnumerator ScanDelay(float delay)
     {
         Scan();
-        Debug.Log("scan");
+        //Debug.Log("scan");
         yield return new WaitForSeconds(delay);
         StartCoroutine(ScanDelay(m_scanFrequency));
     }
@@ -129,7 +129,7 @@ public class AISensor : MonoBehaviour
             if (IsInSight(obj))
             {
                 m_detectedPlayer = obj;
-                Debug.Log("Player in range");
+                //Debug.Log("Player in range");
                 if(!m_shooting)
 				{
                     StartCoroutine(Fire(m_fireDelay));
@@ -152,7 +152,7 @@ public class AISensor : MonoBehaviour
 
     void Shoot()
 	{
-        Debug.Log("shoot");
+        //Debug.Log("shoot");
         Vector3 direction = gameObject.transform.TransformDirection(Vector3.forward);
         GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, gameObject.transform.rotation);
         shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);
