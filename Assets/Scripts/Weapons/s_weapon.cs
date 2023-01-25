@@ -10,7 +10,7 @@ public class s_weapon : MonoBehaviour
     protected Rigidbody m_rigidBody;
     /// <summary>The transform of the camera to avoid a sea of .parents</summary>
     protected Transform m_camera;
-    /// <summary>The transform of the camera to avoid a sea of .parents</summary>
+    /// <summary>The transform of the player to avoid a sea of .parents</summary>
     protected Transform m_player;
     [Header("Cost Settings")]
     /// <summary>The cost of the weapon to fire per shot. For charging weapons, the cost each second.</summary>
@@ -39,9 +39,9 @@ public class s_weapon : MonoBehaviour
     /// <summary>Gets the hand, camera transform, player, and rigidbody components, and resets m_regening.</summary>
     protected void Start()
     {
+        m_player = transform.root;                         //Get the parent of the camera, i.e the player's transform.
         m_hand = GetComponentInParent<s_hand>();            //Get the hand from the player, as it will be its parent, always.
-        m_camera = m_hand.transform.parent;                 //Get the camera's transform, the hands's parent's transform.
-        m_player = m_camera.parent;                         //Get the parent of the camera, i.e the player's transform.
+        m_camera = m_player.GetComponentInChildren<Camera>().transform; //Get the camera's transform, the hands's parent's transform.
         m_rigidBody = m_player.GetComponent<Rigidbody>();   //Binds the player's rigidbody so this weapon can affect it with force.
 
         m_hand.m_regening = true;   //Make sure the hand is initialising ammo, in case the player attempted to switch while charging a weapon.
