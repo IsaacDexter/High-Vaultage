@@ -17,7 +17,7 @@ public class s_grenadeGun : s_weapon
 
 
 	/// <summary>The point on the gun to spawn the projectile</summary>
-	private Vector3 m_firePoint;
+	private Transform m_firePoint;
 	/// <summary>The currently active grenade, ready to be exploded</summary>
 	private GameObject m_currentGrenade;
 
@@ -37,7 +37,7 @@ public class s_grenadeGun : s_weapon
 	{
 		if (!m_armed)	//If theres not currently a grenade, armed...
 		{
-			m_firePoint = gameObject.transform.position;	//...Get the point to fire grenades from
+			m_firePoint = gameObject.transform;	//...Get the point to fire grenades from
 			if (CheckCost())	//So long as we can afford it...
 			{
 				SpawnProjectile();	//Spawn and fire a grenade
@@ -57,7 +57,7 @@ public class s_grenadeGun : s_weapon
     /// <summary>Spawn m_currentGrenade, apply force to it and arm it.</summary>
     private void SpawnProjectile()
 	{
-		m_currentGrenade = Instantiate(m_projectile, m_firePoint, m_camera.transform.rotation);							//Spawn a new grenade
+		m_currentGrenade = Instantiate(m_projectile, m_firePoint.position, m_camera.transform.rotation);							//Spawn a new grenade
 		m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_projectileForce);	//Fire it forwards
 		m_grenadeScript = m_currentGrenade.GetComponent<s_grenadeShot>();
 		m_armed = true;	//Indicate we are armed.
