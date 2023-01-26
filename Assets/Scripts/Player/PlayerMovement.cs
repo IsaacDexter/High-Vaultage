@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 m_moveDirection;
     Rigidbody m_rigidBody;
     [HideInInspector] public bool isGrounded;
-    bool m_canJump = true;
+    public bool m_canJump = true;
 
     [SerializeField] Transform m_cameraTransform;
     Vector3 oldCameraPosition;
