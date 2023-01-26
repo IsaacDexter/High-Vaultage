@@ -79,7 +79,7 @@ public class s_player : MonoBehaviour
 
     #region UI Settings
     [Header("UI")]
-    [Tooltip("A reference to a s_weaponwheel class, which handles opening events etc")]
+    [SerializeField, Tooltip("A reference to a s_weaponwheel class, which handles opening events etc")]
     s_weaponWheel m_weaponWheel;
     #endregion
 
@@ -162,8 +162,6 @@ public class s_player : MonoBehaviour
             m_leftHand = hands[1];
             m_rightHand = hands[0];
         }
-
-        m_weaponWheel = gameObject.GetComponentInChildren<s_weaponWheel>(); //Attatch the weapon wheel.
     }
 
     private void InitializeMovement()
