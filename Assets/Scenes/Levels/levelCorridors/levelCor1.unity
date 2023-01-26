@@ -1163,6 +1163,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 575827371}
     m_Modifications:
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 2045115161}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2045115160}
     - target: {fileID: 1368063793500281803, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
       propertyPath: m_Name
       value: p_automaticDoor
@@ -1805,3 +1813,13 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022405290}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &2045115160 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8217902220259609233, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 1289912080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2045115161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2800382190292286330, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 1289912080}
+  m_PrefabAsset: {fileID: 0}

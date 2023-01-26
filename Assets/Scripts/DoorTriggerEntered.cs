@@ -6,12 +6,12 @@ public class DoorTriggerEntered : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] int id;
-    [SerializeField] string LookForColliderName = "Player";
+    [SerializeField] string LookForTag = "Player";
 
     private void OnTriggerEnter(Collider other)
     {
         // only trigger if 'Player' collides
-        if (other.CompareTag(LookForColliderName))
+        if (other.CompareTag(LookForTag))
         {
             TriggerEventManager.current.TriggerEvent(id);
         }
@@ -20,7 +20,7 @@ public class DoorTriggerEntered : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // only trigger if 'Player' collides
-        if (other.CompareTag(LookForColliderName))
+        if (other.CompareTag(LookForTag))
         {
             TriggerEventManager.current.TriggerEventExit(id);
         }

@@ -558,6 +558,14 @@ PrefabInstance:
       propertyPath: id
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1641225173}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1641225172}
     - target: {fileID: 1368063793500281803, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
       propertyPath: m_Name
       value: p_automaticDoor (2)
@@ -1233,6 +1241,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1641225172 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8217902220259609233, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 640769686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1641225173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2800382190292286330, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 640769686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1745220959
 GameObject:
   m_ObjectHideFlags: 0

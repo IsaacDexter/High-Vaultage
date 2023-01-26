@@ -329,6 +329,14 @@ PrefabInstance:
       propertyPath: id
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 1641225173}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1641225172}
     - target: {fileID: 1368063793500281803, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
       propertyPath: m_Name
       value: p_automaticDoor (1)
@@ -422,6 +430,16 @@ Transform:
   m_Father: {fileID: 1616461918}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &442395386 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8217902220259609233, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 1001619935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &442395387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2800382190292286330, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 1001619935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &452219667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,6 +1283,14 @@ PrefabInstance:
       propertyPath: id
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 442395387}
+    - target: {fileID: 1216970183108538640, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 442395386}
     - target: {fileID: 1368063793500281803, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
       propertyPath: m_Name
       value: p_automaticDoor (1)
@@ -1780,6 +1806,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1641225172 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8217902220259609233, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 172882635}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1641225173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2800382190292286330, guid: d7c6029b5e7bb8b4191c25833cfd41cf, type: 3}
+  m_PrefabInstance: {fileID: 172882635}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1679450887
 GameObject:
   m_ObjectHideFlags: 0
