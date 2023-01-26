@@ -212,11 +212,11 @@ public class s_player : MonoBehaviour
         {
             StopSliding();
         }
-        //Get horizontal and vertical movement and apply 
-        CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (m_acceptingInput)
         {
+            //Get horizontal and vertical movement and apply 
+            CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             //Mouse input
             if (Input.GetKeyDown(m_leftFireKey))
             {

@@ -21,7 +21,6 @@ public class s_smashButton : s_button
     protected bool CheckColliderVelocity(Collider other)
     {
         Vector3 colliderVelocityTowardsButton = GetVelocityTowardsButton(other.attachedRigidbody.velocity);    //Get the players velocity in the direction of the button
-        print(colliderVelocityTowardsButton);
         return colliderVelocityTowardsButton.magnitude >= minVelocity;  //Check this against the minVelocity.
     }
 

@@ -45,7 +45,6 @@ public class s_smashDoor : s_trigger
     protected bool CheckColliderVelocity(Collider other)
     {
         Vector3 colliderVelocityTowardsButton = GetVelocityTowardsButton(other.attachedRigidbody.velocity);    //Get the players velocity in the direction of the door
-        print(colliderVelocityTowardsButton);
         return colliderVelocityTowardsButton.magnitude >= minVelocity;  //Check this against the minVelocity.
     }
 
