@@ -51,8 +51,14 @@ public class s_harpoon : s_chargingWeapon
 		}
 	}
 
-	/// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
-	private void SpawnProjectile()
+    public override void Cancel()
+    {
+        base.Cancel();
+		Fire();
+    }
+
+    /// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
+    private void SpawnProjectile()
     {
 		m_currentHarpoon = Instantiate(m_projectile, m_firePoint, m_camera.rotation);									//Spawn in the harpoon
 		m_currentHarpoon.GetComponent<s_harpoonShot>().m_owner = this;													//Become its owner

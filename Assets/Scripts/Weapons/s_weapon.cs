@@ -32,6 +32,11 @@ public class s_weapon : MonoBehaviour
 
     }
 
+    virtual public void Cancel()
+    {
+
+    }
+
     virtual protected void Update()
     {
 

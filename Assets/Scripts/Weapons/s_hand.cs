@@ -48,8 +48,17 @@ public class s_hand : MonoBehaviour
     {
         if(m_weapon != null)
         {
+            Cancel();
             m_weapon.GetComponent<s_weapon>().Dequip();
             m_weapon = null;
+        }
+    }
+
+    public void Cancel()
+    {
+        if (m_weapon!= null)
+        {
+            m_weapon.GetComponent<s_weapon>().Cancel();
         }
     }
 
