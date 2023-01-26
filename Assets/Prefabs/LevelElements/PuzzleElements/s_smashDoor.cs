@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class s_smashDoor : MonoBehaviour
+public class s_smashDoor : s_trigger
 {
     /// <summary>The lowest velocity the collider needs to reach to "slam" the button</summary>
     [SerializeField] float minVelocity = 0.0f;
@@ -14,6 +14,7 @@ public class s_smashDoor : MonoBehaviour
     {
         m_planks.SetActive(false);
         m_planksSmashed.SetActive(true);
+        Trigger();
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -44,7 +45,6 @@ public class s_smashDoor : MonoBehaviour
     protected bool CheckColliderVelocity(Collider other)
     {
         Vector3 colliderVelocityTowardsButton = GetVelocityTowardsButton(other.attachedRigidbody.velocity);    //Get the players velocity in the direction of the door
-        print(colliderVelocityTowardsButton);
         return colliderVelocityTowardsButton.magnitude >= minVelocity;  //Check this against the minVelocity.
     }
 

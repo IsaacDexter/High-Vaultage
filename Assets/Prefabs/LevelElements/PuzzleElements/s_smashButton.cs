@@ -21,7 +21,6 @@ public class s_smashButton : s_button
     protected bool CheckColliderVelocity(Collider other)
     {
         Vector3 colliderVelocityTowardsButton = GetVelocityTowardsButton(other.attachedRigidbody.velocity);    //Get the players velocity in the direction of the button
-        print(colliderVelocityTowardsButton);
         return colliderVelocityTowardsButton.magnitude >= minVelocity;  //Check this against the minVelocity.
     }
 
@@ -30,5 +29,10 @@ public class s_smashButton : s_button
         Vector3 velocity = colliderVelocity;
         Vector3 direction = transform.up * -1;  //Get the buttons downwards direction
         return Vector3.Project(velocity, direction); //Get the velocity of the player in the direction of the button
+    }
+
+    override public void Detrigger()
+    {
+        return;
     }
 }

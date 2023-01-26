@@ -7,7 +7,7 @@ public class s_movingPlatform : s_triggerable
     /// <summary>The waypoints for the platform to move to, in order of the array given</summary>
     [SerializeField] protected List<s_waypoint> m_waypoints;
     /// <summary>The speed of the moving platform</summary>
-    [SerializeField] protected float m_speed = 0.01f;
+    [SerializeField] protected float m_speed = 1.0f;
     /// <summary>The position of the current waypoint</summary>
     protected Vector3 m_destination;
     /// <summary>The index of the current waypoint</summary>
@@ -26,11 +26,11 @@ public class s_movingPlatform : s_triggerable
     {
         if (m_active)
         {
-            MoveToDestination();
+            MoveToDestination(Time.deltaTime);
         }
     }
     /// <summary>Finds the direction to the destination, and updates the destination if neccessary. Then moves in that direction</summary>
-    virtual protected void MoveToDestination()
+    virtual protected void MoveToDestination(float elapsedTime)
     {
         //Get the current position
         Vector3 position = transform.position;
@@ -39,7 +39,7 @@ public class s_movingPlatform : s_triggerable
         Vector3 direction = GetDirection(position);
 
         //Move in that direction by speed
-        transform.position += direction * m_speed;
+        transform.position += direction * m_speed * elapsedTime;
     }
 
     /// <summary>Finds the direction between the positon and the destination and returns it. If we've reached the destination, find the next and the direction to it</summary>
