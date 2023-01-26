@@ -18,6 +18,8 @@ public class WallRun : MonoBehaviour
     GameObject m_lastWall;
     GameObject m_currentWall;
 
+    bool m_onWall;
+
     private Rigidbody m_rigidBody;
 
     private void Start()
@@ -48,6 +50,8 @@ public class WallRun : MonoBehaviour
     {
         CheckWalls();
 
+
+
         if (CanWallRun())
         {
            if(m_wallOnLeft)
@@ -71,14 +75,20 @@ public class WallRun : MonoBehaviour
 
     void StartWallRun()
     {
+
+        if (!m_onWall)
+        {
+            m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
+            m_onWall = true;
+        }
+
         m_rigidBody.useGravity = false;
-        m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
+        m_rigidBody.AddForce(Vector3.down * 0.35f, ForceMode.Force);
 
         if (m_currentWall != m_lastWall && m_currentWall!=null)
         {
             gameObject.GetComponent<PlayerMovement>().m_canJump = true;
         }
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -104,5 +114,6 @@ public class WallRun : MonoBehaviour
     {
         m_rigidBody.useGravity = true;
         m_currentWall = null;
+        m_onWall = false;
     }
 }
