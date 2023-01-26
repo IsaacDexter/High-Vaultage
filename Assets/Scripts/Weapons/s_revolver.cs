@@ -42,7 +42,13 @@ public class s_revolver : s_chargingWeapon
 		m_revolverCharge = m_revolverDamage;
 	}
 
-	private void SpawnProjectile()
+    public override void Cancel()
+    {
+        base.Cancel();
+		Time.timeScale = 1f;
+    }
+
+    private void SpawnProjectile()
     {
 		Debug.DrawRay(m_firePoint, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
 		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint, m_camera.rotation);   //Instanciate a shot facing in the direction of the camera

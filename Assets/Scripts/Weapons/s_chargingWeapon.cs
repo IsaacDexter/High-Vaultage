@@ -26,11 +26,19 @@ public class s_chargingWeapon : s_weapon
     {
         if (m_charging) //Check the weapon was charging, to stop release events being triggered multiple times
         {
+            Cancel();
+            Fire();                                 //Launch the projectile
+        }
+    }
+
+    override public void Cancel()
+    {
+        if (m_charging) //Check the weapon was charging, to stop release events being triggered multiple times
+        {
             m_charging = false;
 
             m_chargeTime = Time.time - m_startTime; //Store how long the weapon was charging, used as a modifier in certain fires
             m_hand.m_regening = true;               //Start the hand regening ammo once again
-            Fire();                                 //Launch the projectile
         }
     }
 

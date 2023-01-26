@@ -205,6 +205,8 @@ public class s_player : MonoBehaviour
         if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
             m_weaponWheel.Toggle();
+            m_leftHand.Cancel();
+            m_rightHand.Cancel();
         }
         if (Input.GetKeyUp(m_slideKey))
         {
@@ -403,6 +405,7 @@ public class s_player : MonoBehaviour
     private void Look()
     {
         m_camera.transform.rotation = Quaternion.Euler(m_xRotation, m_yRotation, 0);
+        m_rigidBody.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
         m_orientation.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
     }
 
