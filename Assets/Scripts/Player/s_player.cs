@@ -205,6 +205,8 @@ public class s_player : MonoBehaviour
         if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
             m_weaponWheel.Toggle();
+            m_leftHand.Cancel();
+            m_rightHand.Cancel();
         }
         if (Input.GetKeyUp(m_slideKey))
         {
