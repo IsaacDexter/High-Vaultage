@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
 
 
         UI.enabled = false;
-        UILevel.enabled = true;
+        StartCoroutine(Animation1());
     }
 
     public void OpenOptions()
@@ -55,11 +55,12 @@ public class MainMenu : MonoBehaviour
     public void SelectLevel(int LevelNumber)
     {
         UI2.enabled = true;
-        StartCoroutine(WaitCorutine());
+        UILevel.enabled = false;
+        StartCoroutine(ExitMenuAnimation());
     }
 
 
-    IEnumerator WaitCorutine()
+    IEnumerator Animation1()
     {
         //Print the time of when the function is first called.
         Debug.Log("Started Coroutine at timestamp : " + Time.time);
@@ -76,11 +77,76 @@ public class MainMenu : MonoBehaviour
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-       Camera.SetActive(false);
-       Player.GetComponent<PlayerMovement>().enabled = true;
-       Player.GetComponent<PlayerLook>().enabled = true;
-       Player.GetComponent<PlayerDash>().enabled = true;
-       PlayerCamera.SetActive(true);
+        StartCoroutine(Animation2());
     }
+
+
+    IEnumerator Animation2()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        for (int i = 0; i < 160; i++)
+        {
+            Camera.transform.position = Camera.transform.position - new Vector3(0, 0, -0.01f);
+            Debug.Log("Moving");
+            yield return new WaitForSeconds(.01f);
+        }
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(.5f);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        StartCoroutine(Animation3());
+
+    }
+
+    IEnumerator Animation3()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        for (int i = 0; i < 40; i++)
+        {
+            Camera.transform.position = Camera.transform.position - new Vector3(+0.01f, 0, 0);
+            Debug.Log("Moving");
+            yield return new WaitForSeconds(.01f);
+        }
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(.5f);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        UILevel.enabled = true;
+
+    }
+
+
+    IEnumerator ExitMenuAnimation()
+    {
+        //Print the time of when the function is first called.
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+        for (int i = 0; i < 40; i++)
+        {
+            Camera.transform.position = Camera.transform.position - new Vector3(-0.01f, 0, 0);
+            Debug.Log("Moving");
+            yield return new WaitForSeconds(.01f);
+        }
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(.5f);
+
+        //After we have waited 5 seconds print the time again.
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        Camera.SetActive(false);
+        Player.GetComponent<PlayerMovement>().enabled = true;
+        Player.GetComponent<PlayerLook>().enabled = true;
+        Player.GetComponent<PlayerDash>().enabled = true;
+        PlayerCamera.SetActive(true);
+    }
+
 
 }
