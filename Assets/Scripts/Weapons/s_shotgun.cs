@@ -8,7 +8,7 @@ public class s_shotgun : s_weapon
     [SerializeField] float m_shotgunDamage;
 
     /// <summary>The position to spawn projectiles at.</summary>
-    private Transform m_firePoint;
+    [SerializeField] Transform m_firePoint;
 
     [Header("Projectile Settings")]
     /// <summary>The gameobject projectile for the shotgun to fire. Should be set to p_shotgunShot</summary>

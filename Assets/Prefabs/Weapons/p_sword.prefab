@@ -47,14 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cost: 0.5
   m_chargeCost: 0
-  m_dashForce: 200
-  m_minForce: 150
-  m_maxForce: 250
-  m_dashDuration: 0.25
-  m_meleeBox: {fileID: 0}
-  m_dashCharge: 0
+  m_dashForce: 350
+  m_minForce: 250
+  m_maxForce: 650
+  m_dashDuration: 0.5
+  m_dashCharge: 0.2
   m_velocityFalloff: 0
   m_slashCost: 0.1
+  m_swordDamage: 4
+  m_meleeTargets: []
 --- !u!1001 &2972325717352085171
 PrefabInstance:
   m_ObjectHideFlags: 0
