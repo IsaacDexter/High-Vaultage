@@ -142,10 +142,10 @@ public class MainMenu : MonoBehaviour
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
         Camera.SetActive(false);
-        Player.GetComponent<PlayerMovement>().enabled = true;
-        Player.GetComponent<PlayerLook>().enabled = true;
-        Player.GetComponent<PlayerDash>().enabled = true;
-        PlayerCamera.SetActive(true);
+
+        Player.SetActive(true);
+        Debug.Log(Player.transform.rotation);
+        Player.transform.rotation = Quaternion.Euler(0, -90, 0);
     }
 
 
