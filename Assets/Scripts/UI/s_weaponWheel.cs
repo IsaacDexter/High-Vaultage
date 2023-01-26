@@ -26,6 +26,7 @@ private void Start()
             m_leftHand = hands[1];
             m_rightHand = hands[0];
         }
+        Close();
     }
 
     /// <summary>If the weapon wheel's open, close it and vice versa.</summary>
@@ -49,7 +50,7 @@ private void Start()
         m_open = false;  //Update check bool
         Time.timeScale = 1f;        //Speed time up to the normal amount
         gameObject.SetActive(false);
-        m_player.GetComponent<s_playerInput>().m_acceptingInput = true;
+        m_player.GetComponent<s_player>().m_acceptingInput = true;
     }
 
     /// <summary>Opens the weapons wheel, freeing the cursor and slowing down time</summary>
@@ -60,6 +61,6 @@ private void Start()
         m_open = true;   //Update check bool
         Time.timeScale = m_timeDilation;      //Slow down time to the slow speed
         gameObject.SetActive(true);
-        m_player.GetComponent<s_playerInput>().m_acceptingInput = false;
+        m_player.GetComponent<s_player>().m_acceptingInput = false;
     }
 }

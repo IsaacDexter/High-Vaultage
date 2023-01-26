@@ -1,14 +1,14 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Camera))]
-public class Player : MonoBehaviour
+public class s_player : MonoBehaviour
 {
+    #region Movement Settings
     [Header("Movement")]
-    [Range(0.0f, 10.0f), Tooltip("The players movement speed.")]
-    public float m_movementSpeed = 6.0f;
+    [Range(0.0f, 20.0f), Tooltip("The players movement speed.")]
+    public float m_movementSpeed = 10.0f;
     [SerializeField, Range(0.0f, 1.0f), Tooltip("How much to reduce movement speed in the air by.")]
-    float m_airMovementMultiplier = 0.03f;
+    float m_airMovementMultiplier = 0.2f;
     [Tooltip("How much to multiply movement speed by.")]
     float m_movementMultiplier = 10.0f;
     [Tooltip("Interacts with input to apply movement horizontally.")]
@@ -17,14 +17,16 @@ public class Player : MonoBehaviour
     float m_verticalMovement;
     [Tooltip("The direction to move in.")]
     Vector3 m_moveDirection;
+    #endregion
 
+    #region Physics Settings
     [Header("Physics")]
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The maximum velocity the player can reach before being limited")]
-    float m_maxVelocity;
+    float m_maxVelocity = 27.0f;
     [Range(0.0f, 10.0f), Tooltip("How much drag to apply when the player is touching the ground.")]
-    public float m_groundDrag;
+    public float m_groundDrag = 8.0f;
     [Range(0.0f, 10.0f), Tooltip("How much drag to apply while the player is airborne.")]
-    public float m_airDrag;
+    public float m_airDrag = 0.3f;
     [Tooltip("The rigidbody component to apply physics to.")]
     Rigidbody m_rigidBody;
     [SerializeField, Range(0.0f, 5.0f), Tooltip("The height of the player's model while standing.")]
@@ -35,16 +37,21 @@ public class Player : MonoBehaviour
     public float m_height;
     [SerializeField, Tooltip("The collision detection mode of the player.Continuous dynamic / speculative are good for fast moving projectiles.")] 
     CollisionDetectionMode m_collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+    #endregion
 
+    #region Jumping Settings
     [Header("Jumping")]
-    [SerializeField, Range(0.0f, 10.0f), Tooltip("How high the player can jump.")]
-    float m_jumpForce = 5.0f;
+    [SerializeField, Range(0.0f, 50.0f), Tooltip("How high the player can jump.")]
+    float m_jumpForce = 20.0f;
     [SerializeField, Tooltip("Which layer to be seen as the ground.")]
     LayerMask m_groundMask;
-    [HideInInspector, Tooltip("Whether or not the player is currently touching the ground.")] public bool m_grounded;
+    [Tooltip("Whether or not the player is currently touching the ground.")] 
+    public bool m_grounded;
     [Tooltip("If the player can currently jump.")]
     bool m_canJump = true;
+    #endregion
 
+    #region Sliding Settings
     [Header("Sliding")]
     [SerializeField, Range(0.0f, 10.0f), Tooltip("How much drag to apply to the player as they're sliding.")] 
     float m_slideDrag = 1.0f;
@@ -54,51 +61,61 @@ public class Player : MonoBehaviour
     public bool m_sliding = false;
     [Tooltip("If the player should be sliding, regardless of if it actually is or isn't")]
     private bool m_slidingExpected = false;
+    #endregion
 
+    #region Health Settings
     [Header("Health")]
+    [SerializeField, Tooltip("The tag to use for the enemy bullets.")] 
+    string m_enemyBulletTag = "EnemyBullet";
+    [SerializeField, Range(0.0f, 10.0f), Tooltip("The delay in seconds between being damaged and no longer being damaged.")]
+    float m_recoveryDuration = 3.0f;
     [Tooltip("The players current damaged state. If damaged, the player will die when it takes damage")]
     bool m_damaged = false;
     [Tooltip("When the player will be recovered")]
     float m_recoveryTime;
-    [SerializeField, Range(0.0f, 10.0f), Tooltip("The delay in seconds between being damaged and no longer being damaged.")]
-    float m_recoveryDuration = 3.0f;
     [Tooltip("The player's spawn point it will return to upon death")]
     public Transform m_spawnPoint;
-    [SerializeField, Tooltip("The tag to use for the enemy bullets.")] 
-    string m_enemyBulletTag = "EnemyBullet";
+    #endregion
 
+    #region UI Settings
     [Header("UI")]
     [SerializeField, Tooltip("A reference to a s_weaponwheel class, which handles opening events etc")]
     s_weaponWheel m_weaponWheel;
+    #endregion
 
+    #region Components
     [Header("Components")]
+    [SerializeField, Tooltip("The player's orientation component.")]
+    Transform m_orientation;
+    [SerializeField, Tooltip("The player's body/capsule, needed to scale/animate while crouched.")]
+    Transform m_body;
     [Tooltip("The camera associated with this game object, its tranform used to help calculate direction.")]
     Transform m_camera;
     [Tooltip("The camera's position in the previous call.")]
     Vector3 m_previousCameraPosition;
     [Tooltip("How much the player's position has changed since the previous call.")]
     Vector3 m_positionShift;
-    [SerializeField, Tooltip("The player's orientation component.")]
-    Transform m_orientation;
-    [SerializeField, Tooltip("The player's body/capsule, needed to scale/animate while crouched.")]
-    Transform m_body;
     [Tooltip("The player's left hand, that holds their left weapon.")]
     s_hand m_leftHand;
     [Tooltip("The player's right hand, that holds their right weapon.")]
     s_hand m_rightHand;
+    #endregion
 
+    #region Look Settings
     [Header("Looking")]
     float m_deltaX;
     float m_deltaY;
     float m_lookMultiplier = 0.01f;
     float m_xRotation;
     float m_yRotation;
+    #endregion
 
+    #region Input Settings
     [Header("Input")]
-    [SerializeField, Tooltip("The mouse's sensitivity in the horizontal")] 
-    float m_sensitivityX; 
-    [SerializeField, Tooltip("The mouse's sensitivity in the vertical")] 
-    float m_sensitivityY;
+    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
+    float m_sensitivityX = 200; 
+    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 
+    float m_sensitivityY = 200;
     [Tooltip("The key pressed in order to Jump.")]
     KeyCode m_jumpKey = KeyCode.Space;
     [Tooltip("The key pressed in order to Slide.")]
@@ -111,6 +128,9 @@ public class Player : MonoBehaviour
     KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
     [Tooltip("Whether or not the player is accepting buttoninput, stops the player from moving or firing weapons with the weapon wheel open")]
     [HideInInspector] public bool m_acceptingInput { set; private get; } = true;
+    #endregion 
+
+
 
     #region Initialization
 
@@ -142,12 +162,6 @@ public class Player : MonoBehaviour
             m_leftHand = hands[1];
             m_rightHand = hands[0];
         }
-<<<<<<< HEAD
-=======
-
-        m_weaponWheel = gameObject.GetComponentInChildren<s_weaponWheel>(); //Attatch the weapon wheel...
-        m_weaponWheel.Close();                                              //...then close it
->>>>>>> parent of 0c8f77a (Added and tested the new s_player class. It seems to work brilliantly. I'm going to push it to main without implementation for now.)
     }
 
     private void InitializeMovement()
@@ -158,7 +172,7 @@ public class Player : MonoBehaviour
         m_positionShift = m_previousCameraPosition;
         m_positionShift.y -= 0.5f;
 
-        m_height = m_heightStanding;    //Set the player's height to be standing.
+        SetHeight(m_heightStanding);
     }
 
     #endregion
@@ -179,6 +193,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        TryMove();
         TrySlide();
     }
 
@@ -246,6 +261,23 @@ public class Player : MonoBehaviour
         m_verticalMovement = verticalInput;
 
         m_moveDirection = m_orientation.forward * m_verticalMovement + m_orientation.right * m_horizontalMovement;
+    }
+
+    /// <summary>Attempt to move the player in it's desired direction according to if its in the air, on the ground or sliding.</summary>
+    private void TryMove()
+    {
+        if (m_grounded && !m_sliding)   //if we're on the ground and not sliding...
+        {
+            m_rigidBody.AddForce(m_moveDirection.normalized * m_movementSpeed * m_movementMultiplier, ForceMode.Acceleration);  //Apply the movement * m_movementMultiplier
+        }
+        else if (!m_grounded)           //If we're in the air...
+        {
+            m_rigidBody.AddForce(m_moveDirection * m_movementSpeed * m_movementMultiplier * m_airMovementMultiplier, ForceMode.Force);  //Apply the same * air multiplier
+        }
+        else                            //If we're sliding
+        {
+            m_rigidBody.AddForce(new Vector3(0, 0, 0)); //Apply no input
+        }
     }
 
     /// <summary>Applies drag dependent on if the player is airborne.</summary>
