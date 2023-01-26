@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Goes in player
 public class s_levelLoader : MonoBehaviour
 {
     LevelStreamer streamer = new LevelStreamer();
