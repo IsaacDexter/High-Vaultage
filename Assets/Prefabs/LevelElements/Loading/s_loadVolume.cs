@@ -12,17 +12,22 @@ public class s_loadVolume : MonoBehaviour
     [SerializeField] private string m_corridorToUnload;
     private void OnTriggerEnter(Collider other) 
     {
+        Debug.Log(other.tag);
+
         if (other.CompareTag("Player")) //When the player triggers this
         {
             s_levelLoader levelLoader = other.gameObject.GetComponentInParent<s_levelLoader>(); //Get a reference to the persistent level loader inside the player so it can set the currentlevel correctly
+            Debug.Log($"player hit loadVolume {levelLoader}");
+
             if (levelLoader != null)    //once we have it,
             {
-                levelLoader.UnloadLevel(m_corridorToUnload);
-                levelLoader.UnloadLevel(m_sceneToUnload);   //Unload the previous level.
-                levelLoader.LoadLevel(m_corridorToLoad);
+                //levelLoader.UnloadLevel(m_corridorToUnload);
+                //levelLoader.UnloadLevel(m_sceneToUnload);   //Unload the previous level.
+                //levelLoader.LoadLevel(m_corridorToLoad);
                 levelLoader.LoadLevel(m_sceneToLoad);   //Load the next one. Load this last so we know which to reload on respawn.
 
-                Destroy(levelLoader.gameObject);    //Destroy the load volume so we no longer have to worry about loading twice.
+                //Destroy(levelLoader.gameObject);    //Destroy the load volume so we no longer have to worry about loading twice.
+                Destroy(gameObject);
             }
         }
     }
