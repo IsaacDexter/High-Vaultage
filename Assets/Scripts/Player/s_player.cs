@@ -81,6 +81,8 @@ public class s_player : MonoBehaviour
     [Header("UI")]
     [SerializeField, Tooltip("A reference to a s_weaponwheel class, which handles opening events etc")]
     s_weaponWheel m_weaponWheel;
+    [SerializeField, Tooltip("A reference to a s_pausemenu class, which handles opening events etc")]
+    s_pauseMenu m_pauseMenu;
     #endregion
 
     #region Components
@@ -208,15 +210,22 @@ public class s_player : MonoBehaviour
             m_leftHand.Cancel();
             m_rightHand.Cancel();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            m_leftHand.Cancel();
+            m_rightHand.Cancel();
+            m_weaponWheel.Close();
+            m_pauseMenu.Toggle();
+        }
         if (Input.GetKeyUp(m_slideKey))
         {
             StopSliding();
         }
-        //Get horizontal and vertical movement and apply 
-        CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (m_acceptingInput)
         {
+            //Get horizontal and vertical movement and apply 
+            CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             //Mouse input
             if (Input.GetKeyDown(m_leftFireKey))
             {

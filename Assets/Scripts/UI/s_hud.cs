@@ -7,8 +7,12 @@ public class s_hud : MonoBehaviour
 {
     public s_hand m_leftHand;
     public s_hand m_rightHand;
-    [SerializeField] private Slider m_leftSlider;
-    [SerializeField] private Slider m_rightSlider;
+    [SerializeField] private Image m_leftCharge;
+    [SerializeField] private Image m_rightCharge;
+    [SerializeField] Color m_leftColor = Color.green;
+    [SerializeField] Color m_rightColor = Color.red;
+    [SerializeField] Color m_flashColor = Color.white;
+    [SerializeField] float m_flashSpeed = 2.0f;
     private GameObject m_player;
     // Start is called before the first frame update
     void Start()
@@ -24,13 +28,32 @@ public class s_hud : MonoBehaviour
         {
             m_leftHand = hands[1];
             m_rightHand = hands[0];
-        }    
+        }
+        m_leftCharge.color = m_leftColor;
+        m_rightCharge.color = m_rightColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_leftSlider.value = m_leftHand.m_charge;
-        m_rightSlider.value = m_rightHand.m_charge;
+        m_leftCharge.rectTransform.localScale = new Vector3(1, m_leftHand.m_charge);
+        m_rightCharge.rectTransform.localScale = new Vector3(1, m_rightHand.m_charge);
+        if (m_leftHand.m_regening && m_leftHand.m_charge < 1.0f)
+        {
+            m_leftCharge.color = Color.Lerp(m_flashColor, m_leftColor, Mathf.PingPong(Time.time * m_flashSpeed, 1.0f));
+        }
+        else
+        {
+            m_leftCharge.color = m_leftColor;
+        }
+
+        if (m_rightHand.m_regening && m_rightHand.m_charge < 1.0f)
+        {
+            m_rightCharge.color = Color.Lerp(m_flashColor, m_rightColor, Mathf.PingPong(Time.time * m_flashSpeed, 1.0f));
+        }
+        else
+        {
+            m_rightCharge.color = m_rightColor;
+        }
     }
 }
