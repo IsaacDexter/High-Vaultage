@@ -61,7 +61,7 @@ public class WallRun : MonoBehaviour
     void StartWallRun()
     {
         m_rigidBody.useGravity = false;
-        m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
+        m_rigidBody.AddForce(Vector3.down * 0.3f, ForceMode.Force);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
