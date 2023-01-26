@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 119
+  controlID: 52
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -120,14 +120,14 @@ MonoBehaviour:
     y: 561
     width: 1418
     height: 386
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
   - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Weapons
+    - Assets/Models/Smart Turret Template/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/Weapons
+  - Assets/Models/Smart Turret Template/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\d010941k\Documents\GitHub\technical-games-production-assignment-2-group-01
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 74900000
-    m_LastClickedID: 36980
-    m_ExpandedIDs: 0000000004810000d882000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 703}
+    m_SelectedIDs: 16950000
+    m_LastClickedID: 38166
+    m_ExpandedIDs: 00000000827f0000668100006c8100007481000076810000f0810000f281000020890000228900002c8900002e8900003289000034890000de8a00000a8c00000e95000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000004810000
+    m_ExpandedIDs: 00000000827f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -388,7 +388,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_ExpandedInstanceIDs: c6230000c87d0000927a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -431,7 +431,7 @@ MonoBehaviour:
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Debug
+    m_Text: Inspector
     m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
-  m_InspectorMode: 1
+  m_InspectorMode: 0
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
@@ -488,23 +488,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 78f8ffff
+      m_SelectedIDs: e6d7feff
+      m_LastClickedID: -75802
+      m_ExpandedIDs: d2d7feffdad7feffe6d7feffa211ffff2a13ffff9ee2ffffcae4fffface6ffff08e8ffff38edffff80eeffffccefffffbaf2ffff28f4ffffe4f9ffffe0a10000f0a1000036a200003aa20000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: STT_Turret
+        m_OriginalName: STT_Turret
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -75814
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -827,9 +827,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 5.9240513, y: 1.6578412, z: -17.372616}
+    m_Target: {x: 17.912666, y: 0.12534884, z: -18.417728}
     speed: 2
-    m_Value: {x: 5.9240513, y: 1.6578412, z: -17.372616}
+    m_Value: {x: 17.912666, y: 0.12534884, z: -18.417728}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -875,13 +875,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.117396496, y: -0.63204247, z: 0.097664475, w: -0.7597401}
+    m_Target: {x: -0.11761248, y: -0.38233078, z: 0.04913168, w: -0.91520053}
     speed: 2
-    m_Value: {x: -0.117542684, y: -0.6309012, z: 0.09748812, w: -0.76068616}
+    m_Value: {x: -0.11761157, y: -0.38232782, z: 0.0491313, w: -0.91519344}
   m_Size:
-    m_Target: 1.226392
+    m_Target: 0.8556122
     speed: 2
-    m_Value: 1.226392
+    m_Value: 0.8556122
   m_Ortho:
     m_Target: 0
     speed: 2
