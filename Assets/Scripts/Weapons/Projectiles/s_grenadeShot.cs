@@ -6,6 +6,10 @@ public class s_grenadeShot : s_stickyProjectile
 {
     /// <summary>Once something has entered the trigger i.e. the grenade has hit an object</summary>
     /// <param name="other">The other thing that entered the trigger i.e. whatever the object attatched itself to</param>
+    /// 
+
+    [SerializeField] GameObject m_explosionEffect;
+
 	private void OnTriggerEnter(Collider other)
     {
         if (!m_stuck)                               //If we havent yet attatched ourselves to something...
@@ -56,6 +60,12 @@ public class s_grenadeShot : s_stickyProjectile
                 rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
             }
         }
+        GameObject Explosion =  Instantiate(m_explosionEffect, gameObject.transform.position, transform.rotation);
+        Destroy(Explosion, 5);
+
         Destroy(gameObject);
+
+        
+
     }
 }

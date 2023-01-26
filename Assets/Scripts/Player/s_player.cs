@@ -205,6 +205,8 @@ public class s_player : MonoBehaviour
         if (Input.GetKeyDown(m_weaponWheelOpenKey))
         {
             m_weaponWheel.Toggle();
+            m_leftHand.Cancel();
+            m_rightHand.Cancel();
         }
         if (Input.GetKeyUp(m_slideKey))
         {
@@ -347,7 +349,6 @@ public class s_player : MonoBehaviour
     public void StartSliding()
     {
         m_slidingExpected = true;   //Set that we should be sliding
-        SetHeight(m_heightSliding); //Set out height to that of a sliding person
     }
 
     public void StopSliding()
@@ -365,6 +366,7 @@ public class s_player : MonoBehaviour
         {
             if (m_grounded)     //...and can...
             {
+                SetHeight(m_heightSliding); //Set out height to that of a sliding person
                 m_rigidBody.AddForce(m_camera.forward * m_slideForce, ForceMode.Impulse);   //Apply the slide force forwards
 
                 m_sliding = true;           //Set that we are sliding (for drag reasons)
@@ -403,6 +405,7 @@ public class s_player : MonoBehaviour
     private void Look()
     {
         m_camera.transform.rotation = Quaternion.Euler(m_xRotation, m_yRotation, 0);
+        m_rigidBody.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
         m_orientation.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
     }
 

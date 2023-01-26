@@ -49,8 +49,13 @@ public class s_grenadeGun : s_weapon
 		}
 	}
 
-	/// <summary>Spawn m_currentGrenade, apply force to it and arm it.</summary>
-	private void SpawnProjectile()
+    public override void Cancel()
+    {
+        base.Cancel();
+    }
+
+    /// <summary>Spawn m_currentGrenade, apply force to it and arm it.</summary>
+    private void SpawnProjectile()
 	{
 		m_currentGrenade = Instantiate(m_projectile, m_firePoint, m_camera.transform.rotation);							//Spawn a new grenade
 		m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_projectileForce);	//Fire it forwards
