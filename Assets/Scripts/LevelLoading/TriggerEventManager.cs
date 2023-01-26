@@ -12,12 +12,13 @@ public class TriggerEventManager : MonoBehaviour
         current = this;
     }
 
-    public event Action<int> onTriggerEvent;
+    public event Action<int> onTriggerEventDoor;
     public void TriggerEvent(int id)
     {
-        if (onTriggerEvent != null)
+        if (onTriggerEventDoor != null)
         {
-            onTriggerEvent(id);
+            Debug.Log("not null");
+            onTriggerEventDoor(id);
         }
     }
 
