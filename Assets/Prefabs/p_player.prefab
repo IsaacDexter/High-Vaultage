@@ -894,7 +894,10 @@ MonoBehaviour:
   m_weaponWheel: {fileID: 5626012580950934799}
   m_pauseMenu: {fileID: 7176722897129184622}
   m_orientation: {fileID: 2002771142344128862}
+  m_mantleCheck: {fileID: 0}
   m_body: {fileID: 4608390000834687481}
+  m_playerCamera: {fileID: 1802985367891876071}
+  m_slideFOV: 70
   m_sensitivityX: 200
   m_sensitivityY: 200
 --- !u!114 &8111925542334845360
@@ -912,8 +915,10 @@ MonoBehaviour:
   m_orientation: {fileID: 3120777541067098316}
   m_wallDistance: 0.6
   m_minJumpHeight: 1.5
-  wallRunGravity: 0
-  wallRunJumpForce: 5
+  m_wallRunGravity: 0
+  m_wallRunJumpForce: 0
+  m_Camera: {fileID: 1802985367891876071}
+  m_slideFOV: 75
 --- !u!1 &7576628030957165052
 GameObject:
   m_ObjectHideFlags: 0
