@@ -462,9 +462,10 @@ public class s_player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag(m_enemyBulletTag))   //If we have collided with a bullet...
+        if (collision.gameObject.transform.root.gameObject.CompareTag(m_enemyBulletTag))   //If we have collided with a bullet...
         {
-            Destroy(collision.collider.gameObject); //Destroy that bullet
+            Debug.Log("OWW");
+            Destroy(collision.gameObject); //Destroy that bullet
             Damage();   //Take damage.
         }
     }
