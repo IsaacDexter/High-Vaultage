@@ -22,6 +22,12 @@ public class s_pauseMenu : s_menu
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
 
+    public override void Open()
+    {
+        m_settings.Close();
+        base.Open();
+    }
+
     public void OpenSettings()
     {
         Close();

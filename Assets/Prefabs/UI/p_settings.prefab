@@ -3056,6 +3056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_timeDilation: 0
   m_postProcess: {fileID: 0}
+  m_pause: {fileID: 0}
 --- !u!1 &3247139545469854510
 GameObject:
   m_ObjectHideFlags: 0
@@ -6971,8 +6972,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5843423572808527644}
-        m_TargetAssemblyTypeName: s_menu, Assembly-CSharp
-        m_MethodName: Close
+        m_TargetAssemblyTypeName: s_settings, Assembly-CSharp
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

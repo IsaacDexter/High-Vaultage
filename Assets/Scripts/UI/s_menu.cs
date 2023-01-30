@@ -42,7 +42,7 @@ public class s_menu : MonoBehaviour
     }
 
     /// <summary>Opens the weapons wheel, freeing the cursor and slowing down time</summary>
-    public void Open()
+    virtual public void Open()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;      //Unlock and show the cursor
