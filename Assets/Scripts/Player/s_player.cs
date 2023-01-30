@@ -138,8 +138,8 @@ public class s_player : MonoBehaviour
     KeyCode m_rightFireKey = KeyCode.Mouse1;
     [Tooltip("The key to press to open the weapon wheel")]
     KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
-    [Tooltip("Whether or not the player is accepting buttoninput, stops the player from moving or firing weapons with the weapon wheel open")]
-    [HideInInspector] public bool m_acceptingInput { set; private get; } = true;
+    [Tooltip("The key that will cause the player to acept input, set to none when all input is accepted.")]
+    [HideInInspector] public KeyCode m_acceptedInput { set; private get; } = KeyCode.None;
     #endregion 
 
 
@@ -216,30 +216,30 @@ public class s_player : MonoBehaviour
 
     private void CheckInput()
     {
-        //These two do not freeze when the weapon wheel is open so the player won't have to reenable sliding to stop and so the player can close the weapon wheel 
-        if (Input.GetKeyDown(m_weaponWheelOpenKey))
+        if (Input.GetKeyDown(m_acceptedInput) || m_acceptedInput == KeyCode.None)
         {
-            m_weaponWheel.Toggle();
-            m_leftHand.Cancel();
-            m_rightHand.Cancel();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            m_leftHand.Cancel();
-            m_rightHand.Cancel();
-            m_weaponWheel.Close();
-            m_pauseMenu.Toggle();
-        }
-        if (Input.GetKeyUp(m_slideKey))
-        {
-            StopSliding();
-        }
-
-        if (m_acceptingInput)
-        {
+            //These two do not freeze when the weapon wheel is open so the player won't have to reenable sliding to stop and so the player can close the weapon wheel 
+            if (Input.GetKeyDown(m_weaponWheelOpenKey))
+            {
+                m_weaponWheel.Toggle();
+                m_leftHand.Cancel();
+                m_rightHand.Cancel();
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                m_leftHand.Cancel();
+                m_rightHand.Cancel();
+                m_weaponWheel.Close();
+                m_pauseMenu.Toggle();
+            }
+            if (Input.GetKeyUp(m_slideKey))
+            {
+                StopSliding();
+            }
             //Get horizontal and vertical movement and apply 
             CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             //Mouse input
+            CalculateCameraRotation(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
             if (Input.GetKeyDown(m_leftFireKey))
             {
                 m_leftHand.PullTrigger();
@@ -448,8 +448,6 @@ public class s_player : MonoBehaviour
 
     private void Look()
     {
-        CalculateCameraRotation(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-
         m_rigidBody.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
         m_camera.transform.localRotation = Quaternion.Euler(m_xRotation, 0, 0);
     }
