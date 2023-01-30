@@ -12,7 +12,7 @@ public class DoorTriggerEvent : MonoBehaviour
 
     void Start()
     {
-        TriggerEventManager.current.onTriggerEvent += OnTriggerEvent;
+        TriggerEventManager.current.onTriggerEventDoor += OnTriggerEvent;
         TriggerEventManager.current.onTriggerEventExit += OntTriggerEventExit;
     }
     private void OnTriggerEvent(int id)

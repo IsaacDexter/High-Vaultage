@@ -11,7 +11,7 @@ public class s_revolver : s_chargingWeapon
 	[SerializeField] float m_revolverMaxDamage;
 
 	/// <summary>The position to spawn projectiles at.</summary>
-	private Vector3 m_firePoint;
+	private Transform m_firePoint;
 
 
     [Header("Projectile Settings")]
@@ -31,7 +31,7 @@ public class s_revolver : s_chargingWeapon
 	/// <summary></summary>
 	override protected void Fire()
 	{
-		m_firePoint = gameObject.transform.position;	//Get the position to fire from
+		m_firePoint = gameObject.transform;	//Get the position to fire from
 		Time.timeScale = 1f;							//Reset time dilation
 
 		if (CheckCost())	//If we can afford to fire, pay the cost
@@ -50,12 +50,12 @@ public class s_revolver : s_chargingWeapon
 
     private void SpawnProjectile()
     {
-		Debug.DrawRay(m_firePoint, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
-		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint, m_camera.rotation);   //Instanciate a shot facing in the direction of the camera
+		Debug.DrawRay(m_firePoint.position, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
+		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);   //Instanciate a shot facing in the direction of the camera
 
 		LineRenderer shotline = shotLineObject.GetComponent<LineRenderer>();            //Get the shot's line
-		shotline.SetPosition(0, m_firePoint);                                           //Set one end to the point the weapon fired from...
-		shotline.SetPosition(1, m_firePoint + (m_camera.transform.forward * m_range));  //... and the other to the end of the pistols range
+		shotline.SetPosition(0, m_firePoint.position);                                           //Set one end to the point the weapon fired from...
+		shotline.SetPosition(1, m_firePoint.position + (m_camera.transform.forward * m_range));  //... and the other to the end of the pistols range
 
 		Destroy(shotLineObject, m_projectileLifetime);  //Queue the object for destruction
 	}
@@ -64,7 +64,7 @@ public class s_revolver : s_chargingWeapon
 	private void CheckHit()
     {
 		RaycastHit hit;
-		if (Physics.Raycast(m_firePoint, transform.parent.transform.forward, out hit, m_range))	//Use  raycast to find the point where the gun hit.
+		if (Physics.Raycast(m_firePoint.position, transform.parent.transform.forward, out hit, m_range))	//Use  raycast to find the point where the gun hit.
 		{										//If it hit anything...
 			if (hit.rigidbody != null)			//...and the hit object has a rigidbody...
 			{

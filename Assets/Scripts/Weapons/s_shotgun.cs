@@ -8,7 +8,7 @@ public class s_shotgun : s_weapon
     [SerializeField] float m_shotgunDamage;
 
     /// <summary>The position to spawn projectiles at.</summary>
-    private Vector3 m_firePoint;
+    [SerializeField] Transform m_firePoint;
 
     [Header("Projectile Settings")]
     /// <summary>The gameobject projectile for the shotgun to fire. Should be set to p_shotgunShot</summary>
@@ -26,15 +26,21 @@ public class s_shotgun : s_weapon
     /// <summary>The force for the shotgun to knock the player back by.<summary>
     [SerializeField] float m_kickback;
 
+    /// <summary>Muzzle flash particale effect.<summary>
+    [SerializeField] GameObject m_muzzleFlash;
+   
 
-	/// <summary>Gets the cameras forward vector and launch the player in the opposite direction</summary>
-	override protected void Fire()
+
+    /// <summary>Gets the cameras forward vector and launch the player in the opposite direction</summary>
+    override protected void Fire()
     {
         if (CheckCost())    //if we can afford to fire...
         {
-            m_firePoint = gameObject.transform.position;         //Get the position of the gun to fire from
+            m_firePoint = gameObject.transform;         //Get the position of the gun to fire from
             for (int i = 0; i < m_projectileCount; i++) //For each projectile we're firing...
             {
+                GameObject flash = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);
+                Destroy(flash,1);
                 SpawnProjectile();                      //Spawn it
             }
 
@@ -46,7 +52,7 @@ public class s_shotgun : s_weapon
     private void SpawnProjectile()
     {
         Quaternion angle = Random.rotation;                                                             //Calculate a random rotation
-        GameObject shot = Instantiate(m_projectile, m_firePoint, m_camera.rotation);           //Instanciate a new projectile from the firing position using the cameras rotation
+        GameObject shot = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);           //Instanciate a new projectile from the firing position using the cameras rotation
         shot.transform.rotation = Quaternion.RotateTowards(shot.transform.rotation, angle, m_spread);   //Rotate from the forward within maximum spread
         shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * projectileForce);              //apply the shot with its its force
         shot.GetComponent<s_bullet>().m_damage = m_shotgunDamage;

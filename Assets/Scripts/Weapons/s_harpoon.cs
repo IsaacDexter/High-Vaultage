@@ -14,7 +14,7 @@ public class s_harpoon : s_chargingWeapon
 	SpringJoint m_joint;
 
 	/// <summary>The position to spawn projectiles at.</summary>
-	private Vector3 m_firePoint;
+	private Transform m_firePoint;
 
     [Header ("Weapon Settings")]
 	/// <summary>The force the player moves forward by when releasing</summary>
@@ -60,7 +60,7 @@ public class s_harpoon : s_chargingWeapon
     /// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
     private void SpawnProjectile()
     {
-		m_currentHarpoon = Instantiate(m_projectile, m_firePoint, m_camera.rotation);									//Spawn in the harpoon
+		m_currentHarpoon = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);									//Spawn in the harpoon
 		m_currentHarpoon.GetComponent<s_harpoonShot>().m_owner = this;													//Become its owner
 		m_currentHarpoon.GetComponent<Rigidbody>().AddForce(m_currentHarpoon.transform.forward * m_projectileForce);	//Provide it with an initial force.
 	}
@@ -70,7 +70,7 @@ public class s_harpoon : s_chargingWeapon
 	{
 		if (CheckCost())		//if we can afford to fire the harpoon...
 		{
-			m_firePoint = gameObject.transform.position;    //Set the fire point
+			m_firePoint = gameObject.transform;    //Set the fire point
 			SpawnProjectile();  //Fire the harpoon
 			base.Press();
 		}

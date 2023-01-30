@@ -525,8 +525,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8743528442736874735}
   - component: {fileID: 19863528089677020}
-  - component: {fileID: 4924446461360549374}
-  - component: {fileID: 625792556145343814}
+  - component: {fileID: 1216970183108538640}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -562,7 +561,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4924446461360549374
+--- !u!114 &1216970183108538640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,23 +570,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7951611531090407931}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c5f7a8d7f447b4ebb868e102ef75d9, type: 3}
+  m_Script: {fileID: 11500000, guid: d40951ab1b9f6e9479f2af042ba68993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  LookForColliderName: Player
---- !u!114 &625792556145343814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7951611531090407931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07aa2781412497a4f9b662f27ecf47bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  door: {fileID: 2800382190292286330}
-  animator: {fileID: 8217902220259609233}

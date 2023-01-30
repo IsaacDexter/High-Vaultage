@@ -14,7 +14,7 @@ public class s_sword : s_chargingWeapon
     /// <summary>The length the dash will last in seconds, on top of how long the player charged for</summary>
     [SerializeField] float m_dashDuration;
 
-    [SerializeField] private GameObject m_meleeBox;
+
 
     /// <summary>The minimum charge required to dash</summary>
     [SerializeField] float m_dashCharge;
@@ -24,6 +24,12 @@ public class s_sword : s_chargingWeapon
     /// <summary>The cost of a small slash as opposed to a big dash.</summary>
     [SerializeField] float m_slashCost;
 
+    
+
+    [SerializeField] private float m_swordDamage;
+
+    public List<GameObject> m_meleeTargets;
+
 
     /// <summary>Calls when the dash has finished and resets velocity</summary>
     /// <param name="delay">The delat in seconds, should be set to m_dashDuration</param>
@@ -31,16 +37,31 @@ public class s_sword : s_chargingWeapon
     {
         yield return new WaitForSeconds(delay);
         m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x * m_velocityFalloff, m_rigidBody.velocity.y, m_rigidBody.velocity.z * m_velocityFalloff);
+        m_hand.m_meleeBox.SetActive(false);
+        m_meleeTargets = null;
+        m_hand.m_killOnHit = false;
+    }
+
+    override public void Press()
+    {
+        m_hand.m_meleeBox.SetActive(true);
+
+        m_startTime = Time.time;    //Store the time the weapon started charging
+
+        m_charging = true;          //Start the weapon charging
+        m_hand.m_regening = false;  //Prevent the hand from regenning ammo while charging
     }
 
     /// <summary>Checks how long the weapon was charging for. If it exceeded m_dashCharge it will dash, otherwise it will slice</summary>
     override protected void Fire()
     {
-        if(m_chargeTime>m_dashCharge)   //If you held long enough to dash...
+        m_hand.m_meleeBox.SetActive(true);
+        if (m_chargeTime>m_dashCharge)   //If you held long enough to dash...
 		{
             if (CheckCost())            //...and we can afford to dash... 
             {
                 Dash();                 //... do so
+
             }
         }
         else                        //If the weapon was only charged long enough to slash...
@@ -57,13 +78,19 @@ public class s_sword : s_chargingWeapon
     {
         float force = Mathf.Clamp(m_dashForce * m_chargeTime, m_minForce, m_maxForce);  //Calculate the force of the dash proprtional to time spent charging
         m_rigidBody.AddForce(m_camera.forward * force, ForceMode.Impulse);              //Apply the dash force in the forward vector
-        StartCoroutine(DashDelay(m_dashDuration));                                      //Start the coroutine that triggers when the dash delay has ended
+        StartCoroutine(DashDelay(m_dashDuration));    //Start the coroutine that triggers when the dash delay has ended
+        m_hand.m_killOnHit = true;       
     }
 
-    /// <summary>Called when the player just clicks with this weapon. Unimplemented, intended to be a simple melee hit.</summary>
-    private void Slash()
+	/// <summary>Called when the player just clicks with this weapon. Unimplemented, intended to be a simple melee hit.</summary>
+	private void Slash()
     {
         Debug.Log("Slash!");
+
+        m_meleeTargets = m_hand.m_meleeBox.GetComponent<s_meleeBox>().m_targets;
+       
+        m_meleeTargets = null;
+
     }
 
     private bool CheckSlashCost()

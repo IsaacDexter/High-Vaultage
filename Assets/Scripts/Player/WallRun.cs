@@ -7,16 +7,16 @@ public class WallRun : MonoBehaviour
     [SerializeField] Transform m_orientation;
     [SerializeField] float m_wallDistance = .6f;
     [SerializeField] float m_minJumpHeight = 1.5f;
-    [SerializeField] float wallRunGravity;
-    [SerializeField] float wallRunJumpForce;
+    [SerializeField] float m_wallRunGravity;
+    [SerializeField] float m_wallRunJumpForce;
     
     bool m_wallOnLeft = false;
     bool m_wallOnRight = false;
     RaycastHit m_leftWallHit;
     RaycastHit m_rightWallHit;
 
-    GameObject m_lastWall;
-    GameObject m_currentWall;
+    bool check;
+    float m_baseFOV;
 
     private Rigidbody m_rigidBody;
 
@@ -35,14 +35,6 @@ public class WallRun : MonoBehaviour
         m_wallOnLeft  = Physics.Raycast(transform.position, -m_orientation.right, out m_leftWallHit, m_wallDistance, LayerMask.GetMask("RunnableWall"));
         m_wallOnRight = Physics.Raycast(transform.position, m_orientation.right, out m_rightWallHit, m_wallDistance, LayerMask.GetMask("RunnableWall"));
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.layer == 8)
-        {
-
-            m_currentWall = collision.gameObject;
-        }
-    }
 
     private void Update()
     {
@@ -50,11 +42,7 @@ public class WallRun : MonoBehaviour
 
         if (CanWallRun())
         {
-           if(m_wallOnLeft)
-            {
-                StartWallRun();
-            }
-           else if(m_wallOnRight)
+           if(m_wallOnLeft || m_wallOnRight)
             {
                 StartWallRun();
             }
@@ -71,14 +59,14 @@ public class WallRun : MonoBehaviour
 
     void StartWallRun()
     {
-        m_rigidBody.useGravity = false;
-        m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
-
-        if (m_currentWall != m_lastWall && m_currentWall!=null)
+        if (!check)
         {
-            gameObject.GetComponent<PlayerMovement>().m_canJump = true;
+            m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
+            check = true;
         }
 
+        m_rigidBody.useGravity = false;
+        m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -86,23 +74,20 @@ public class WallRun : MonoBehaviour
             {
                 Vector3 jumpDirection = transform.up + m_leftWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-                m_rigidBody.AddForce(jumpDirection * wallRunJumpForce, ForceMode.Impulse);
+                m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
             }
             else if (m_wallOnRight)
             {
                 Vector3 jumpDirection = transform.up + m_rightWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-                m_rigidBody.AddForce(jumpDirection * wallRunJumpForce, ForceMode.Impulse);
+                m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
             }
-            m_lastWall = m_currentWall;
-            m_currentWall = null;
-
         }
     }
 
     void StopWallRun()
     {
         m_rigidBody.useGravity = true;
-        m_currentWall = null;
+        check = false;
     }
 }
