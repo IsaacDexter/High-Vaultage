@@ -17,6 +17,7 @@ public class s_player : MonoBehaviour
     float m_verticalMovement;
     [Tooltip("The direction to move in.")]
     Vector3 m_moveDirection;
+    bool m_mantleEnabled;
     #endregion
 
     #region Physics Settings
@@ -89,6 +90,8 @@ public class s_player : MonoBehaviour
     [Header("Components")]
     [SerializeField, Tooltip("The player's orientation component.")]
     Transform m_orientation;
+    [SerializeField, Tooltip("The player's mantle checker, centered in the body")]
+    Transform m_mantleCheck;
     [SerializeField, Tooltip("The player's body/capsule, needed to scale/animate while crouched.")]
     Transform m_body;
     [Tooltip("The camera associated with this game object, its tranform used to help calculate direction.")]
@@ -101,6 +104,13 @@ public class s_player : MonoBehaviour
     s_hand m_leftHand;
     [Tooltip("The player's right hand, that holds their right weapon.")]
     s_hand m_rightHand;
+    #endregion
+
+    #region Camera Settings
+    [SerializeField, Tooltip("The camera to transform on specific movement triggers")]
+    Camera m_playerCamera;
+    [SerializeField] float m_slideFOV;
+    float m_baseFOV;
     #endregion
 
     #region Look Settings
@@ -164,6 +174,8 @@ public class s_player : MonoBehaviour
             m_leftHand = hands[1];
             m_rightHand = hands[0];
         }
+
+        m_baseFOV = m_playerCamera.fieldOfView;
     }
 
     private void InitializeMovement()
@@ -186,6 +198,7 @@ public class s_player : MonoBehaviour
         Regenerate();
         CheckGrounded();
         ApplyDrag();
+        MantleCheck();
 
         CheckInput();
         Look();
@@ -243,7 +256,6 @@ public class s_player : MonoBehaviour
             {
                 m_rightHand.ReleaseTrigger();
             }
-            CalculateCameraRotation(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
             //Key input
             if (Input.GetKeyDown(m_jumpKey))
@@ -317,6 +329,26 @@ public class s_player : MonoBehaviour
         }
     }
 
+    /// <summary>Checks if player needs to mantle a surface they missed</summary>
+    private void MantleCheck()
+    {
+        if (m_grounded)
+        {
+            m_mantleEnabled = true;
+        }
+
+        if (!m_grounded && m_mantleEnabled)
+        {
+            if (Physics.Raycast(m_mantleCheck.position, m_mantleCheck.forward, 0.6f, LayerMask.GetMask("Ground")) &&
+                !Physics.Raycast(m_camera.position, m_camera.forward, 0.6f, LayerMask.GetMask("Ground")))
+            {
+                m_mantleEnabled = false;
+                m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
+                m_rigidBody.AddForce(transform.up * 10, ForceMode.Impulse);
+            }
+        }
+    }
+
     #region Jumping
 
     /// <summary>If we're on the ground, jump, otherwise double jump (if we can).</summary>
@@ -364,6 +396,7 @@ public class s_player : MonoBehaviour
     {
         m_slidingExpected = false;      //Set that we shouldn't be sliding
         m_sliding = false;              //Make sure we aren't
+        m_playerCamera.fieldOfView = m_baseFOV;
         SetHeight(m_heightStanding);    //Return us to our normal height
     }
 
@@ -380,6 +413,8 @@ public class s_player : MonoBehaviour
 
                 m_sliding = true;           //Set that we are sliding (for drag reasons)
                 m_slidingExpected = false;  //But reset that we should be sliding, so we can only apply the intial slide force once. We have slid.
+
+                m_playerCamera.fieldOfView = m_slideFOV;
                 return true;
             }
         }
@@ -413,9 +448,10 @@ public class s_player : MonoBehaviour
 
     private void Look()
     {
-        m_camera.transform.rotation = Quaternion.Euler(m_xRotation, m_yRotation, 0);
+        CalculateCameraRotation(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+
         m_rigidBody.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
-        m_orientation.transform.rotation = Quaternion.Euler(0, m_yRotation, 0);
+        m_camera.transform.localRotation = Quaternion.Euler(m_xRotation, 0, 0);
     }
 
     #endregion

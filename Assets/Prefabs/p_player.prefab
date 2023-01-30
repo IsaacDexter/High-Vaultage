@@ -97,6 +97,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &2167648326006478543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7806153719847310203}
+  m_Layer: 7
+  m_Name: Mantle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7806153719847310203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167648326006478543}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3120777541067098316}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2431243992419660151
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +811,7 @@ GameObject:
   - component: {fileID: 8428189119617721395}
   - component: {fileID: -9053301445771478554}
   - component: {fileID: 8111925542334845360}
+  - component: {fileID: 529311543328553222}
   m_Layer: 7
   m_Name: p_player
   m_TagString: Player
@@ -806,6 +838,7 @@ Transform:
   - {fileID: 7617405431886666248}
   - {fileID: 489654162145895983}
   - {fileID: 408510678789462202}
+  - {fileID: 7806153719847310203}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -894,7 +927,10 @@ MonoBehaviour:
   m_weaponWheel: {fileID: 5626012580950934799}
   m_pauseMenu: {fileID: 7176722897129184622}
   m_orientation: {fileID: 2002771142344128862}
+  m_mantleCheck: {fileID: 7806153719847310203}
   m_body: {fileID: 4608390000834687481}
+  m_playerCamera: {fileID: 1802985367891876071}
+  m_slideFOV: 70
   m_sensitivityX: 200
   m_sensitivityY: 200
 --- !u!114 &8111925542334845360
@@ -912,8 +948,20 @@ MonoBehaviour:
   m_orientation: {fileID: 3120777541067098316}
   m_wallDistance: 0.6
   m_minJumpHeight: 1.5
-  wallRunGravity: 0
-  wallRunJumpForce: 5
+  m_wallRunGravity: 0
+  m_wallRunJumpForce: 0
+--- !u!114 &529311543328553222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434073310353456999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a97bad46304e894f837895340584eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7576628030957165052
 GameObject:
   m_ObjectHideFlags: 0
