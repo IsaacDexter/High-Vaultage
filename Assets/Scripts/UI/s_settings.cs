@@ -21,7 +21,7 @@ public class s_settings : s_menu
         m_resolutionX = Screen.width;
         m_resolutionY = Screen.height;
         m_fullscreenMode = FullScreenMode.FullScreenWindow;
-        m_brightness = 2.49f;
+        m_brightness = 0.0f;
 
         //Apply();
     }
@@ -34,14 +34,13 @@ public class s_settings : s_menu
 
     public void Apply()
     {
-        print("Applying brightness of " + m_brightness);
         ApplyGraphics();
     }
 
     private void ApplyGraphics()
     {
         Screen.SetResolution(m_resolutionX, m_resolutionY, m_fullscreenMode);
-        m_postProcess.SetBrightness(m_brightness);
+        m_postProcess.SetGain(m_brightness);
     }
 
     public void SetScreenResolution(TextMeshProUGUI dropdown)
