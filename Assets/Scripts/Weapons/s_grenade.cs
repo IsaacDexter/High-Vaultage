@@ -17,12 +17,7 @@ public class s_grenade : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> parent of bee3ace... Merge branch 'main' into Chris4
 	private void OnCollisionEnter(Collision collision)
 	{
         if (collision.gameObject.transform.root.gameObject.tag!="Player"|| collision.gameObject.transform.root.gameObject.tag != "Projectile")
