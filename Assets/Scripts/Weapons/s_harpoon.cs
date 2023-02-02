@@ -60,6 +60,8 @@ public class s_harpoon : s_chargingWeapon
     /// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
     private void SpawnProjectile()
     {
+		m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Firing SFX
+
 		m_currentHarpoon = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);									//Spawn in the harpoon
 		m_currentHarpoon.GetComponent<s_harpoonShot>().m_owner = this;													//Become its owner
 		m_currentHarpoon.GetComponent<Rigidbody>().AddForce(m_currentHarpoon.transform.forward * m_projectileForce);	//Provide it with an initial force.
@@ -87,6 +89,7 @@ public class s_harpoon : s_chargingWeapon
 	/// <summary>Check to see if the rope is not yet at it's minimum length, and reduces the roles length</summary>
 	private void Reel()
     {
+
 		if (m_joint.maxDistance > m_joint.minDistance)              //If the joints distance is not yet at its minimum...
 		{
 			m_joint.maxDistance -= m_reelSpeed * Time.deltaTime;    //Reel in the harpoon
@@ -94,6 +97,8 @@ public class s_harpoon : s_chargingWeapon
 	}
 	public void AttachHarpoon()
 	{
+		m_audioSource.PlayOneShot(m_clip2, m_volume); //Plays Firing SFX
+
 		Vector3 swingPoint = m_currentHarpoon.transform.position;		//Get the position of the harpoon
 		m_joint = m_rigidBody.gameObject.AddComponent<SpringJoint>();	//Add a joint to the player's rigid body
 		m_joint.autoConfigureConnectedAnchor = false;					
@@ -106,7 +111,9 @@ public class s_harpoon : s_chargingWeapon
 
 		m_joint.spring = m_ropeSpring;		
 		m_joint.damper = m_ropeDamper;		
-		m_joint.massScale = m_ropeMassScale;	//Set the ropes properties
+		m_joint.massScale = m_ropeMassScale;    //Set the ropes properties
+
+		
 	}
 
 

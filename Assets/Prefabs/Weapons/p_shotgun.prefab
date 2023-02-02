@@ -324,9 +324,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7033856454029520767}
   - component: {fileID: -6948666385265980258}
-
+  - component: {fileID: 6420312328173135079}
   m_Layer: 8
-
   m_Name: p_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_cost: 0.5
+  m_volume: 1
   m_shotgunDamage: 0.25
   m_firePoint: {fileID: 2914483352741807592}
   m_projectile: {fileID: 6401435605650204769, guid: e1e5cf8822677d641a68014859ca4c13, type: 3}
@@ -381,9 +381,9 @@ AudioSource:
   m_GameObject: {fileID: 4808214484034372710}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 31e3e418c995f4a4e8ae08eb10fa3380, type: 2}
+  m_audioClip: {fileID: 8300000, guid: d875d36fd2e46fd44bc219f8fd9fa088, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

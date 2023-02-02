@@ -28,7 +28,7 @@ public class s_shotgun : s_weapon
 
     /// <summary>Muzzle flash particale effect.<summary>
     [SerializeField] GameObject m_muzzleFlash;
-   
+
 
 
     /// <summary>Gets the cameras forward vector and launch the player in the opposite direction</summary>
@@ -36,6 +36,8 @@ public class s_shotgun : s_weapon
     {
         if (CheckCost())    //if we can afford to fire...
         {
+            m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Firing SFX
+
             m_firePoint = gameObject.transform;         //Get the position of the gun to fire from
             for (int i = 0; i < m_projectileCount; i++) //For each projectile we're firing...
             {
