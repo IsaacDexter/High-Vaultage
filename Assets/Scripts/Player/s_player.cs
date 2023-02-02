@@ -104,6 +104,13 @@ public class s_player : MonoBehaviour
     s_hand m_leftHand;
     [Tooltip("The player's right hand, that holds their right weapon.")]
     s_hand m_rightHand;
+
+    //Audio Stuff
+    [SerializeField] public float m_volume;
+    public AudioSource m_audioSource;
+    public AudioClip m_Clip;
+
+
     #endregion
 
     #region Camera Settings
@@ -151,6 +158,9 @@ public class s_player : MonoBehaviour
         InitializeComponents();
 
         InitializeMovement();
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_Clip = m_audioSource.clip;
     }
 
     private void InitializeComponents()
@@ -472,6 +482,8 @@ public class s_player : MonoBehaviour
     {
         if (m_damaged)  //If we're already damaged, kill the playewr
         {
+            m_audioSource.PlayOneShot(m_Clip, m_volume);
+            Debug.Log("Dead LOL");
             Kill();
         }
         else    //Otherwise...
@@ -485,6 +497,7 @@ public class s_player : MonoBehaviour
     public void Kill()
     {
         Respawn();
+
     }
 
     /// <summary>Transform the player to the spawnpoints transform, and then reload the current level</summary>
