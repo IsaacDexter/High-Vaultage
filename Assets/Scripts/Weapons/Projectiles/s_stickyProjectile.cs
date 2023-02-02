@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class s_stickyProjectile : MonoBehaviour
 {
@@ -9,8 +8,6 @@ public class s_stickyProjectile : MonoBehaviour
     protected Rigidbody m_rigidbody;
     /// <summary>Is the grenade stuck to the something?</summary>
     protected bool m_stuck;
-    /// <summary>Contains object to connect to</summary>
-    protected ConstraintSource constraintSource;
 
     protected void Start()
     {
@@ -20,42 +17,22 @@ public class s_stickyProjectile : MonoBehaviour
     /// <summary>Check to see if other is either the ground, or contains a rigidbody. If they do, stick to them and return true. Otherwise, return false.</summary>
     /// <param name="other">The object to try to stick to</param>
     /// <returns>Whether or not the grenade is stuck</returns>
-	virtual protected bool Stick(Collision other)
+	virtual protected bool Stick(GameObject other)
     {
-        if (other.gameObject.transform.root.gameObject.tag != "Player")
+        if (other.gameObject.GetComponent<Rigidbody>())         //if we've hit an object with a rigid body...
         {
-            Debug.Log("Poon");
-            Vector3 colisionPoint = other.contacts[0].point;
-
-            ParentConstraint constraint = GetComponent<ParentConstraint>();
-            constraintSource.sourceTransform = other.gameObject.transform;
-            //constraintSource.weight = 100;
-
-            constraint.AddSource(constraintSource);
-
-            //gameObject.transform.SetParent(collision.gameObject.transform,true);
-            gameObject.transform.position = colisionPoint;
-            m_rigidbody.isKinematic = true;
+            StickToRigidbody(other.GetComponent<Rigidbody>());  //...Stick to it
+            return true;
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) //If we've hit the ground...
+        {
+            StickToGround(other);
             return true;
         }
         else
-		{
+        {
             return false;
-		}
-        //if (other.gameObject.GetComponent<Rigidbody>())         //if we've hit an object with a rigid body...
-        //{
-        //    StickToRigidbody(other.GetComponent<Rigidbody>());  //...Stick to it
-        //    return true;
-        //}
-        //else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) //If we've hit the ground...
-        //{
-        //    StickToGround(other);
-        //    return true;
-        //}
-        //else
-        //{
-        //    return false;
-        //}
+        }
     }
 
     /// <summary>Stick to the ground by becoming kinematic</summary>

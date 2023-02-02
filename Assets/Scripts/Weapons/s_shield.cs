@@ -25,10 +25,4 @@ public class s_shield : s_chargingWeapon
 		Fire();
 		base.Dequip();
 	}
-
-	protected override void Charge()
-	{
-		m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-		base.Charge();
-	}
 }

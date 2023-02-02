@@ -14,7 +14,6 @@ public class AISensor : MonoBehaviour
     [SerializeField] float m_rotateSpeed;
     [SerializeField] List<GameObject> m_objects = new List<GameObject>();
     [SerializeField] Transform m_gunpoint;
-    [SerializeField] GameObject TurretBody;
 
     bool m_shooting;
     Vector3 m_targetDirection;
@@ -26,9 +25,8 @@ public class AISensor : MonoBehaviour
     bool m_resetCheck;
     bool m_reseting;
     [SerializeField] GameObject m_enemyShot;
+    [SerializeField] float m_fireDelay=0.5f;
     [SerializeField] float m_fireSpeed;
-    [SerializeField] float m_currentReload;
-    [SerializeField] float m_reloadTime;
     [SerializeField] float m_resetTime;
 
     // Start is called before the first frame update
@@ -43,6 +41,15 @@ public class AISensor : MonoBehaviour
         //Debug.Log("scan");
         yield return new WaitForSeconds(delay);
         StartCoroutine(ScanDelay(m_scanFrequency));
+    }
+    IEnumerator Fire(float delay)
+    {
+        Shoot();
+        yield return new WaitForSeconds(delay);
+        if (m_detectedPlayer != null)
+        {
+            StartCoroutine(Fire(m_fireDelay));
+        }
     }
 
     IEnumerator ResetAngle()
@@ -66,29 +73,13 @@ public class AISensor : MonoBehaviour
                 m_resetCheck = false;
                 m_reseting = false;
             }
-            Vector3 dir = m_detectedPlayer.gameObject.transform.root.gameObject.transform.position - transform.position; //a vector pointing from pointA to pointB
+            Vector3 dir = m_detectedPlayer.transform.position - transform.position; //a vector pointing from pointA to pointB
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up); //calc a rotation that
-            Quaternion rotation = Quaternion.Lerp(TurretBody.transform.rotation, rot, m_rotateSpeed);//Quaternion.Euler(new Vector3(0, rot.y,0))
-            TurretBody.transform.rotation = rotation;
+            Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed);//Quaternion.Euler(new Vector3(0, rot.y,0))
+            gameObject.transform.rotation = rotation;
 
             Quaternion bRot = Quaternion.LookRotation(dir, Vector3.up);
-
-            if(m_shooting)
-			{
-                m_currentReload += Time.deltaTime;
-                if(m_currentReload > m_reloadTime)
-				{
-                    Shoot();
-                    m_currentReload = 0;
-                }
-            }
-            else
-			{
-                m_currentReload = 0;
-            }
-
-
-        }
+		}
         else
 		{
             if (m_resetCheck == false)
@@ -99,9 +90,9 @@ public class AISensor : MonoBehaviour
             if(m_reseting)
 			{
                 Quaternion rot = Quaternion.Euler( new Vector3(transform.rotation.x, 0, transform.rotation.z));
-                Quaternion rotation = Quaternion.Lerp(TurretBody.transform.rotation, rot, m_rotateSpeed/4);
-                TurretBody.transform.rotation = rotation;
-                if(TurretBody.transform.rotation==rot)
+                Quaternion rotation = Quaternion.Lerp(gameObject.transform.rotation, rot, m_rotateSpeed/4);
+                gameObject.transform.rotation = rotation;
+                if(gameObject.transform.rotation==rot)
 				{
                     m_reseting = false;
                     m_resetCheck = false;
@@ -141,6 +132,8 @@ public class AISensor : MonoBehaviour
                 //Debug.Log("Player in range");
                 if(!m_shooting)
 				{
+                    StartCoroutine(Fire(m_fireDelay));
+
                     m_shooting = true;
                 }
             }
@@ -160,8 +153,8 @@ public class AISensor : MonoBehaviour
     void Shoot()
 	{
         //Debug.Log("shoot");
-        Vector3 direction = TurretBody.transform.TransformDirection(Vector3.forward);
-        GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, TurretBody.transform.rotation);
+        Vector3 direction = gameObject.transform.TransformDirection(Vector3.forward);
+        GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, gameObject.transform.rotation);
         shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);
         Destroy(shot, 2);
 

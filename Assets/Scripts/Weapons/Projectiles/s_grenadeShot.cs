@@ -10,13 +10,13 @@ public class s_grenadeShot : s_stickyProjectile
 
     [SerializeField] GameObject m_explosionEffect;
 
-	private void OnCollisionEnter(Collision other)
+	private void OnTriggerEnter(Collider other)
     {
         if (!m_stuck)                               //If we havent yet attatched ourselves to something...
         {
             if (other.gameObject.tag != "Player")   //And whatever we've hit isnt a player
             {
-                m_stuck = Stick(other);  //Stick to whatever we hit
+                m_stuck = Stick(other.gameObject);  //Stick to whatever we hit
             }
         }
     }

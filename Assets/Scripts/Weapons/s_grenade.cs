@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
-
 
 public class s_grenade : MonoBehaviour
 {
     Rigidbody m_rigidbody;
     bool m_hasJoint;
-    ConstraintSource constraintSource;
+    
     bool m_isActivated;
 
     // Start is called before the first frame update
@@ -18,54 +16,31 @@ public class s_grenade : MonoBehaviour
     }
 
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.transform.root.gameObject.GetComponent<Rigidbody>() != null && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        gameObject.AddComponent<FixedJoint>();
-    //        gameObject.GetComponent<FixedJoint>().connectedBody = other.gameObject.GetComponent<Rigidbody>();
-    //        m_hasJoint = true;
-
-    //        //m_rigidbody.isKinematic = true;
-
-    //        m_isActivated = true;
-    //        //change colour
-
-    //    }
-    //    else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        m_rigidbody.isKinematic = true;
-    //        m_isActivated = true;
-
-    //        //change colour
-    //    }
-
-    //}
-
-	private void OnCollisionEnter(Collision collision)
-	{
-        if (collision.gameObject.transform.root.gameObject.tag!="Player")
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.transform.root.gameObject.GetComponent<Rigidbody>() != null && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
         {
-            Debug.Log("Poon");
-            Vector3 colisionPoint = collision.contacts[0].point;
-            
-            ParentConstraint constraint = GetComponent<ParentConstraint>();
-            constraintSource.sourceTransform = collision.gameObject.transform;
-            //constraintSource.weight = 100;
+            gameObject.AddComponent<FixedJoint>();
+            gameObject.GetComponent<FixedJoint>().connectedBody = other.gameObject.GetComponent<Rigidbody>();
+            m_hasJoint = true;
+            //m_rigidbody.isKinematic = true;
 
-            constraint.AddSource(constraintSource);
-            
-            //gameObject.transform.SetParent(collision.gameObject.transform,true);
-            gameObject.transform.position = colisionPoint;
-            m_rigidbody.isKinematic = true;
+            m_isActivated = true;
+            //change colour
         }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
+        {
+            m_rigidbody.isKinematic = true;
+            m_isActivated = true;
+
+            //change colour
+        }
+
     }
 
 
 
-
-
-	public void Detonate(float force, float radius, float dammage)
+    public void Detonate(float force, float radius, float dammage)
     {
         RaycastHit[] hit;
         List<GameObject> targets = new List<GameObject>();

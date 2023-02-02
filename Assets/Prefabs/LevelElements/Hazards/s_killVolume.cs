@@ -8,7 +8,7 @@ public class s_killVolume : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            s_player healthManager = other.gameObject.GetComponentInParent<s_player>();
+            s_playerHealthManager healthManager = other.gameObject.GetComponentInParent<s_playerHealthManager>();
             if (healthManager != null)
             {
                 healthManager.Kill();
