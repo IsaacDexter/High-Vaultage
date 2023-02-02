@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using TMPro;
 
 public class s_settings : s_menu
@@ -14,13 +14,14 @@ public class s_settings : s_menu
     int m_antiAliasing;
     int? m_qualityLevel;
     int m_textureRes;
-    ShadowQuality m_shadowQuality;
-    ShadowResolution m_shadowResolution;
+    bool m_hdr;
+    float m_renderScale;
     int m_shadowCascades;
     float m_shadowDistance;
     bool m_bloom;
     bool m_motionBlur;
 
+    public UniversalRenderPipelineAsset m_pipeline;
     public s_brightness m_postProcess;
     public s_menu m_pause;
     [SerializeField] private GameObject m_advancedSettings;
@@ -37,12 +38,13 @@ public class s_settings : s_menu
         m_brightness = 0.0f;
         m_qualityLevel = QualitySettings.GetQualityLevel();
         m_vsync = QualitySettings.vSyncCount;
-        m_antiAliasing = QualitySettings.antiAliasing;
+        m_antiAliasing = m_pipeline.msaaSampleCount;
+        print("2XMSAA = " + m_antiAliasing);
         m_textureRes = QualitySettings.masterTextureLimit;
-        m_shadowQuality = QualitySettings.shadows;
-        m_shadowResolution = QualitySettings.shadowResolution;
-        m_shadowCascades = QualitySettings.shadowCascades;
-        m_shadowDistance = QualitySettings.shadowDistance;
+        m_hdr = m_pipeline.supportsHDR;
+        m_renderScale = m_pipeline.renderScale;
+        m_shadowCascades = m_pipeline.shadowCascadeCount;
+        m_shadowDistance = m_pipeline.shadowDistance;
         m_bloom = false;
         m_motionBlur = false;
 
@@ -66,20 +68,19 @@ public class s_settings : s_menu
         m_postProcess.SetGain(m_brightness);
         m_postProcess.SetBloom(m_bloom);
         m_postProcess.SetMotionBlur(m_motionBlur);
-        if (m_qualityLevel != null)
+        if (m_qualityLevel != 3)
         {
             QualitySettings.SetQualityLevel(m_qualityLevel.Value);
         }
         else
         {
             QualitySettings.vSyncCount = m_vsync;
-            QualitySettings.antiAliasing = m_antiAliasing;
+            m_pipeline.msaaSampleCount = m_antiAliasing;
             QualitySettings.masterTextureLimit = m_textureRes;
-            QualitySettings.shadows = m_shadowQuality;
-            QualitySettings.shadowResolution = m_shadowResolution;
-            QualitySettings.shadowCascades = m_shadowCascades;
-            QualitySettings.shadowDistance = m_shadowDistance;
-            
+            m_pipeline.supportsHDR = m_hdr;
+            m_pipeline.renderScale = m_renderScale;
+            m_pipeline.shadowCascadeCount = m_shadowCascades;
+            m_pipeline.shadowDistance = m_shadowDistance;
         }
     }
 
@@ -129,15 +130,7 @@ public class s_settings : s_menu
 
     public void SetAntiAliasing(int value)
     {
-        switch (value)
-        {
-            case 0:
-                m_antiAliasing = 0;
-                break;
-            default:
-                m_antiAliasing = 2 ^ value;
-                break;
-        }
+        m_antiAliasing = (int)Mathf.Pow(2, value);
     }
 
     public void SetQualityLevel(int value)
@@ -149,7 +142,7 @@ public class s_settings : s_menu
         }
         else
         {
-            m_qualityLevel = null;
+            m_qualityLevel = value;
             m_advancedSettings.SetActive(true);
         }
     }
@@ -162,56 +155,20 @@ public class s_settings : s_menu
     #endregion
 
     #region AdvancedSettings
+   
+    public void SetHDR(bool value)
+    {
+        m_hdr = value;
+    }
 
-    public void SetRealTimeShadows(int value)
+    public void SetRenderScale(float value)
     {
-        switch (value)
-        {
-            case 0:
-                m_shadowQuality = ShadowQuality.Disable;
-                break;
-            case 1:
-                m_shadowQuality = ShadowQuality.HardOnly;
-                break;
-            case 2:
-                m_shadowQuality = ShadowQuality.All;
-                break;
-            default:
-                break;
-        }
+        m_renderScale = value;
     }
-    
-    public void SetShadowResolution(int value)
+
+    public void SetShadowCascades(float value)
     {
-        switch (value)
-        {
-            case 0:
-                m_shadowResolution = ShadowResolution.Low;
-                break;
-            case 1:
-                m_shadowResolution = ShadowResolution.Medium;
-                break;
-            case 2:
-                m_shadowResolution = ShadowResolution.High;
-                break;
-            case 3:
-                m_shadowResolution = ShadowResolution.VeryHigh;
-                break;
-            default:
-                break;
-        }
-    }
-    public void SetShadowCascades(int value)
-    {
-        switch (value)
-        {
-            case 0:
-                m_shadowCascades = 0;
-                break;
-            default:
-                m_shadowCascades = 2 ^ value;
-                break;
-        }
+        m_shadowCascades = (int)value;
     }
 
     public void SetShadowDistance(float value)
