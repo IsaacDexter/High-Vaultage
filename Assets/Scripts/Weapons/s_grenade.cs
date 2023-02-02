@@ -11,40 +11,15 @@ public class s_grenade : MonoBehaviour
     ConstraintSource constraintSource;
     bool m_isActivated;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Start is called before the first frame update
+	private void Awake()
+	{
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.transform.root.gameObject.GetComponent<Rigidbody>() != null && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        gameObject.AddComponent<FixedJoint>();
-    //        gameObject.GetComponent<FixedJoint>().connectedBody = other.gameObject.GetComponent<Rigidbody>();
-    //        m_hasJoint = true;
-
-    //        //m_rigidbody.isKinematic = true;
-
-    //        m_isActivated = true;
-    //        //change colour
-
-    //    }
-    //    else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        m_rigidbody.isKinematic = true;
-    //        m_isActivated = true;
-
-    //        //change colour
-    //    }
-
-    //}
-
 	private void OnCollisionEnter(Collision collision)
 	{
-        if (collision.gameObject.transform.root.gameObject.tag!="Player")
+        if (collision.gameObject.transform.root.gameObject.tag!="Player"|| collision.gameObject.transform.root.gameObject.tag != "Projectile")
         {
             Debug.Log("Poon");
             Vector3 colisionPoint = collision.contacts[0].point;
@@ -52,11 +27,11 @@ public class s_grenade : MonoBehaviour
             ParentConstraint constraint = GetComponent<ParentConstraint>();
             constraintSource.sourceTransform = collision.gameObject.transform;
             //constraintSource.weight = 100;
-
+            constraint.constraintActive = true;
             constraint.AddSource(constraintSource);
             
             //gameObject.transform.SetParent(collision.gameObject.transform,true);
-            gameObject.transform.position = colisionPoint;
+            //gameObject.transform.position = colisionPoint;
             m_rigidbody.isKinematic = true;
         }
     }
