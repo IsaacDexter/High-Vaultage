@@ -19,39 +19,40 @@ public class s_stickyProjectile : MonoBehaviour
     /// <returns>Whether or not the grenade is stuck</returns>
 	virtual protected bool Stick(GameObject other)
     {
-        if (other.gameObject.transform.root.gameObject.tag != "Player"&& other.gameObject.transform.root.gameObject.tag != "Projectile" && other.gameObject.transform.root.gameObject.tag != "EnemyBullet")
+        if (other.gameObject.transform.root.gameObject.tag != "Player")
         {
-            if (m_stuck != true)
-            {
-                Debug.Log("Poon");
-                Vector3 colisionPoint = other.contacts[0].point;
-                Debug.Log(colisionPoint);
-                Debug.Log(other.gameObject.transform.position);
-                ParentConstraint constraint = GetComponent<ParentConstraint>();
-                constraintSource.sourceTransform = other.gameObject.transform;
+            Debug.Log("Poon");
+            Vector3 colisionPoint = other.contacts[0].point;
 
-                Vector3 offset = colisionPoint-other.gameObject.transform.position;
+            ParentConstraint constraint = GetComponent<ParentConstraint>();
+            constraintSource.sourceTransform = other.gameObject.transform;
+            //constraintSource.weight = 100;
 
-                Debug.Log(other.gameObject);
-                constraintSource.weight = 1;
-                constraint.constraintActive = true;
-                gameObject.transform.position = colisionPoint;
-                //constraint.locked = true;
-                constraint.AddSource(constraintSource);
-                constraint.SetTranslationOffset(0,offset);
-                //constraint.translationOffsets[0] = offset;
+            constraint.AddSource(constraintSource);
 
-                //gameObject.transform.SetParent(collision.gameObject.transform,true);
-                m_rigidbody.isKinematic = true;
-                //m_rigidbody.
-                return true;
-            }
+            //gameObject.transform.SetParent(collision.gameObject.transform,true);
+            gameObject.transform.position = colisionPoint;
+            m_rigidbody.isKinematic = true;
             return true;
         }
         else
         {
             return false;
 		}
+        //if (other.gameObject.GetComponent<Rigidbody>())         //if we've hit an object with a rigid body...
+        //{
+        //    StickToRigidbody(other.GetComponent<Rigidbody>());  //...Stick to it
+        //    return true;
+        //}
+        //else if (other.gameObject.layer == LayerMask.NameToLayer("Ground")) //If we've hit the ground...
+        //{
+        //    StickToGround(other);
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
     }
 
     /// <summary>Stick to the ground by becoming kinematic</summary>

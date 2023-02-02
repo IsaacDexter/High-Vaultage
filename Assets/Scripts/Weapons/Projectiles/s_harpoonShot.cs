@@ -26,34 +26,21 @@ public class s_harpoonShot : s_stickyProjectile
     override protected bool Stick(GameObject other)
     {
 
-        if (other.gameObject.transform.root.gameObject.tag != "Player" && other.gameObject.transform.root.gameObject.tag != "Projectile" && other.gameObject.transform.root.gameObject.tag != "EnemyBullet")
+        if (other.gameObject.transform.root.gameObject.tag != "Player")
         {
-            if (m_stuck != true)
-            {
-                Debug.Log("Poon");
-                Vector3 colisionPoint = other.contacts[0].point;
-                Debug.Log(colisionPoint);
-                Debug.Log(other.gameObject.transform.position);
-                ParentConstraint constraint = GetComponent<ParentConstraint>();
-                constraintSource.sourceTransform = other.gameObject.transform;
+            Debug.Log("Poon");
+            Vector3 colisionPoint = other.contacts[0].point;
 
-                Vector3 tOffset = colisionPoint - other.gameObject.transform.position;
-                Vector3 rOffset = gameObject.transform.rotation.eulerAngles - other.gameObject.transform.rotation.eulerAngles;
+            ParentConstraint constraint = GetComponent<ParentConstraint>();
+            constraintSource.sourceTransform = other.gameObject.transform;
+            //constraintSource.weight = 100;
 
-                Debug.Log(other.gameObject);
-                constraintSource.weight = 1;
-                constraint.constraintActive = true;
-                gameObject.transform.position = colisionPoint;
-                //constraint.locked = true;
-                constraint.AddSource(constraintSource);
-                constraint.SetTranslationOffset(0, tOffset);
-                constraint.SetRotationOffset(0, rOffset);
-                //constraint.translationOffsets[0] = offset;
+            constraint.AddSource(constraintSource);
 
-                //gameObject.transform.SetParent(collision.gameObject.transform,true);
-                m_rigidbody.isKinematic = true;
-                //m_rigidbody.
-            }
+            //gameObject.transform.SetParent(collision.gameObject.transform,true);
+            gameObject.transform.position = colisionPoint;
+            m_rigidbody.isKinematic = true;
+
             m_owner.AttachHarpoon();
             return true;
         }

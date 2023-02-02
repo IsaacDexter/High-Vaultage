@@ -57,6 +57,7 @@ public class s_grenadeShot : s_stickyProjectile
                 s_enemyHealth health = targets[i].GetComponent<s_enemyHealth>();
                 health.DamageEnemy(dammage);
                 float multiplier = 1 - distance / radius;
+                rigidbody.AddExplosionForce(force, transform.position, radius, 0f, ForceMode.Impulse);
             }
         }
         GameObject Explosion =  Instantiate(m_explosionEffect, gameObject.transform.position, transform.rotation);

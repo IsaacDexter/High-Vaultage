@@ -66,7 +66,7 @@ public class s_glove : s_chargingWeapon
 
             }
         }
-        m_meleeTargets = null;
+
         m_hand.m_meleeBox.SetActive(false);
     }
 
