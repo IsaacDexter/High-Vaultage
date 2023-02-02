@@ -7,8 +7,8 @@ public class WallRun : MonoBehaviour
     [SerializeField] Transform m_orientation;
     [SerializeField] float m_wallDistance = .6f;
     [SerializeField] float m_minJumpHeight = 1.5f;
-    [SerializeField] float wallRunGravity;
-    [SerializeField] float wallRunJumpForce;
+    [SerializeField] float m_wallRunGravity;
+    [SerializeField] float m_wallRunJumpForce;
     
     bool m_wallOnLeft = false;
     bool m_wallOnRight = false;
@@ -16,6 +16,7 @@ public class WallRun : MonoBehaviour
     RaycastHit m_rightWallHit;
 
     bool check;
+    float m_baseFOV;
 
     private Rigidbody m_rigidBody;
 
@@ -35,18 +36,13 @@ public class WallRun : MonoBehaviour
         m_wallOnRight = Physics.Raycast(transform.position, m_orientation.right, out m_rightWallHit, m_wallDistance, LayerMask.GetMask("RunnableWall"));
     }
 
-
     private void Update()
     {
         CheckWalls();
 
         if (CanWallRun())
         {
-           if(m_wallOnLeft)
-            {
-                StartWallRun();
-            }
-           else if(m_wallOnRight)
+           if(m_wallOnLeft || m_wallOnRight)
             {
                 StartWallRun();
             }
@@ -72,23 +68,20 @@ public class WallRun : MonoBehaviour
         m_rigidBody.useGravity = false;
         m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
 
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (m_wallOnLeft)
             {
                 Vector3 jumpDirection = transform.up + m_leftWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-                m_rigidBody.AddForce(jumpDirection * wallRunJumpForce, ForceMode.Impulse);
+                m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
             }
             else if (m_wallOnRight)
             {
                 Vector3 jumpDirection = transform.up + m_rightWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-                m_rigidBody.AddForce(jumpDirection * wallRunJumpForce, ForceMode.Impulse);
+                m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
             }
-
-
         }
     }
 

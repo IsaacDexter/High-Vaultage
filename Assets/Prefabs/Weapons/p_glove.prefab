@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 63098557483933447}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right Glove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1468276921139373341}
   - component: {fileID: 7977930175970581256}
   - component: {fileID: 8120925830942075608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boxing Glove.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8778750074671408356}
   - component: {fileID: -7041173892275517874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: p_glove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,13 +163,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_cost: 0.2
   m_chargeCost: 0.25
-  m_meleeBox: {fileID: 0}
-  m_fistDamage: 0
   m_uppercutForce: 35
   m_minForce: 25
   m_maxForce: 65
   m_uppercutCharge: 0.25
   m_punchCost: 0.1
+  m_fistDamage: 3
+  m_meleeTargets: []
 --- !u!1 &5174363143352169499
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5513768727106121377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left Glove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 6342373021643216059}
   - component: {fileID: 2509544604678924974}
   - component: {fileID: 4384165968031685502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boxing Glove.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}

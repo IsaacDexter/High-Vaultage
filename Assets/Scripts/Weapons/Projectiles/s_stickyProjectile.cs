@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class s_stickyProjectile : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class s_stickyProjectile : MonoBehaviour
     protected Rigidbody m_rigidbody;
     /// <summary>Is the grenade stuck to the something?</summary>
     protected bool m_stuck;
+    /// <summary>Contains object to connect to</summary>
+    protected ConstraintSource constraintSource;
 
     protected void Start()
     {
@@ -17,7 +20,7 @@ public class s_stickyProjectile : MonoBehaviour
     /// <summary>Check to see if other is either the ground, or contains a rigidbody. If they do, stick to them and return true. Otherwise, return false.</summary>
     /// <param name="other">The object to try to stick to</param>
     /// <returns>Whether or not the grenade is stuck</returns>
-	virtual protected bool Stick(GameObject other)
+	virtual protected bool Stick(Collision other)
     {
         if (other.gameObject.transform.root.gameObject.tag != "Player")
         {
@@ -36,7 +39,7 @@ public class s_stickyProjectile : MonoBehaviour
             return true;
         }
         else
-        {
+		{
             return false;
 		}
         //if (other.gameObject.GetComponent<Rigidbody>())         //if we've hit an object with a rigid body...

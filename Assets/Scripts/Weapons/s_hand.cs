@@ -13,6 +13,10 @@ public class s_hand : MonoBehaviour
     /// <summary>The charge (ammo) this fist has, shared between weapons</summary>
     public float m_charge = 1.0f;
 
+    [SerializeField] public GameObject m_meleeBox;
+
+    public bool m_killOnHit;
+
     /// <summary>Will call press on the currently held weapon</summary>
     public void PullTrigger()
     {

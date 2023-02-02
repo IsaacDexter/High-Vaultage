@@ -14,7 +14,7 @@ public class s_sword : s_chargingWeapon
     /// <summary>The length the dash will last in seconds, on top of how long the player charged for</summary>
     [SerializeField] float m_dashDuration;
 
-    [SerializeField] private GameObject m_meleeBox;
+
 
     /// <summary>The minimum charge required to dash</summary>
     [SerializeField] float m_dashCharge;
@@ -61,6 +61,7 @@ public class s_sword : s_chargingWeapon
             if (CheckCost())            //...and we can afford to dash... 
             {
                 Dash();                 //... do so
+
             }
         }
         else                        //If the weapon was only charged long enough to slash...
@@ -81,8 +82,8 @@ public class s_sword : s_chargingWeapon
         m_hand.m_killOnHit = true;       
     }
 
-    /// <summary>Called when the player just clicks with this weapon. Unimplemented, intended to be a simple melee hit.</summary>
-    private void Slash()
+	/// <summary>Called when the player just clicks with this weapon. Unimplemented, intended to be a simple melee hit.</summary>
+	private void Slash()
     {
         Debug.Log("Slash!");
 
