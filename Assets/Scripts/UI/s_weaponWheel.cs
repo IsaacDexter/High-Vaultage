@@ -10,6 +10,8 @@ public class s_weaponWheel : s_menu
     override protected void Start()
     {
         base.Start();
+        m_timeDilation = 0.24f;
+        m_key = KeyCode.Mouse2;
         s_hand[] hands = m_player.GetComponentsInChildren<s_hand>();    //Get the players hands
         if (hands[0].name == "m_leftHand")
         {

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9132492693327176759}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2914483352741807592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9211947333997177626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fore-End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4330366221632144169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hammer/Ejector_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9002159288356666412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Action Bar Lock_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3095823160173437843}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Action Bar Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 127000341420881632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Armature Remington 870
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822848281439115565}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger Safety Lock_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7016851791534407294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fore-End_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475955321522505186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shell Carrier_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7033856454029520767}
   - component: {fileID: -6948666385265980258}
-  m_Layer: 0
+
+  m_Layer: 8
+
   m_Name: p_shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,6 +372,102 @@ MonoBehaviour:
   m_spread: 25
   m_kickback: 25
   m_muzzleFlash: {fileID: 100000, guid: 8eaaa4f553116f44b8459bc24201c514, type: 3}
+--- !u!82 &6420312328173135079
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808214484034372710}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5342972208377418433
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6305018300537398704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shotgun Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6470827414043054695}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Remington 870 FieldMaster (Sketchfab Ready)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5692392655549490848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trigger_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7055498307582822677}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hammer/Ejector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +610,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4051126679953055312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shell Carrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -544,7 +642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7984711705851816243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Recovery GameObject for Transform (ID in file: 7984711705851816243)'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6764897756198021623}
   - component: {fileID: 6585777698153953132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Remington 870 Fieldmaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}

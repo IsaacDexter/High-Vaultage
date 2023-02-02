@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3509196944464527366}
   - component: {fileID: 6093804785942194262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlastRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,9 @@ GameObject:
   - component: {fileID: 1695683235609022930}
   - component: {fileID: 1479548206097640438}
   - component: {fileID: 8173627136334954605}
-  m_Layer: 0
+  - component: {fileID: -6095352254129016546}
+  - component: {fileID: -9187318964345635245}
+  m_Layer: 8
   m_Name: p_grenadeShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,10 +142,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6621947793516563856}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1479548206097640438
 Rigidbody:
@@ -173,4 +175,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aeb0abc25db10842bc3399b6b5532a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_explosionEffect: {fileID: 100012, guid: 3364c97de68d3a147af572d1c71c6455, type: 3}
+  m_explosionEffect: {fileID: 100008, guid: 1ae4db7b36e51124b89d2b32303a7a0b, type: 3}
+--- !u!114 &-6095352254129016546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621947793516563856}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee2df8bd40f246e40aa9c889060ef701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1773428102 &-9187318964345635245
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621947793516563856}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets: []
+  m_RotationOffsets: []
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 0
+  m_IsLocked: 0
+  m_Sources: []
