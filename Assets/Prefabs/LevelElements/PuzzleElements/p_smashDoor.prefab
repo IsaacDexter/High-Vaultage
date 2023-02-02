@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6709711127300085693}
   m_Layer: 0
   m_Name: m_planksSmashed
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 4081620723993425813}
   m_Layer: 0
   m_Name: m_plank2
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 796022788257048262}
   m_Layer: 0
   m_Name: m_plank3
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 3850840875254545019}
   m_Layer: 0
   m_Name: m_plank2
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 6834676112390941522}
   m_Layer: 0
   m_Name: m_frameRight
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 5264117871047708981}
   m_Layer: 0
   m_Name: m_plank1
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -534,7 +534,7 @@ GameObject:
   - component: {fileID: 4694093328083890577}
   m_Layer: 0
   m_Name: p_smashDoor
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,6 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0b092c86588b141aae59e7676e6796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_outputs: []
   minVelocity: 0
   m_planks: {fileID: 3227968470207361126}
   m_planksSmashed: {fileID: 82372806381428698}
@@ -599,7 +600,7 @@ GameObject:
   - component: {fileID: 1462306765234856189}
   m_Layer: 0
   m_Name: m_frameTop
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -693,7 +694,7 @@ GameObject:
   - component: {fileID: 7352871414300019655}
   m_Layer: 0
   m_Name: m_planks
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -730,7 +731,7 @@ GameObject:
   - component: {fileID: 9160322124484740696}
   m_Layer: 0
   m_Name: m_plank2 (1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -827,7 +828,7 @@ GameObject:
   - component: {fileID: 1296967182381689375}
   m_Layer: 0
   m_Name: m_plank1 (1)
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -924,7 +925,7 @@ GameObject:
   - component: {fileID: 8631335691717640481}
   m_Layer: 0
   m_Name: m_plank3
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,7 +1019,7 @@ GameObject:
   - component: {fileID: 7522647751691908116}
   m_Layer: 0
   m_Name: m_frame
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1056,7 +1057,7 @@ GameObject:
   - component: {fileID: 8195838515988527234}
   m_Layer: 0
   m_Name: m_frameLeft
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1153,7 +1154,7 @@ GameObject:
   - component: {fileID: 3432366672453689695}
   m_Layer: 0
   m_Name: m_plank1
-  m_TagString: Untagged
+  m_TagString: Trigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1291,6 +1292,10 @@ PrefabInstance:
     - target: {fileID: 4497379519969025697, guid: ec1a3e59a27756c498e7b57b05cf7b7b, type: 3}
       propertyPath: m_Name
       value: p_lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4497379519969025697, guid: ec1a3e59a27756c498e7b57b05cf7b7b, type: 3}
+      propertyPath: m_TagString
+      value: Trigger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

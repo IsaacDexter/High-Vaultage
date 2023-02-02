@@ -9,6 +9,7 @@ public class s_menu : MonoBehaviour
     protected GameObject m_player;
     /// <summary>The speed time should move at when the weapon wheel is open</summary>
     [SerializeField] protected float m_timeDilation;
+    protected KeyCode m_key;
 
     virtual protected void Start()
     {
@@ -37,17 +38,17 @@ public class s_menu : MonoBehaviour
         m_open = false;  //Update check bool
         Time.timeScale = 1f;        //Speed time up to the normal amount
         gameObject.SetActive(false);
-        m_player.GetComponent<s_player>().m_acceptingInput = true;
+        m_player.GetComponent<s_player>().m_acceptedInput = KeyCode.None;
     }
 
     /// <summary>Opens the weapons wheel, freeing the cursor and slowing down time</summary>
-    public void Open()
+    virtual public void Open()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;      //Unlock and show the cursor
         m_open = true;   //Update check bool
         Time.timeScale = m_timeDilation;      //Slow down time to the slow speed
         gameObject.SetActive(true);
-        m_player.GetComponent<s_player>().m_acceptingInput = false;
+        m_player.GetComponent<s_player>().m_acceptedInput = m_key;
     }
 }

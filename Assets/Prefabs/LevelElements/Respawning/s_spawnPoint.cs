@@ -8,7 +8,7 @@ public class s_spawnPoint : MonoBehaviour
     {
         if (other.CompareTag("Player")) //If the player overlaps...
         {
-            s_playerHealthManager healthManager = other.gameObject.GetComponentInParent<s_playerHealthManager>();   //Get the health manager
+            s_player healthManager = other.gameObject.GetComponentInParent<s_player>();   //Get the health manager
             if (healthManager != null)
             {
                 healthManager.m_spawnPoint = gameObject.transform;  //Set this to be its respawn point
