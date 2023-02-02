@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6709354688545970214}
   - component: {fileID: -5388423192408405556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: p_revolver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,9 +61,25 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6709354688545970214}
     m_Modifications:
+    - target: {fileID: 117548, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 117550, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 117552, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 117554, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
       propertyPath: m_Name
       value: SciFiGun_Diffuse
+      objectReference: {fileID: 0}
+    - target: {fileID: 117554, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 417554, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
       propertyPath: m_RootOrder
@@ -121,14 +137,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2317550, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ce095c9b9fb41c48ae8045291a0ae7b, type: 2}
     - target: {fileID: 2317552, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b95886db081f7be4686a97e9ef96d61b, type: 2}
+      objectReference: {fileID: 2100000, guid: 4ce095c9b9fb41c48ae8045291a0ae7b, type: 2}
     - target: {fileID: 2317554, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b95886db081f7be4686a97e9ef96d61b, type: 2}
+      objectReference: {fileID: 2100000, guid: 4ce095c9b9fb41c48ae8045291a0ae7b, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 30d819e0f44869f4e82f18d655b5c786, type: 3}
