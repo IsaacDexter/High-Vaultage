@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Animations;
 
 public class s_harpoonShot : s_stickyProjectile
 {
     /// <summary>The gun that fired the harpoon</summary>
     public s_harpoon m_owner;
 
-	/// <summary>Once something has entered the trigger i.e. the harpoon has hit an object</summary>
-	/// <param name="other">The other thing that entered the trigger i.e. whatever the object attatched itself to</param>
-	private void OnCollisionEnter(Collision other)
+    /// <summary>Once something has entered the trigger i.e. the harpoon has hit an object</summary>
+    /// <param name="other">The other thing that entered the trigger i.e. whatever the object attatched itself to</param>
+	protected void OnTriggerEnter(Collider other)
     {
         if (!m_stuck)                               //If we havent yet attatched ourselves to something...
         {
             if (other.gameObject.tag != "Player")   //And whatever we've hit isnt a player
             {
-                m_stuck = Stick(other);  //Stick to whatever we hit
+                m_stuck = Stick(other.gameObject);  //Stick to whatever we hit
             }
         }
     }
@@ -24,7 +23,7 @@ public class s_harpoonShot : s_stickyProjectile
     /// <summary>Check to see if other is either the ground, or contains a rigidbody. If they do, stick to them and return true. Otherwise, return false.</summary>
     /// <param name="other">The object to try to stick to</param>
     /// <returns>Whether or not the harpoon is stuck</returns>
-    override protected bool Stick(Collision other)
+    override protected bool Stick(GameObject other)
     {
 
         if (other.gameObject.transform.root.gameObject.tag != "Player" && other.gameObject.transform.root.gameObject.tag != "Projectile" && other.gameObject.transform.root.gameObject.tag != "EnemyBullet")

@@ -11,15 +11,18 @@ public class s_grenade : MonoBehaviour
     ConstraintSource constraintSource;
     bool m_isActivated;
 
-	// Start is called before the first frame update
-	private void Awake()
-	{
+    // Start is called before the first frame update
+    void Start()
+    {
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
+
+
+
 	private void OnCollisionEnter(Collision collision)
 	{
-        if (collision.gameObject.transform.root.gameObject.tag!="Player"|| collision.gameObject.transform.root.gameObject.tag != "Projectile")
+        if (collision.gameObject.transform.root.gameObject.tag!="Player")
         {
             Debug.Log("Poon");
             Vector3 colisionPoint = collision.contacts[0].point;
@@ -27,11 +30,11 @@ public class s_grenade : MonoBehaviour
             ParentConstraint constraint = GetComponent<ParentConstraint>();
             constraintSource.sourceTransform = collision.gameObject.transform;
             //constraintSource.weight = 100;
-            constraint.constraintActive = true;
+
             constraint.AddSource(constraintSource);
             
             //gameObject.transform.SetParent(collision.gameObject.transform,true);
-            //gameObject.transform.position = colisionPoint;
+            gameObject.transform.position = colisionPoint;
             m_rigidbody.isKinematic = true;
         }
     }
