@@ -19,33 +19,7 @@ public class s_grenade : MonoBehaviour
 
 <<<<<<< HEAD
 
-<<<<<<< HEAD
 
-=======
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.transform.root.gameObject.GetComponent<Rigidbody>() != null && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        gameObject.AddComponent<FixedJoint>();
-    //        gameObject.GetComponent<FixedJoint>().connectedBody = other.gameObject.GetComponent<Rigidbody>();
-    //        m_hasJoint = true;
-
-    //        //m_rigidbody.isKinematic = true;
-
-    //        m_isActivated = true;
-    //        //change colour
-
-    //    }
-    //    else if (other.gameObject.layer == LayerMask.NameToLayer("Ground") && !m_hasJoint && other.gameObject.tag != "Player" && !m_isActivated)
-    //    {
-    //        m_rigidbody.isKinematic = true;
-    //        m_isActivated = true;
-
-    //        //change colour
-    //    }
-
-    //}
->>>>>>> parent of a5715fb... Finishing off melee weapons
 
 =======
 >>>>>>> parent of bee3ace... Merge branch 'main' into Chris4

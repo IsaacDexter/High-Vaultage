@@ -94,6 +94,7 @@ public class s_revolver : s_chargingWeapon
 			targets.Clear();
 			SpawnProjectile(hit[furthestHit].point);
 		}
+		SpawnProjectile(m_firePoint.position + (m_camera.transform.forward * m_range));
 	}
 
 	/// <summary>Checks if the hit object is an enemy, and if it is, destroys it</summary>
