@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class s_player : MonoBehaviour
@@ -124,6 +125,7 @@ public class s_player : MonoBehaviour
 
     #region Input Settings
     [Header("Input")]
+    public InputAction m_controls;
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
     float m_sensitivityX = 200; 
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 

@@ -60,6 +60,7 @@ public class s_settings : s_menu
     public void Apply()
     {
         ApplyGraphics();
+        ApplyControls();
     }
 
     private void ApplyGraphics()
@@ -82,6 +83,11 @@ public class s_settings : s_menu
             m_pipeline.shadowCascadeCount = m_shadowCascades;
             m_pipeline.shadowDistance = m_shadowDistance;
         }
+    }
+
+    private void ApplyControls()
+    {
+        
     }
 
     #region WindowSettings
@@ -192,4 +198,17 @@ public class s_settings : s_menu
 
     #endregion
 
+    #region Control
+
+    private void SetJumpKey(TextMeshProUGUI text)
+    {
+        
+    }
+
+    private void UpdateControl(TextMeshProUGUI text, KeyCode key)
+    {
+
+    }
+
+    #endregion
 }
