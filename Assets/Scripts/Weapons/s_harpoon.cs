@@ -81,6 +81,9 @@ public class s_harpoon : s_chargingWeapon
 		if (m_joint != null)        //...and we have a joint to swing on
 		{
 			Reel();                 //Reel in on that point
+			Vector3 swingPoint = m_currentHarpoon.transform.position;
+			m_joint.connectedAnchor = swingPoint;
+			Debug.Log(swingPoint);
 		}
 	}
 
@@ -90,6 +93,7 @@ public class s_harpoon : s_chargingWeapon
 		if (m_joint.maxDistance > m_joint.minDistance)              //If the joints distance is not yet at its minimum...
 		{
 			m_joint.maxDistance -= m_reelSpeed * Time.deltaTime;    //Reel in the harpoon
+
 		}
 	}
 	public void AttachHarpoon()
