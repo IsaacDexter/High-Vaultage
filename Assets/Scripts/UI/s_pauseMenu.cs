@@ -18,7 +18,6 @@ public class s_pauseMenu : s_menu
         m_open = false;  //Update check bool
         Time.timeScale = 1f;        //Speed time up to the normal amount
         gameObject.SetActive(false);
-        m_player.GetComponent<s_player>().m_acceptedInput = KeyCode.None;
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
 

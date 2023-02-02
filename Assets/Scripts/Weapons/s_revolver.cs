@@ -119,7 +119,7 @@ public class s_revolver : s_chargingWeapon
 			m_revolverCharge += 3*Time.deltaTime;
 		}
 		Time.timeScale = m_timeDilation;
-		print("charging revolver... "+ m_revolverDamage);
+		//print("charging revolver... "+ m_revolverDamage);
 		base.Charge();
 
 	}

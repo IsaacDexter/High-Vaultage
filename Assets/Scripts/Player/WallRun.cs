@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WallRun : MonoBehaviour
 {
@@ -67,8 +68,11 @@ public class WallRun : MonoBehaviour
 
         m_rigidBody.useGravity = false;
         m_rigidBody.AddForce(Vector3.down * 0.1f, ForceMode.Force);
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
         {
             if (m_wallOnLeft)
             {
