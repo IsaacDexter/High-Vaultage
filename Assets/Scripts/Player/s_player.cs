@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class s_player : MonoBehaviour
 {
     #region Movement Settings
+
     [Header("Movement")]
     [Range(0.0f, 20.0f), Tooltip("The players movement speed.")]
     public float m_movementSpeed = 10.0f;
@@ -17,7 +18,7 @@ public class s_player : MonoBehaviour
     [Tooltip("Interacts with input to apply movement horizontally.")]
     float m_verticalMovement;
     [Tooltip("The direction to move in.")]
-    Vector3 m_moveDirection;
+    public Vector3 m_moveDirection;
     bool m_mantleEnabled;
     #endregion
 
@@ -437,6 +438,7 @@ public class s_player : MonoBehaviour
         m_sliding = false;              //Make sure we aren't
         m_playerCamera.fieldOfView = m_baseFOV;
         SetHeight(m_heightStanding);    //Return us to our normal height
+
     }
 
     /// <summary>If we're meant to be sliding, checks to see if we're grounded. If we are, apply a slide force forward and stop checking if we're meant to be sliding.</summary>
