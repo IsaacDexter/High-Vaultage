@@ -10,7 +10,6 @@ public class s_pauseMenu : s_menu
     protected override void Start()
     {
         m_timeDilation = 0.0f;
-        m_key = KeyCode.Escape;
         base.Start();
     }
     public void Quit()

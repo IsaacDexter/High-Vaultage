@@ -9,7 +9,6 @@ public class s_menu : MonoBehaviour
     protected GameObject m_player;
     /// <summary>The speed time should move at when the weapon wheel is open</summary>
     [SerializeField] protected float m_timeDilation;
-    protected KeyCode m_key;
 
     virtual protected void Start()
     {

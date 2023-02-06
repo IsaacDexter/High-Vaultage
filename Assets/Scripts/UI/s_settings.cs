@@ -29,7 +29,6 @@ public class s_settings : s_menu
     {
         base.Start();
         m_timeDilation = 0.0f;
-        m_key = KeyCode.Escape;
 
         //Default values:
         m_resolutionX = Screen.width;
