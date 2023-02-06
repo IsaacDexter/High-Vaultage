@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 2285
-    y: 244
+    x: 2239
+    y: 211
     width: 512
     height: 758
   m_ShowMode: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 9}
   m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_MinSize: {x: 136, y: 51}
   m_MaxSize: {x: 4000, y: 4021}
   vertical: 0
-  controlID: 37832
+  controlID: 17
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 106
+  controlID: 105
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,8 +168,8 @@ MonoBehaviour:
     y: 0
     width: 349
     height: 510
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 107
+  controlID: 106
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 108
+  controlID: 107
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -373,8 +373,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2285
-    y: 244
+    x: 2239
+    y: 211
     width: 512
     height: 737
   m_ViewDataDictionary: {fileID: 0}
@@ -1036,22 +1036,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/LevelElements/PuzzleElements
+    - Assets/Scenes/Levels
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs/LevelElements/PuzzleElements
+  - Assets/Scenes/Levels
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\m017149k\Documents\GitHub\technical-games-production-assignment-2-group-01
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: ee9d0000
-    m_LastClickedID: 40430
-    m_ExpandedIDs: 00000000069d0000269d00003e9d0000469d0000489d0000da9d00008206010000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 196}
+    m_SelectedIDs: 4ada0000
+    m_LastClickedID: 55882
+    m_ExpandedIDs: 00000000aa920000f6940000fe9400004e9500004ada000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1079,7 +1079,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000069d0000
+    m_ExpandedIDs: 00000000aa920000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1206,10 +1206,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 220}
-      m_SelectedIDs: 0245fbff
-      m_LastClickedID: -310014
-      m_ExpandedIDs: 6a83faff7e9afaffa0c7faffa6c7faffaecdfaff32d1faff4ed4fafff8d7faff92e5faff5044fbffe644fbff0445fbff4053fbff2e92fcff9292fcff2893fcfff495fcffe29afcffa0a6fcfffaaafcffbeb8fcff36c1fcff549afdff589afdff34a3fdff36a3fdff90a4fdff1ab6fdff52d0fdffbadbfdff56dffdffa4f0fdffdcf0fdff62f2fdff56f4fdffac0cfeff0421feff1a51feff7a5ffeff1a61feff9cbfffff9ebfffff1cc3ffff20c3ffff1ce5ffffb4e8fffff89a0000649b0000a29b0000c89b0000cc9b0000e09b0000f49b00009a0901009e090100dc0901003a0a01002a0c01003e0c0100900c0100720e0100840e01001e0f010022240100d82401002e550200425502002458020036580200d45802004ac60200
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: a4ebfcff
+      m_LastClickedID: -201820
+      m_ExpandedIDs: 6adffcff32ebfcff7eebfcffa4ebfcffa6ebfcff6635fdff1c37fdff8241fdffae43fdffc046fdff6448fdfffe49fdff8a5bfdffbc5cfdff348dfdffbaaffdff2ebcfdfff2befdff5252feffaa54feff347cfeff467ffeff5482feff6485feff3e94feff54fcfeff66fffeff961affff9a1affff0023ffff9076ffffb676ffff2885ffff0487ffffb288ffff1e8affffc88bffff268dffffd4f0ffffecf0ffff94880000a688000006890000228900009ae000001ce100002ae1000048e40000fee4000012e500008eec0000d4ec0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1546,9 +1546,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.3767886, y: 3.9944253, z: -14.310905}
+    m_Target: {x: -12.695239, y: 18.53521, z: 14.723878}
     speed: 2
-    m_Value: {x: 3.3767886, y: 3.9944253, z: -14.310905}
+    m_Value: {x: -12.695239, y: 18.53521, z: 14.723878}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1594,20 +1594,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.0014691065, y: 0.9875679, z: -0.1583944, w: -0.021202346}
+    m_Target: {x: 0.110616766, y: -0.87679857, z: 0.25708583, w: 0.39228943}
     speed: 2
-    m_Value: {x: -0.0041367277, y: 0.9864354, z: -0.1597627, w: -0.03747192}
+    m_Value: {x: 0.11056173, y: -0.8763623, z: 0.25695792, w: 0.39209422}
   m_Size:
-    m_Target: 10
+    m_Target: 3.5264578
     speed: 2
-    m_Value: 10
+    m_Value: 3.5264578
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1.1204399
-    m_SpeedNormalized: 0.55999994
+    m_Speed: 1.1804098
+    m_SpeedNormalized: 0.5899999
     m_SpeedMin: 0.001
     m_SpeedMax: 2
     m_EasingEnabled: 1
