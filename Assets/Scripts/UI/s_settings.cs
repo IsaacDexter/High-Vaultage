@@ -27,7 +27,7 @@ public class s_settings : s_menu
     [SerializeField] private GameObject m_advancedSettings;
     protected override void Start()
     {
-        base.Start();
+        m_open = false;
         m_timeDilation = 0.0f;
 
         //Default values:
@@ -38,7 +38,6 @@ public class s_settings : s_menu
         m_qualityLevel = QualitySettings.GetQualityLevel();
         m_vsync = QualitySettings.vSyncCount;
         m_antiAliasing = m_pipeline.msaaSampleCount;
-        print("2XMSAA = " + m_antiAliasing);
         m_textureRes = QualitySettings.masterTextureLimit;
         m_hdr = m_pipeline.supportsHDR;
         m_renderScale = m_pipeline.renderScale;
@@ -48,12 +47,20 @@ public class s_settings : s_menu
         m_motionBlur = false;
 
         //Apply();
+        Close();
     }
 
     public void Exit()
     {
         Close();
         m_pause.Open();
+    }
+
+    override public void Close()
+    {
+        m_open = false;  //Update check bool
+        Time.timeScale = 1f;        //Speed time up to the normal amount
+        gameObject.SetActive(false);
     }
 
     public void Apply()

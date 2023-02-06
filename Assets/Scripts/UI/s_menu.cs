@@ -31,7 +31,7 @@ public class s_menu : MonoBehaviour
     }
 
     /// <summary>Closes the weapon wheel and locks the cursor</summary>
-    public void Close()
+    virtual public void Close()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;     //Lock and hide the cursor

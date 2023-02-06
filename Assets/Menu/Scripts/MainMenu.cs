@@ -26,7 +26,6 @@ public class MainMenu : s_menu
         {
             m_settings = GetComponentInChildren<s_settings>();
         }
-        print("m_settings = " + m_settings);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;      //Unlock and show the cursor
     }
@@ -40,16 +39,12 @@ public class MainMenu : s_menu
 
     public void StartGame()
     {
-        Debug.Log("Start");
-
-
         UI.enabled = false;
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()
     {
-        Debug.Log("TEST EXPERIMENT");
         m_settings.Open();
     }
 
@@ -61,7 +56,6 @@ public class MainMenu : s_menu
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quitting");
     }
 
     public void SelectLevel(int LevelNumber)
