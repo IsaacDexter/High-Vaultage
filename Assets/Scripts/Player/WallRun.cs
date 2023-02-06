@@ -43,9 +43,9 @@ public class WallRun : MonoBehaviour
 
         if (CanWallRun())
         {
-           if(m_wallOnLeft || m_wallOnRight)
+            if (m_wallOnLeft || m_wallOnRight)
             {
-                StartWallRun();
+                StartWallRun(); 
             }
             else
             {
