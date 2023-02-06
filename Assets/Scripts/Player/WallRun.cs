@@ -10,7 +10,8 @@ public class WallRun : MonoBehaviour
     [SerializeField] float m_minJumpHeight = 1.5f;
     [SerializeField] float m_wallRunGravity;
     [SerializeField] float m_wallRunJumpForce;
-    
+    [SerializeField] s_player m_playerScript;
+
     bool m_wallOnLeft = false;
     bool m_wallOnRight = false;
     RaycastHit m_leftWallHit;

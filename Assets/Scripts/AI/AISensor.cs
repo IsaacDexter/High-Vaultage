@@ -151,11 +151,12 @@ public class AISensor : MonoBehaviour
 
     void Shoot()
 	{
+        float timeMod = 1 / Time.timeScale;   //compensate for slowdown
         //Debug.Log("shoot");
         m_audioSource.PlayOneShot(m_clip, m_volume);
         Vector3 direction = TurretBody.transform.TransformDirection(Vector3.forward);
         GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, TurretBody.transform.rotation);
-        shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);
+        shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed*timeMod);
         Destroy(shot, 2);
 
     }
