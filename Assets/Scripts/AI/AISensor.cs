@@ -31,10 +31,18 @@ public class AISensor : MonoBehaviour
     [SerializeField] float m_reloadTime;
     [SerializeField] float m_resetTime;
 
+    //Audio Stuff
+    [SerializeField] public float m_volume;
+    public AudioSource m_audioSource;
+    public AudioClip m_clip;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(ScanDelay(m_scanFrequency));
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_clip = m_audioSource.clip;
     }
 
     IEnumerator ScanDelay(float delay)
@@ -109,22 +117,6 @@ public class AISensor : MonoBehaviour
             }
             StartCoroutine(ResetAngle());
         }
-
-  //      for(int i = 0; i < m_firePoint.Length; i++)
-		//{
-
-		//}
-
-        //m_scanTimer = Time.deltaTime;
-        //if (m_scanTimer > 0)
-        //{
-        //    m_scanTimer += m_scanInterval;
-        //    Scan();
-        //    Quaternion toRotation = Quaternion.FromToRotation(transform.forward, m_targetDirection);
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, m_rotateSpeed * Time.time);
-        //}
-        
-
     }
 
     private void Scan()
@@ -160,6 +152,7 @@ public class AISensor : MonoBehaviour
     void Shoot()
 	{
         //Debug.Log("shoot");
+        m_audioSource.PlayOneShot(m_clip, m_volume);
         Vector3 direction = TurretBody.transform.TransformDirection(Vector3.forward);
         GameObject shot = Instantiate(m_enemyShot, m_gunpoint.position, TurretBody.transform.rotation);
         shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * m_fireSpeed);

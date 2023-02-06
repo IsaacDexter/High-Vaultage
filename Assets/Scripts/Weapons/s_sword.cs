@@ -93,6 +93,7 @@ public class s_sword : s_chargingWeapon
     private void Dash()
     {
         Debug.Log("Dash!");
+        m_audioSource.PlayOneShot(m_clip, m_volume);
         m_hand.m_meleeBox.SetActive(true);
         float force = Mathf.Clamp(m_dashForce * m_chargeTime, m_minForce, m_maxForce);  //Calculate the force of the dash proprtional to time spent charging
         m_rigidBody.AddForce(m_camera.forward * force, ForceMode.Impulse);              //Apply the dash force in the forward vector
@@ -105,6 +106,7 @@ public class s_sword : s_chargingWeapon
 	private void Slash()
     {
         Debug.Log("Slash!");
+        m_audioSource.PlayOneShot(m_clip, m_volume);
         m_hand.m_meleeBox.SetActive(true);
         m_meleeTargets = m_hand.m_meleeBox.GetComponent<s_meleeBox>().m_targets;
         for (int i = 0; i < m_meleeTargets.Count; i++)
