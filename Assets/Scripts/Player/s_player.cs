@@ -537,12 +537,13 @@ public class s_player : MonoBehaviour
         GetComponent<s_levelLoader>().ReloadLevel();    //Call the level loader to reload the current level. Will not reload the corridor though, luckily.
     }
 
-    #endregion
 
-    #region Recovering
+	#endregion
 
-    /// <summary>Checks if we've exceeded recovery time, if we have, recover.</summary>
-    private void Regenerate()
+	#region Recovering
+
+	/// <summary>Checks if we've exceeded recovery time, if we have, recover.</summary>
+	private void Regenerate()
     {
         if (m_damaged)   //If we're damaged,
         {

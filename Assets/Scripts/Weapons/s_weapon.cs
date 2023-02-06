@@ -5,7 +5,7 @@ using UnityEngine;
 public class s_weapon : MonoBehaviour
 {
     /// <summary>The hand that is holding the weapon, used to reduce the charge as the weapon fires.</summary>
-    protected s_hand m_hand;
+    [SerializeField] protected s_hand m_hand;
     /// <summary>The collision of the player for the weapon to apply force to.</summary>
     protected Rigidbody m_rigidBody;
     /// <summary>The transform of the camera to avoid a sea of .parents</summary>
