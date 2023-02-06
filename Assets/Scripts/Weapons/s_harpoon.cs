@@ -109,7 +109,6 @@ public class s_harpoon : s_chargingWeapon
 			Reel();                 //Reel in on that point
 			Vector3 swingPoint = m_currentHarpoon.transform.position;
 			m_joint.connectedAnchor = swingPoint;
-			Debug.Log(swingPoint);
 		}
 	}
 
@@ -155,12 +154,19 @@ public class s_harpoon : s_chargingWeapon
     {
 		if (m_currentHarpoon != null)
 		{
+			if (m_currentHarpoon.GetComponent<s_harpoonShot>().m_button != null)
+			{
+				m_currentHarpoon.GetComponent<s_harpoonShot>().m_button.Detrigger();
+			}
+
 			Destroy(m_currentHarpoon.gameObject);
 			m_currentHarpoon = null;    //Destroy the current harpoon...
 			Destroy(m_joint);           //...and its joint
 			m_joint=null;
 			Destroy(m_line);
 			m_line=null;
+
+
 		}
 	}
 
