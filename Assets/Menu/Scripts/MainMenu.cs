@@ -34,7 +34,11 @@ public class MainMenu : MonoBehaviour
 
 
         UI.enabled = false;
-        StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
+
+        SceneManager.LoadScene("levelCor1");
+        SceneManager.LoadScene("PlayerControllerScene");
+        
+        // StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()
