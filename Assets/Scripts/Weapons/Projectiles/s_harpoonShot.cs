@@ -7,6 +7,20 @@ public class s_harpoonShot : s_stickyProjectile
 {
     /// <summary>The gun that fired the harpoon</summary>
     public s_harpoon m_owner;
+    public GameObject m_ropePoint;
+    public GameObject m_rope;
+
+    private void FixedUpdate()
+	{
+        if (!m_stuck)
+        {
+            Vector3 velocity = GetComponent<Rigidbody>().velocity;
+            gameObject.transform.rotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
+        }
+	}
+
+
+
 
 	/// <summary>Once something has entered the trigger i.e. the harpoon has hit an object</summary>
 	/// <param name="other">The other thing that entered the trigger i.e. whatever the object attatched itself to</param>
