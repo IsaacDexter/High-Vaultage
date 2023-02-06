@@ -133,7 +133,7 @@ public class s_player : MonoBehaviour
 
     #region Input Settings
     [Header("Input")]
-    private PlayerInput m_playerInput;
+    public PlayerInput m_playerInput;
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
     float m_sensitivityX = 200; 
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 

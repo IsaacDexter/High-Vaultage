@@ -7,6 +7,7 @@ using TMPro;
 
 public class s_settings : s_menu
 {
+
     int m_resolutionX, m_resolutionY;
     FullScreenMode m_fullscreenMode;
     float m_brightness;
@@ -25,6 +26,7 @@ public class s_settings : s_menu
     public s_brightness m_postProcess;
     public s_menu m_pause;
     [SerializeField] private GameObject m_advancedSettings;
+    
     protected override void Start()
     {
         m_open = false;
@@ -206,15 +208,9 @@ public class s_settings : s_menu
 
     #region Control
 
-    private void SetJumpKey(TextMeshProUGUI text)
-    {
-        
-    }
+    
 
-    private void UpdateControl(TextMeshProUGUI text, KeyCode key)
-    {
-
-    }
+    
 
     #endregion
 }
