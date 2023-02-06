@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,11 @@ public class s_pauseMenu : s_menu
         Time.timeScale = 1f;        //Speed time up to the normal amount
         gameObject.SetActive(false);
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+    }
+
+    public void Resume()
+    {
+        m_player.GetComponent<s_player>().TogglePause();
     }
 
     public override void Open()

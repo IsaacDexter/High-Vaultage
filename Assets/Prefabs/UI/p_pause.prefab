@@ -227,7 +227,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.3
+  m_fontSize: 20.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -493,6 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6edfb8fea43b6824ab8e14452e3aba70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_open: 0
   m_timeDilation: 0
   m_settings: {fileID: 0}
 --- !u!1 &6045214491996337595
@@ -588,7 +589,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26.95
+  m_fontSize: 20.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1092,7 +1093,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.3
+  m_fontSize: 20.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1257,8 +1258,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1354663756268360217}
-        m_TargetAssemblyTypeName: s_menu, Assembly-CSharp
-        m_MethodName: Close
+        m_TargetAssemblyTypeName: s_pauseMenu, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

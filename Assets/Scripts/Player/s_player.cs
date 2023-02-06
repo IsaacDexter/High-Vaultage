@@ -156,12 +156,18 @@ public class s_player : MonoBehaviour
 
     private void OnEnable()
     {
-        m_playerInput.enabled = true;
+        if (m_playerInput != null)
+        {
+            m_playerInput.enabled = true;
+        }
     }
 
     private void OnDisable()
     {
-        m_playerInput.enabled = false;
+        if (m_playerInput != null)
+        {
+            m_playerInput.enabled = false;
+        }
     }
 
     private void InitializeComponents()
@@ -579,7 +585,6 @@ public class s_player : MonoBehaviour
 
     private void OpenPause()
     {
-        print("Opened pause");
         m_playerInput.SwitchCurrentActionMap("UI");
 
         m_leftHand.Cancel();
