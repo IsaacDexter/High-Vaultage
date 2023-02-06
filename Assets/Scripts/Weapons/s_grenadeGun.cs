@@ -57,7 +57,8 @@ public class s_grenadeGun : s_weapon
     /// <summary>Spawn m_currentGrenade, apply force to it and arm it.</summary>
     private void SpawnProjectile()
 	{
-		m_currentGrenade = Instantiate(m_projectile, m_firePoint.position, m_camera.transform.rotation);							//Spawn a new grenade
+        m_audioSource.PlayOneShot(m_clip, m_volume);
+        m_currentGrenade = Instantiate(m_projectile, m_firePoint.position, m_camera.transform.rotation);							//Spawn a new grenade
 		m_currentGrenade.GetComponent<Rigidbody>().AddForce(m_currentGrenade.transform.forward * m_projectileForce);	//Fire it forwards
 		m_grenadeScript = m_currentGrenade.GetComponent<s_grenadeShot>();
 		m_armed = true;	//Indicate we are armed.

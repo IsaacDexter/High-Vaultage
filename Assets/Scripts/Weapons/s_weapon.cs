@@ -16,6 +16,12 @@ public class s_weapon : MonoBehaviour
     /// <summary>The cost of the weapon to fire per shot. For charging weapons, the cost each second.</summary>
     [SerializeField] public float m_cost;
 
+    //Audio Stuff
+    protected AudioSource m_audioSource;
+    protected AudioClip m_clip;
+    protected AudioClip m_clip2;
+    [SerializeField] public float m_volume;
+
     /// <summary>Called when the trigger is pulled. Calculates if there is enough ammo to fire, then fires, if possible.</summary>
     virtual public void Press()
     {
@@ -50,6 +56,11 @@ public class s_weapon : MonoBehaviour
         m_rigidBody = m_player.GetComponent<Rigidbody>();   //Binds the player's rigidbody so this weapon can affect it with force.
 
         m_hand.m_regening = true;   //Make sure the hand is initialising ammo, in case the player attempted to switch while charging a weapon.
+
+        m_audioSource = GetComponent<AudioSource>();   
+        m_clip = m_audioSource.clip;
+        m_clip2 = m_audioSource.clip;
+  
     }
 
     /// <summary>Checks if we can afford to fire and pays the cost.</summary>

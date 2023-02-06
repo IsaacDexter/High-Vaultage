@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class s_player : MonoBehaviour
@@ -84,6 +85,8 @@ public class s_player : MonoBehaviour
     s_weaponWheel m_weaponWheel;
     [SerializeField, Tooltip("A reference to a s_pausemenu class, which handles opening events etc")]
     s_pauseMenu m_pauseMenu;
+    [SerializeField, Tooltip("A reference to a s_hud class, to toggle it when the pause menu opens")]
+    s_hud m_hud;
     #endregion
 
     #region Components
@@ -104,6 +107,13 @@ public class s_player : MonoBehaviour
     s_hand m_leftHand;
     [Tooltip("The player's right hand, that holds their right weapon.")]
     s_hand m_rightHand;
+
+    //Audio Stuff
+    [SerializeField] public float m_volume;
+    public AudioSource m_audioSource;
+    public AudioClip m_Clip;
+
+
     #endregion
 
     #region Camera Settings
@@ -115,8 +125,7 @@ public class s_player : MonoBehaviour
 
     #region Look Settings
     [Header("Looking")]
-    float m_deltaX;
-    float m_deltaY;
+    Vector2 m_delta;
     float m_lookMultiplier = 0.01f;
     float m_xRotation;
     float m_yRotation;
@@ -124,22 +133,11 @@ public class s_player : MonoBehaviour
 
     #region Input Settings
     [Header("Input")]
+    private PlayerInput m_playerInput;
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
     float m_sensitivityX = 200; 
     [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 
     float m_sensitivityY = 200;
-    [Tooltip("The key pressed in order to Jump.")]
-    KeyCode m_jumpKey = KeyCode.Space;
-    [Tooltip("The key pressed in order to Slide.")]
-    KeyCode m_slideKey = KeyCode.LeftShift;
-    [Tooltip("The key to press to fire the left weapon")]
-    KeyCode m_leftFireKey = KeyCode.Mouse0;
-    [Tooltip("The key to press to fire the right weapon")]
-    KeyCode m_rightFireKey = KeyCode.Mouse1;
-    [Tooltip("The key to press to open the weapon wheel")]
-    KeyCode m_weaponWheelOpenKey = KeyCode.Mouse2;
-    [Tooltip("The key that will cause the player to acept input, set to none when all input is accepted.")]
-    [HideInInspector] public KeyCode m_acceptedInput { set; private get; } = KeyCode.None;
     #endregion 
 
 
@@ -151,12 +149,26 @@ public class s_player : MonoBehaviour
         InitializeComponents();
 
         InitializeMovement();
+
+        m_audioSource = GetComponent<AudioSource>();
+        m_Clip = m_audioSource.clip;
+    }
+
+    private void OnEnable()
+    {
+        m_playerInput.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        m_playerInput.enabled = false;
     }
 
     private void InitializeComponents()
     {
         //Get the player's camera and rigidbody components.
         m_camera = gameObject.GetComponentInChildren<Camera>().transform;
+        m_playerInput = gameObject.GetComponent<PlayerInput>();
 
         m_rigidBody = gameObject.GetComponent<Rigidbody>();
         m_rigidBody.freezeRotation = true;  //Prevent the rigidbody from rotating
@@ -200,7 +212,8 @@ public class s_player : MonoBehaviour
         ApplyDrag();
         MantleCheck();
 
-        CheckInput();
+        CalculateMovementDirection();
+        CalculateCameraRotation();
         Look();
 
         LimitVelocity();
@@ -214,60 +227,81 @@ public class s_player : MonoBehaviour
 
     #region Input
 
-    private void CheckInput()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(m_acceptedInput) || m_acceptedInput == KeyCode.None)
-        {
-            //These two do not freeze when the weapon wheel is open so the player won't have to reenable sliding to stop and so the player can close the weapon wheel 
-            if (Input.GetKeyDown(m_weaponWheelOpenKey))
-            {
-                m_weaponWheel.Toggle();
-                m_leftHand.Cancel();
-                m_rightHand.Cancel();
-            }
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                m_leftHand.Cancel();
-                m_rightHand.Cancel();
-                m_weaponWheel.Close();
-                m_pauseMenu.Toggle();
-            }
-            if (Input.GetKeyUp(m_slideKey))
-            {
-                StopSliding();
-            }
-            //Get horizontal and vertical movement and apply 
-            CalculateMovementDirection(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            //Mouse input
-            CalculateCameraRotation(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-            if (Input.GetKeyDown(m_leftFireKey))
-            {
-                m_leftHand.PullTrigger();
-            }
-            if (Input.GetKeyUp(m_leftFireKey))
-            {
-                m_leftHand.ReleaseTrigger();
-            }
-            if (Input.GetKeyDown(m_rightFireKey))
-            {
-                m_rightHand.PullTrigger();
-            }
-            if (Input.GetKeyUp(m_rightFireKey))
-            {
-                m_rightHand.ReleaseTrigger();
-            }
+        Vector2 axis = context.ReadValue<Vector2>();
 
-            //Key input
-            if (Input.GetKeyDown(m_jumpKey))
-            {
-                Jump();
-            }
-            if (Input.GetKeyDown(m_slideKey))
-            {
-                StartSliding();
-            }
+        CalculateMovementDirection(axis);
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        Vector2 axis = context.ReadValue<Vector2>();
+
+        m_delta = axis;
+    }
+
+    public void OnLeftFire(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            m_leftHand.PullTrigger();
+        }
+        else if (context.canceled)         //The action has concluded i.e. the key has been released
+        {
+            m_leftHand.ReleaseTrigger();
         }
     }
+
+    public void OnRightFire(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            m_rightHand.PullTrigger();
+        }
+        else if (context.canceled)         //The action has concluded i.e. the key has been released
+        {
+            m_rightHand.ReleaseTrigger();
+        }
+    }
+
+    public void OnSlide(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            StartSliding();
+        }
+        else if (context.canceled)         //The action has concluded i.e. the key has been released
+        {
+            StopSliding();
+        }
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            Jump();
+        }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            TogglePause();
+        }
+    }
+
+    public void OnWheel(InputAction.CallbackContext context)
+    {
+        if (context.started)                //The action has started i.e. the key has gone down
+        {
+            ToggleWeaponWheel();
+        }
+    }
+
+
 
     #endregion
 
@@ -275,13 +309,18 @@ public class s_player : MonoBehaviour
 
     #region Movement
 
-    /// <summary>Applies horizontal and vertical input to movement components, and calculates a new direction of movement.</summary>
-    /// <param name="horizontalInput">Input.GetAxisRaw("Horizontal)</param>
-    /// <param name="verticalInput">Input.GetAxisRaw("Vertical)</param>
-    public void CalculateMovementDirection(float horizontalInput, float verticalInput)
+    /// <summary>Override of calculate movement direction that takes no new input. called in update</summary>
+    public void CalculateMovementDirection()
     {
-        m_horizontalMovement = horizontalInput;
-        m_verticalMovement = verticalInput;
+        m_moveDirection = m_orientation.forward * m_verticalMovement + m_orientation.right * m_horizontalMovement;
+    }
+
+    /// <summary>Applies horizontal and vertical input to movement components, and calculates a new direction of movement.</summary>
+    /// <param name="input">Pass in dynamically from input move</param>
+    public void CalculateMovementDirection(Vector2 axis)
+    {
+        m_horizontalMovement = axis.x;
+        m_verticalMovement = axis.y;
 
         m_moveDirection = m_orientation.forward * m_verticalMovement + m_orientation.right * m_horizontalMovement;
     }
@@ -437,12 +476,11 @@ public class s_player : MonoBehaviour
     #region Looking
 
     /// <summary>Calculates the camera's x and y rotation according to mouse input passed in.</summary>
-    /// <param name="m_deltaX">Input.GetAxisRaw("Mouse X")</param>
-    /// <param name="m_deltaY">Input.GetAxisRaw("Mouse Y")</param>
-    private void CalculateCameraRotation(float m_deltaX, float m_deltaY)
+    /// <param name="delta">Pass in dynamically from input look</param>
+    public void CalculateCameraRotation()
     {
-        m_yRotation += m_deltaX * m_sensitivityX * m_lookMultiplier;
-        m_xRotation -= m_deltaY * m_sensitivityY * m_lookMultiplier;
+        m_yRotation += m_delta.x * m_sensitivityX * m_lookMultiplier;
+        m_xRotation -= m_delta.y * m_sensitivityY * m_lookMultiplier;
         m_xRotation = Mathf.Clamp(m_xRotation, -90f, 90f);
     }
 
@@ -472,6 +510,8 @@ public class s_player : MonoBehaviour
     {
         if (m_damaged)  //If we're already damaged, kill the playewr
         {
+            m_audioSource.PlayOneShot(m_Clip, m_volume);
+            Debug.Log("Dead LOL");
             Kill();
         }
         else    //Otherwise...
@@ -485,6 +525,7 @@ public class s_player : MonoBehaviour
     public void Kill()
     {
         Respawn();
+
     }
 
     /// <summary>Transform the player to the spawnpoints transform, and then reload the current level</summary>
@@ -519,6 +560,70 @@ public class s_player : MonoBehaviour
     }
 
     #endregion
+
+    #endregion
+
+    #region UI
+
+    public void TogglePause()
+    {
+        if (m_pauseMenu.m_open)
+        {
+            ClosePause();
+        }
+        else
+        {
+            OpenPause();
+        }
+    }
+
+    private void OpenPause()
+    {
+        print("Opened pause");
+        m_playerInput.SwitchCurrentActionMap("UI");
+
+        m_leftHand.Cancel();
+        m_rightHand.Cancel();
+        m_weaponWheel.Close();
+        m_hud.Close();
+        m_pauseMenu.Open();
+    }
+
+    private void ClosePause()
+    {
+        m_playerInput.SwitchCurrentActionMap("Player");
+
+        m_hud.Open();
+        m_pauseMenu.Close();
+    }
+
+    public void ToggleWeaponWheel()
+    {
+        if (m_weaponWheel.m_open)
+        {
+            CloseWeaponWheel();
+        }
+        else
+        {
+            OpenWeaponWheel();
+        }
+    }
+
+    private void OpenWeaponWheel()
+    {
+        m_playerInput.SwitchCurrentActionMap("UI");
+
+        m_weaponWheel.Open();
+        m_leftHand.Cancel();
+        m_rightHand.Cancel();
+    }
+
+    private void CloseWeaponWheel()
+    {
+        m_playerInput.SwitchCurrentActionMap("Player");
+
+        m_weaponWheel.Close();
+    }
 
     #endregion
 }

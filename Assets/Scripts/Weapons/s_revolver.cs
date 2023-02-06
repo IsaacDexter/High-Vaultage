@@ -51,6 +51,7 @@ public class s_revolver : s_chargingWeapon
 
     private void SpawnProjectile(Vector3 point)
     {
+		m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Firing SFX
 		Debug.DrawRay(m_camera.position, m_camera.transform.forward * m_range, Color.green, 20);                                  //Draw a ray in the direction the weapon is pointing
 		GameObject shotLineObject = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);   //Instanciate a shot facing in the direction of the camera
 
@@ -94,6 +95,7 @@ public class s_revolver : s_chargingWeapon
 			targets.Clear();
 			SpawnProjectile(hit[furthestHit].point);
 		}
+		SpawnProjectile(m_firePoint.position + (m_camera.transform.forward * m_range));
 	}
 
 	/// <summary>Checks if the hit object is an enemy, and if it is, destroys it</summary>
@@ -117,7 +119,7 @@ public class s_revolver : s_chargingWeapon
 			m_revolverCharge += 3*Time.deltaTime;
 		}
 		Time.timeScale = m_timeDilation;
-		print("charging revolver... "+ m_revolverDamage);
+		//print("charging revolver... "+ m_revolverDamage);
 		base.Charge();
 
 	}

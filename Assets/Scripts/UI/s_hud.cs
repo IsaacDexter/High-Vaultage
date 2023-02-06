@@ -56,4 +56,14 @@ public class s_hud : MonoBehaviour
             m_rightCharge.color = m_rightColor;
         }
     }
+
+    public void Open()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Close()
+    {
+        gameObject.SetActive(false);
+    }
 }
