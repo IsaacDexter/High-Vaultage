@@ -47,8 +47,11 @@ public class s_revolver : s_chargingWeapon
     public override void Cancel()
     {
         base.Cancel();
-		Time.timeScale = 1f;
-		Time.fixedDeltaTime = 0.02F * Time.timeScale;
+		if (m_charging)
+		{
+			Time.timeScale = 1f;
+			Time.fixedDeltaTime = 0.02F * Time.timeScale;
+		}
 	}
 
     private void SpawnProjectile(Vector3 point)

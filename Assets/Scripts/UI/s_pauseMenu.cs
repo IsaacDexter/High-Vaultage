@@ -17,6 +17,7 @@ public class s_pauseMenu : s_menu
     {
         m_open = false;  //Update check bool
         Time.timeScale = 1f;        //Speed time up to the normal amount
+        Time.fixedDeltaTime = 0.02F * Time.timeScale;
         gameObject.SetActive(false);
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
