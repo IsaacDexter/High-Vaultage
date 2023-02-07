@@ -16,7 +16,6 @@ public class s_sword : s_chargingWeapon
     [SerializeField] float m_timeDilation;
 
 
-
     /// <summary>The minimum charge required to dash</summary>
     [SerializeField] float m_dashCharge;
     /// <summary>What percentage of the horizontal velocity to retain once the charge has ended</summary>
@@ -97,9 +96,9 @@ public class s_sword : s_chargingWeapon
         m_hand.m_meleeBox.SetActive(true);
         float force = Mathf.Clamp(m_dashForce * m_chargeTime, m_minForce, m_maxForce);  //Calculate the force of the dash proprtional to time spent charging
         m_rigidBody.AddForce(m_camera.forward * force, ForceMode.Impulse);              //Apply the dash force in the forward vector
+        Time.timeScale = 1f;
         StartCoroutine(DashDelay(m_dashDuration));    //Start the coroutine that triggers when the dash delay has ended
         m_hand.m_killOnHit = true;
-        Time.timeScale = 1f;
     }
 
 	/// <summary>Called when the player just clicks with this weapon. Unimplemented, intended to be a simple melee hit.</summary>
@@ -140,6 +139,7 @@ public class s_sword : s_chargingWeapon
     public override void Dequip()
     {
         Time.timeScale = 1f;
+        m_hand.m_killOnHit = false;
         base.Dequip();
     }
 }

@@ -9,8 +9,11 @@ public class s_grenadeShot : s_stickyProjectile
     /// 
 
     [SerializeField] GameObject m_explosionEffect;
+    bool m_canTrigger = true;
+    s_trigger m_button;
 
-	private void OnCollisionEnter(Collision other)
+
+    private void OnCollisionEnter(Collision other)
     {
         if (!m_stuck)                               //If we havent yet attatched ourselves to something...
         {
@@ -19,6 +22,17 @@ public class s_grenadeShot : s_stickyProjectile
                 m_stuck = Stick(other);  //Stick to whatever we hit
             }
         }
+        if (other.transform.parent != null)
+        {
+            if (other.transform.parent.gameObject.tag == "Trigger" && m_canTrigger)
+            {
+                m_button = other.transform.parent.gameObject.GetComponent<s_trigger>();
+                m_button.Trigger();
+                m_canTrigger = false;
+            }
+        }
+
+
     }
 
     public void Detonate(float force, float radius, float dammage)
@@ -61,7 +75,10 @@ public class s_grenadeShot : s_stickyProjectile
         }
         GameObject Explosion =  Instantiate(m_explosionEffect, gameObject.transform.position, transform.rotation);
         Destroy(Explosion, 5);
-
+        if (m_button != null)
+        {
+            m_button.Detrigger();
+        }
         Destroy(gameObject);
 
         

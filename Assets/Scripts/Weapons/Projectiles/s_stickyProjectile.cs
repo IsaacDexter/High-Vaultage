@@ -22,40 +22,49 @@ public class s_stickyProjectile : MonoBehaviour
     /// <returns>Whether or not the grenade is stuck</returns>
 	virtual protected bool Stick(Collision other)
     {
-        if (other.gameObject.transform.root.gameObject.tag != "Player"&& other.gameObject.transform.root.gameObject.tag != "Projectile" && other.gameObject.transform.root.gameObject.tag != "EnemyBullet")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Projectile" && other.gameObject.tag != "EnemyBullet")
         {
             if (m_stuck != true)
             {
-                Debug.Log("Poon");
-                Vector3 colisionPoint = other.contacts[0].point;
-                Debug.Log(colisionPoint);
-                Debug.Log(other.gameObject.transform.position);
-                ParentConstraint constraint = GetComponent<ParentConstraint>();
-                constraintSource.sourceTransform = other.gameObject.transform;
+                //Debug.Log(other.gameObject.transform.parent.gameObject);
+                if (other.gameObject.tag == "Untagged")
+                {
+                    m_rigidbody.isKinematic = true;
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("Poon");
+                    Vector3 colisionPoint = other.contacts[0].point;
+                    Debug.Log(colisionPoint);
+                    Debug.Log(other.gameObject.transform.position);
+                    ParentConstraint constraint = GetComponent<ParentConstraint>();
+                    constraintSource.sourceTransform = other.gameObject.transform;
 
-                Vector3 offset = colisionPoint-other.gameObject.transform.position;
+                    Vector3 offset = colisionPoint - other.gameObject.transform.position;
 
-                Debug.Log(other.gameObject);
-                constraintSource.weight = 1;
-                constraint.constraintActive = true;
-                gameObject.transform.position = colisionPoint;
-                //constraint.locked = true;
-                constraint.AddSource(constraintSource);
-                constraint.SetTranslationOffset(0,offset);
-                //constraint.translationOffsets[0] = offset;
+                    constraintSource.weight = 1;
+                    constraint.constraintActive = true;
+                    gameObject.transform.position = colisionPoint;
+                    //constraint.locked = true;
+                    constraint.AddSource(constraintSource);
+                    constraint.SetTranslationOffset(0, offset);
+                    //constraint.translationOffsets[0] = offset;
 
-                //gameObject.transform.SetParent(collision.gameObject.transform,true);
-                m_rigidbody.isKinematic = true;
-                //m_rigidbody.
-                return true;
+                    //gameObject.transform.SetParent(collision.gameObject.transform,true);
+                    m_rigidbody.isKinematic = true;
+                    //m_rigidbody.
+                    return true;
+                }
             }
             return true;
         }
         else
-		{
+        {
             return false;
-		}
+        }
     }
+
 
     /// <summary>Stick to the ground by becoming kinematic</summary>
     /// <param name="other">The ground to stick to. Unused.</param>

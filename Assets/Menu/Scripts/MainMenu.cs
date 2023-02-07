@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : s_menu
 {
     public string FirstLevel;
     public GameObject Camera;
@@ -14,11 +15,19 @@ public class MainMenu : MonoBehaviour
     public GameObject Player;
     public GameObject PlayerCamera;
     public GameObject LerpScript;
+    [SerializeField] private s_settings m_settings;
 
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
-        
+        m_timeDilation = 1.0f;
+
+        if (m_settings == null)
+        {
+            m_settings = GetComponentInChildren<s_settings>();
+        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;      //Unlock and show the cursor
     }
 
     // Update is called once per frame
@@ -30,9 +39,6 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Start");
-
-
         UI.enabled = false;
 
         SceneManager.LoadScene("levelCor1");
@@ -43,7 +49,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenOptions()
     {
-        Debug.Log("TEST EXPERIMENT");
+        m_settings.Open();
     }
 
     public void CloseOptions()
@@ -54,7 +60,6 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quitting");
     }
 
     public void SelectLevel(int LevelNumber)

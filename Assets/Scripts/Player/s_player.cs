@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody))]
 public class s_player : MonoBehaviour
@@ -38,7 +40,7 @@ public class s_player : MonoBehaviour
     [HideInInspector, Tooltip("The current height of the players model.")]
     public float m_height;
     [SerializeField, Tooltip("The collision detection mode of the player.Continuous dynamic / speculative are good for fast moving projectiles.")] 
-    CollisionDetectionMode m_collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+    CollisionDetectionMode m_collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     #endregion
 
     #region Jumping Settings
@@ -51,6 +53,9 @@ public class s_player : MonoBehaviour
     public bool m_grounded;
     [Tooltip("If the player can currently jump.")]
     bool m_canJump = true;
+    bool m_wallJump = false;
+    bool m_canDoubleJump = true;
+    float m_wallCount = -1;
     #endregion
 
     #region Sliding Settings
@@ -156,12 +161,18 @@ public class s_player : MonoBehaviour
 
     private void OnEnable()
     {
-        m_playerInput.enabled = true;
+        if (m_playerInput != null)
+        {
+            m_playerInput.enabled = true;
+        }
     }
 
     private void OnDisable()
     {
-        m_playerInput.enabled = false;
+        if (m_playerInput != null)
+        {
+            m_playerInput.enabled = false;
+        }
     }
 
     private void InitializeComponents()
@@ -399,9 +410,15 @@ public class s_player : MonoBehaviour
             {
                 m_rigidBody.AddForce(transform.up * m_jumpForce, ForceMode.Impulse);    //Apply an upwards force
             }
-            else            ///...and we're trying to perform a double jump:
+            else if(m_wallJump)
+			{
+                m_rigidBody.AddForce(transform.up * m_jumpForce, ForceMode.Impulse);                    //Apply an upwards force
+                m_wallCount = -1;
+                m_wallJump = false;
+            }
+            else if(m_canDoubleJump)            ///...and we're trying to perform a double jump:
             {
-                m_canJump = false;          //Prevent us from double jumping a second time
+                m_canDoubleJump = false;          //Prevent us from double jumping a second time
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);  //Reset our vertical velocity
                 m_rigidBody.AddForce(transform.up * m_jumpForce, ForceMode.Impulse);                    //Apply an upwards force
             }
@@ -414,11 +431,24 @@ public class s_player : MonoBehaviour
     private bool CheckGrounded(float radius = 0.4f)
     {
         m_grounded = Physics.CheckSphere(transform.position - new Vector3(0, m_height / 2 - 1, 0), radius, m_groundMask); //Run a sphere collision below the player to see if we're touching the ground.
-        
-        if (!m_canJump && m_grounded)   //If we're grounded but can't jump...
+        if (m_wallCount >= 0)
         {
-            m_canJump = true;           //Rectify that.
+            m_wallCount += 1 * Time.deltaTime;
         }
+        if(m_wallCount > 0.25)
+		{
+            m_wallJump = false;
+            m_wallCount = -1;
+        }
+
+        if (!m_canDoubleJump && m_grounded)   //If we're grounded but can't jump...
+        {
+            //Rectify that.
+            m_canDoubleJump = true;
+        }
+
+        
+
         return m_grounded;
     }
 
@@ -504,9 +534,28 @@ public class s_player : MonoBehaviour
             Destroy(collision.gameObject); //Destroy that bullet
             Damage();   //Take damage.
         }
+        else if (collision.gameObject.layer==3)   //If we have collided with a bullet...
+        {
+            Debug.Log("Wally");
+            m_wallJump = true;
+            m_wallCount = -1;
+        }
     }
 
-    public void Damage()
+	private void OnCollisionExit(Collision collision)
+	{
+        if (collision.gameObject.layer == 3)   //If we have collided with a bullet...
+        {
+            m_wallCount = 0;
+        }
+    }
+
+IEnumerator DashDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+    }
+
+        public void Damage()
     {
         if (m_damaged)  //If we're already damaged, kill the playewr
         {
@@ -537,12 +586,13 @@ public class s_player : MonoBehaviour
         GetComponent<s_levelLoader>().ReloadLevel();    //Call the level loader to reload the current level. Will not reload the corridor though, luckily.
     }
 
-    #endregion
 
-    #region Recovering
+	#endregion
 
-    /// <summary>Checks if we've exceeded recovery time, if we have, recover.</summary>
-    private void Regenerate()
+	#region Recovering
+
+	/// <summary>Checks if we've exceeded recovery time, if we have, recover.</summary>
+	private void Regenerate()
     {
         if (m_damaged)   //If we're damaged,
         {
@@ -579,7 +629,6 @@ public class s_player : MonoBehaviour
 
     private void OpenPause()
     {
-        print("Opened pause");
         m_playerInput.SwitchCurrentActionMap("UI");
 
         m_leftHand.Cancel();
