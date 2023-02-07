@@ -23,6 +23,11 @@ public class s_harpoon : s_chargingWeapon
     [Header("Projectile Settings")]
 	/// <summary>The projectile to fire (s_harpoonShot)</summary>
 	[SerializeField] GameObject m_projectile;
+
+	GameObject m_line;
+
+	[SerializeField] GameObject m_grappleLine;
+
 	/// <summary>The Force to apply to the fired projectile</summary>
 	[SerializeField] float m_projectileForce;
 
@@ -37,6 +42,8 @@ public class s_harpoon : s_chargingWeapon
 	[SerializeField] float m_ropeDamper;
 	/// <summary>The scale to apply to the inverse mass and inertia tensor of the body prior to solving the constraints.</summary>
 	[SerializeField] float m_ropeMassScale;
+
+	
 
 	/// <summary>If we're swinging on a harpoon, release it and move forwards.</summary>
 	override protected void Fire()
@@ -57,14 +64,31 @@ public class s_harpoon : s_chargingWeapon
 		Fire();
     }
 
-    /// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
-    private void SpawnProjectile()
+	void Update()
+	{
+		if (m_line != null)
+		{
+			m_line.GetComponent<LineRenderer>().SetPosition(0, m_firePoint.transform.position);
+			m_line.GetComponent<LineRenderer>().SetPosition(1, m_currentHarpoon.GetComponent<s_harpoonShot>().m_ropePoint.transform.position);
+		}
+		base.Update();
+	}
+
+	/// <summary>Spawn the harpoon at m_firepoint, set its owner to be this, and add the initial force</summary>
+	private void SpawnProjectile()
     {
+		float timeMod = 1 / Time.timeScale;   //compensate for slowdown
+
 		m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Firing SFX
 
-		m_currentHarpoon = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);									//Spawn in the harpoon
-		m_currentHarpoon.GetComponent<s_harpoonShot>().m_owner = this;													//Become its owner
-		m_currentHarpoon.GetComponent<Rigidbody>().AddForce(m_currentHarpoon.transform.forward * m_projectileForce);	//Provide it with an initial force.
+		m_currentHarpoon = Instantiate(m_projectile, m_firePoint.position, m_camera.rotation);                                  //Spawn in the harpoon
+		m_currentHarpoon.GetComponent<s_harpoonShot>().m_owner = this;                                                  //Become its owner
+		m_line = Instantiate(m_grappleLine, m_firePoint.position, m_camera.rotation);
+		
+		m_line.GetComponent<LineRenderer>().SetPosition(0,m_firePoint.transform.position);
+		m_line.GetComponent<LineRenderer>().SetPosition(1, m_currentHarpoon.GetComponent<s_harpoonShot>().m_ropePoint.transform.position);
+
+		m_currentHarpoon.GetComponent<Rigidbody>().AddForce(m_currentHarpoon.transform.forward * m_projectileForce* timeMod);	//Provide it with an initial force.
 	}
 
 	/// <summary>Releases our old harpoon and spawns a new one, if we can.</summary>
@@ -85,7 +109,6 @@ public class s_harpoon : s_chargingWeapon
 			Reel();                 //Reel in on that point
 			Vector3 swingPoint = m_currentHarpoon.transform.position;
 			m_joint.connectedAnchor = swingPoint;
-			Debug.Log(swingPoint);
 		}
 	}
 
@@ -131,10 +154,19 @@ public class s_harpoon : s_chargingWeapon
     {
 		if (m_currentHarpoon != null)
 		{
+			if (m_currentHarpoon.GetComponent<s_harpoonShot>().m_button != null)
+			{
+				m_currentHarpoon.GetComponent<s_harpoonShot>().m_button.Detrigger();
+			}
+
 			Destroy(m_currentHarpoon.gameObject);
 			m_currentHarpoon = null;    //Destroy the current harpoon...
 			Destroy(m_joint);           //...and its joint
 			m_joint=null;
+			Destroy(m_line);
+			m_line=null;
+
+
 		}
 	}
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class s_smashButton : s_button
 {
+
     /// <summary>The lowest velocity the collider needs to reach to "slam" the button</summary>
     [SerializeField] float minVelocity = 0.0f;
     protected override bool CheckCollider(Collider other)

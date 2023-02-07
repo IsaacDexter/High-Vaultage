@@ -9,7 +9,6 @@ public class s_menu : MonoBehaviour
     protected GameObject m_player;
     /// <summary>The speed time should move at when the weapon wheel is open</summary>
     [SerializeField] protected float m_timeDilation;
-    protected KeyCode m_key;
 
     virtual protected void Start()
     {
@@ -32,7 +31,7 @@ public class s_menu : MonoBehaviour
     }
 
     /// <summary>Closes the weapon wheel and locks the cursor</summary>
-    public void Close()
+    virtual public void Close()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;     //Lock and hide the cursor

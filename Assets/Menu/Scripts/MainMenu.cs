@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : s_menu
 {
     public string FirstLevel;
     public GameObject Camera;
@@ -14,43 +15,37 @@ public class MainMenu : MonoBehaviour
     public GameObject Player;
     public GameObject PlayerCamera;
     public GameObject LerpScript;
-    [SerializeField] List<GameObject> listOfLights = new List<GameObject>();
+    [SerializeField] private s_settings m_settings;
 
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
-        
+        m_timeDilation = 1.0f;
+
+        if (m_settings == null)
+        {
+            m_settings = GetComponentInChildren<s_settings>();
+        }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;      //Unlock and show the cursor
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
-
-    IEnumerator TurnOnLights(List<GameObject> listOfLights)
-    {
-        yield return new WaitForSeconds(3);
-        foreach (GameObject currentLight in listOfLights)
-        {
-            yield return new WaitForSeconds(0.5f);
-
-            currentLight.GetComponent<Light>().enabled = true;
-        }
+        
     }
 
     public void StartGame()
     {
-        Debug.Log("Start");
-
-
         UI.enabled = false;
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()
     {
-        Debug.Log("TEST EXPERIMENT");
+        m_settings.Open();
     }
 
     public void CloseOptions()
@@ -61,18 +56,6 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Quitting");
-    }
-
-
-    public void TurnOnLightsN()
-    {
-        Debug.Log("Called turn on lights");
-
-        foreach(GameObject currentLight in listOfLights)
-        {
-            Debug.Log(currentLight.name);
-        }
     }
 
     public void SelectLevel(int LevelNumber)
@@ -80,7 +63,8 @@ public class MainMenu : MonoBehaviour
         UI2.enabled = true;
         UILevel.enabled = false;
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectedLerp(Player));
-
-        StartCoroutine(TurnOnLights(listOfLights));
     }
+
+
+
 }
