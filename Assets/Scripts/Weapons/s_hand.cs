@@ -8,6 +8,7 @@ public class s_hand : MonoBehaviour
     [SerializeField] float m_chargeSpeed;
     /// <summary>The current weapon the hand is holding. Should be a reference to a child of camera</summary>
     public GameObject m_weapon;
+    private s_player m_player;
     /// <summary>If the weapon is currently regaining charge (set to false while charging weapons are charging.)</summary>
     public bool m_regening = true;
     /// <summary>The charge (ammo) this fist has, shared between weapons</summary>
@@ -17,8 +18,12 @@ public class s_hand : MonoBehaviour
 
     public bool m_killOnHit;
 
-    /// <summary>Will call press on the currently held weapon</summary>
-    public void PullTrigger()
+
+    
+
+
+	/// <summary>Will call press on the currently held weapon</summary>
+	public void PullTrigger()
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
