@@ -40,6 +40,7 @@ public class s_menu : MonoBehaviour
         Cursor.visible = false;     //Lock and hide the cursor
         m_open = false;  //Update check bool
         Time.timeScale = 1f;        //Speed time up to the normal amount
+		Time.fixedDeltaTime = 0.02F * Time.timeScale;
         gameObject.SetActive(false);
     }
 
@@ -49,7 +50,8 @@ public class s_menu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;      //Unlock and show the cursor
         m_open = true;   //Update check bool
-        Time.timeScale = m_timeDilation;      //Slow down time to the slow speed
+        Time.timeScale = m_timeDilation;
+        Time.fixedDeltaTime = 0.02F * Time.timeScale;     //Slow down time to the slow speed
         gameObject.SetActive(true);
     }
 }
