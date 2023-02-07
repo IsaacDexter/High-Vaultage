@@ -134,10 +134,8 @@ public class s_player : MonoBehaviour
     #region Input Settings
     [Header("Input")]
     public PlayerInput m_playerInput;
-    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
-    float m_sensitivityX = 200; 
-    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 
-    float m_sensitivityY = 200;
+    [SerializeField, Tooltip("The mouse's sensitivity in the horizontal")] 
+    public Vector2 m_sensitivity =  new Vector2(200.0f, 200.0f);
     #endregion 
 
 
@@ -485,8 +483,8 @@ public class s_player : MonoBehaviour
     /// <param name="delta">Pass in dynamically from input look</param>
     public void CalculateCameraRotation()
     {
-        m_yRotation += m_delta.x * m_sensitivityX * m_lookMultiplier;
-        m_xRotation -= m_delta.y * m_sensitivityY * m_lookMultiplier;
+        m_yRotation += m_delta.x * m_sensitivity.x * m_lookMultiplier;
+        m_xRotation -= m_delta.y * m_sensitivity.y * m_lookMultiplier;
         m_xRotation = Mathf.Clamp(m_xRotation, -90f, 90f);
     }
 

@@ -13,7 +13,10 @@ public class s_menu : MonoBehaviour
     virtual protected void Start()
     {
         m_open = false;
-        m_player = gameObject.transform.root.gameObject;
+        if (m_player == null)
+        {
+            m_player = gameObject.transform.root.gameObject;
+        }
         Close();
     }
 
