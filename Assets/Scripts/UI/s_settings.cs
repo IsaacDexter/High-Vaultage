@@ -102,7 +102,10 @@ public class s_settings : s_menu
 
     private void ApplyControls()
     {
-        m_player.GetComponent<s_player>().m_sensitivity = m_sensitivty;
+        if (m_player != null)
+        {
+            m_player.GetComponent<s_player>().m_sensitivity = m_sensitivty;
+        }
     }
 
     #region WindowSettings
