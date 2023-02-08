@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Audio;
 using TMPro;
 
 public class s_settings : s_menu
@@ -23,12 +24,13 @@ public class s_settings : s_menu
     bool m_motionBlur;
 
     Vector2 m_sensitivty;
-
+    [Header("UI")]
+    public s_menu m_pause;
+    [Header("Graphics")]
     public UniversalRenderPipelineAsset m_pipeline;
     public s_brightness m_postProcess;
-    public s_menu m_pause;
     [SerializeField] private GameObject m_advancedSettings;
-    
+
     protected override void Start()
     {
         base.Start();
