@@ -16,6 +16,7 @@ public class WallRun : MonoBehaviour
     bool m_wallOnRight = false;
     RaycastHit m_leftWallHit;
     RaycastHit m_rightWallHit;
+    Camera m_camera;
 
     bool check;
     float m_baseFOV;
@@ -25,6 +26,7 @@ public class WallRun : MonoBehaviour
     private void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
+        m_camera = GetComponent<Camera>();
     }
 
     bool CanWallRun()
@@ -80,12 +82,14 @@ public class WallRun : MonoBehaviour
                 Vector3 jumpDirection = transform.up + m_leftWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
                 m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
+                m_camera.transform.localRotation = Quaternion.Euler(m_camera.transform.localRotation.x, m_camera.transform.localRotation.y, 30);
             }
             else if (m_wallOnRight)
             {
                 Vector3 jumpDirection = transform.up + m_rightWallHit.normal;
                 m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
                 m_rigidBody.AddForce(jumpDirection * m_wallRunJumpForce, ForceMode.Impulse);
+                m_camera.transform.localRotation = Quaternion.Euler(m_camera.transform.localRotation.x, m_camera.transform.localRotation.y, -30);
             }
         }
     }
