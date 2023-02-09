@@ -17,6 +17,8 @@ public class MainMenu : s_menu
     public GameObject LerpScript;
     [SerializeField] private s_settings m_settings;
 
+    [SerializeField] public List<string> levelLists;
+
     // Start is called before the first frame update
     override protected void Start()
     {
@@ -34,17 +36,16 @@ public class MainMenu : s_menu
     void Update()
     {
 
-        
     }
 
     public void StartGame()
     {
         UI.enabled = false;
 
-        SceneManager.LoadScene("levelCor1");
-        SceneManager.LoadScene("PlayerControllerScene");
+        //SceneManager.LoadScene("levelCor1");
+        //SceneManager.LoadScene("PlayerControllerScene");
         
-        // StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
+        StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()
@@ -67,8 +68,8 @@ public class MainMenu : s_menu
         UI2.enabled = true;
         UILevel.enabled = false;
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectedLerp(Player));
+
+
+
     }
-
-
-
 }

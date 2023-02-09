@@ -11,12 +11,10 @@ public class s_sceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         //levelLoader.LoadLevel("levelCor1");
         //levelLoader.LoadLevel("TriggersScene");
         StartCoroutine(streamer.AsyncLoadScene("TriggersScene", true));
         StartCoroutine(streamer.AsyncLoadScene("levelCor1", true));
     }
-
-
 }
