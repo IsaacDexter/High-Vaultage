@@ -4,7 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class s_victoryMenu : s_menu
+
+public class s_victoryScreen : s_menu
 {
     protected override void Start()
     {
@@ -20,3 +21,4 @@ public class s_victoryMenu : s_menu
         SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
 }
+
