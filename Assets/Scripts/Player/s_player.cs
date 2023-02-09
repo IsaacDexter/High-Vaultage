@@ -93,6 +93,7 @@ public class s_player : MonoBehaviour
     s_pauseMenu m_pauseMenu;
     [SerializeField, Tooltip("A reference to a s_hud class, to toggle it when the pause menu opens")]
     s_hud m_hud;
+    public float m_skipperCount;
     #endregion
 
     #region Components
@@ -526,15 +527,20 @@ public class s_player : MonoBehaviour
 
     #region Damaging
 
+    public bool m_canBeHit = true;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.transform.root.gameObject.CompareTag(m_enemyBulletTag))   //If we have collided with a bullet...
         {
             Debug.Log("OWW");
             Destroy(collision.gameObject); //Destroy that bullet
-            Damage();   //Take damage.
+            if (!m_canBeHit)
+            {
+                Damage();   //Take damage.
+            }
         }
-        else if (collision.gameObject.layer==3)   //If we have collided with a bullet...
+        else if (collision.gameObject.layer==3)   //If we have collided with a Wall...
         {
             Debug.Log("Wally");
             m_wallJump = true;
@@ -580,6 +586,7 @@ IEnumerator DashDelay(float delay)
     /// <summary>Transform the player to the spawnpoints transform, and then reload the current level</summary>
     public void Respawn()
     {
+        m_damaged = false;
         gameObject.transform.position = m_spawnPoint.position;   //Move the player to the position of the spawnpoint
         GetComponent<PlayerLook>().SetRotation(m_spawnPoint.rotation);  //Turn the player to face the same direction as the spawnpoint. Currently nonfunctional due to issues with turning code
 
