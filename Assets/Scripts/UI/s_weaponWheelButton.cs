@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class s_weaponWheelButton : s_clickableObject
 {
-    [SerializeField] GameObject m_weapon;
+    public GameObject m_weapon;
     s_weaponWheel m_weaponWheel;
 
     // Start is called before the first frame update
@@ -44,5 +44,23 @@ public class s_weaponWheelButton : s_clickableObject
             }
         }
         mainhand.Equip(m_weapon);       //Then Equip this weapon to the mainhand
+    }
+
+    public void Unlock()
+    {
+        Button button = gameObject.GetComponent<Button>();
+        if (button != null)
+        {
+            button.interactable = true;
+        }
+    }
+
+    public void Lock()
+    {
+        Button button = gameObject.GetComponent<Button>();
+        if (button != null)
+        {
+            button.interactable = false;
+        }
     }
 }

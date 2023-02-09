@@ -12,37 +12,43 @@ public class s_clickableObject : MonoBehaviour, IPointerUpHandler, IPointerDownH
     public void OnPointerDown(PointerEventData eventData)
     {
         Button button = gameObject.GetComponent<Button>();
-        switch (eventData.button)
+        if (button.IsInteractable())
         {
-            case PointerEventData.InputButton.Left:
-                EventSystem.current.SetSelectedGameObject(null);
-                LeftClick();
-                break;
-            case PointerEventData.InputButton.Right:
-                button.Select();
-                RightClick();
-                break;
-            case PointerEventData.InputButton.Middle:
-                break;
-            default:
-                break;
+            switch (eventData.button)
+            {
+                case PointerEventData.InputButton.Left:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    LeftClick();
+                    break;
+                case PointerEventData.InputButton.Right:
+                    button.Select();
+                    RightClick();
+                    break;
+                case PointerEventData.InputButton.Middle:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         Button button = gameObject.GetComponent<Button>();
-        switch (eventData.button)
+        if (button.IsInteractable())
         {
-            case PointerEventData.InputButton.Left:
-                break;
-            case PointerEventData.InputButton.Right:
-                EventSystem.current.SetSelectedGameObject(null);
-                break;
-            case PointerEventData.InputButton.Middle:
-                break;
-            default:
-                break;
+            switch (eventData.button)
+            {
+                case PointerEventData.InputButton.Left:
+                    break;
+                case PointerEventData.InputButton.Right:
+                    EventSystem.current.SetSelectedGameObject(null);
+                    break;
+                case PointerEventData.InputButton.Middle:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
