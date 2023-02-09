@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class s_player : MonoBehaviour
 {
     #region Movement Settings
+
     [Header("Movement")]
     [Range(0.0f, 20.0f), Tooltip("The players movement speed.")]
     public float m_movementSpeed = 10.0f;
@@ -19,7 +20,7 @@ public class s_player : MonoBehaviour
     [Tooltip("Interacts with input to apply movement horizontally.")]
     float m_verticalMovement;
     [Tooltip("The direction to move in.")]
-    Vector3 m_moveDirection;
+    public Vector3 m_moveDirection;
     bool m_mantleEnabled;
     #endregion
 
@@ -138,11 +139,9 @@ public class s_player : MonoBehaviour
 
     #region Input Settings
     [Header("Input")]
-    private PlayerInput m_playerInput;
-    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the horizontal")] 
-    float m_sensitivityX = 200; 
-    [SerializeField, Range(0.0f, 1000.0f), Tooltip("The mouse's sensitivity in the vertical")] 
-    float m_sensitivityY = 200;
+    public PlayerInput m_playerInput;
+    [SerializeField, Tooltip("The mouse's sensitivity in the horizontal")] 
+    public Vector2 m_sensitivity =  new Vector2(200.0f, 200.0f);
     #endregion 
 
 
@@ -467,6 +466,7 @@ public class s_player : MonoBehaviour
         m_sliding = false;              //Make sure we aren't
         m_playerCamera.fieldOfView = m_baseFOV;
         SetHeight(m_heightStanding);    //Return us to our normal height
+
     }
 
     /// <summary>If we're meant to be sliding, checks to see if we're grounded. If we are, apply a slide force forward and stop checking if we're meant to be sliding.</summary>
@@ -509,8 +509,8 @@ public class s_player : MonoBehaviour
     /// <param name="delta">Pass in dynamically from input look</param>
     public void CalculateCameraRotation()
     {
-        m_yRotation += m_delta.x * m_sensitivityX * m_lookMultiplier;
-        m_xRotation -= m_delta.y * m_sensitivityY * m_lookMultiplier;
+        m_yRotation += m_delta.x * m_sensitivity.x * m_lookMultiplier;
+        m_xRotation -= m_delta.y * m_sensitivity.y * m_lookMultiplier;
         m_xRotation = Mathf.Clamp(m_xRotation, -90f, 90f);
     }
 

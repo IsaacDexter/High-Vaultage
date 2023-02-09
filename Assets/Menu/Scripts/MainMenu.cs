@@ -40,7 +40,11 @@ public class MainMenu : s_menu
     public void StartGame()
     {
         UI.enabled = false;
-        StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
+
+        SceneManager.LoadScene("levelCor1");
+        SceneManager.LoadScene("PlayerControllerScene");
+        
+        // StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()

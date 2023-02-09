@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Audio;
 using TMPro;
 
 public class s_settings : s_menu
 {
+
     int m_resolutionX, m_resolutionY;
     FullScreenMode m_fullscreenMode;
     float m_brightness;
@@ -21,12 +23,18 @@ public class s_settings : s_menu
     bool m_bloom;
     bool m_motionBlur;
 
+    Vector2 m_sensitivty;
+    [Header("UI")]
+    public s_menu m_pause;
+    [Header("Graphics")]
     public UniversalRenderPipelineAsset m_pipeline;
     public s_brightness m_postProcess;
-    public s_menu m_pause;
     [SerializeField] private GameObject m_advancedSettings;
+
     protected override void Start()
     {
+        base.Start();
+
         m_open = false;
         m_timeDilation = 0.0f;
 
@@ -45,9 +53,12 @@ public class s_settings : s_menu
         m_shadowDistance = m_pipeline.shadowDistance;
         m_bloom = false;
         m_motionBlur = false;
+        if (m_player != null)
+        {
+            m_sensitivty = m_player.GetComponent<s_player>().m_sensitivity;
+        }
 
         //Apply();
-        Close();
     }
 
     public void Exit()
@@ -93,7 +104,10 @@ public class s_settings : s_menu
 
     private void ApplyControls()
     {
-        
+        if (m_player != null)
+        {
+            m_player.GetComponent<s_player>().m_sensitivity = m_sensitivty;
+        }
     }
 
     #region WindowSettings
@@ -206,15 +220,17 @@ public class s_settings : s_menu
 
     #region Control
 
-    private void SetJumpKey(TextMeshProUGUI text)
+    public void SetSensitivityX(float value)
     {
-        
+        m_sensitivty.x = value;
     }
 
-    private void UpdateControl(TextMeshProUGUI text, KeyCode key)
+    public void SetSensitivityY(float value)
     {
-
+        m_sensitivty.y = value;
     }
+
+
 
     #endregion
 }

@@ -12,7 +12,7 @@ public class s_loadVolume : MonoBehaviour
     [SerializeField] private string m_corridorToUnload;
     private void OnTriggerEnter(Collider other) 
     {
-        Debug.Log(other.tag);
+        Debug.Log($"{other.tag} {other.name}");
 
         if (other.CompareTag("Player")) //When the player triggers this
         {
