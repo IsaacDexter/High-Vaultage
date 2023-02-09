@@ -18,6 +18,8 @@ public class MainMenu : s_menu
     [SerializeField] private s_settings m_settings;
 
     [SerializeField] public List<string> levelLists;
+    [SerializeField] public GameObject loadTrigger;
+    LevelStreamer streamer = new LevelStreamer();
 
     // Start is called before the first frame update
     override protected void Start()
@@ -67,9 +69,7 @@ public class MainMenu : s_menu
     {
         UI2.enabled = true;
         UILevel.enabled = false;
+        loadTrigger.GetComponent<s_loadFirst>().loadLevelName = levelLists[LevelNumber-1];
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectedLerp(Player));
-
-
-
     }
 }

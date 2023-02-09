@@ -15,6 +15,7 @@ public class s_sceneManager : MonoBehaviour
         //levelLoader.LoadLevel("levelCor1");
         //levelLoader.LoadLevel("TriggersScene");
         StartCoroutine(streamer.AsyncLoadScene("TriggersScene", true));
-        StartCoroutine(streamer.AsyncLoadScene("levelCor1", true));
+        //StartCoroutine(streamer.AsyncLoadScene("levelCor1", true));
+        //levelLoader.UnloadLevel("MainMenuScene");
     }
 }
