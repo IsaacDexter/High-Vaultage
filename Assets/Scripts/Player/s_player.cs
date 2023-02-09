@@ -93,6 +93,8 @@ public class s_player : MonoBehaviour
     s_pauseMenu m_pauseMenu;
     [SerializeField, Tooltip("A reference to a s_hud class, to toggle it when the pause menu opens")]
     s_hud m_hud;
+    [SerializeField, Tooltip("A reference to a s_victoryMenu class, to toggle it when the player wins")]
+    s_victoryScreen m_victoryScreen;
     public float m_skipperCount;
     #endregion
 
@@ -679,6 +681,17 @@ IEnumerator DashDelay(float delay)
         m_playerInput.SwitchCurrentActionMap("Player");
 
         m_weaponWheel.Close();
+    }
+
+    public void OpenVictoryScreen()
+    {
+        m_playerInput.SwitchCurrentActionMap("UI");
+
+        m_leftHand.Cancel();
+        m_rightHand.Cancel();
+        m_weaponWheel.Close();
+        m_hud.Close();
+        m_victoryScreen.Open();
     }
 
     #endregion
