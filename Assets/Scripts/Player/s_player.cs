@@ -88,7 +88,7 @@ public class s_player : MonoBehaviour
     #region UI Settings
     [Header("UI")]
     [SerializeField, Tooltip("A reference to a s_weaponwheel class, which handles opening events etc")]
-    s_weaponWheel m_weaponWheel;
+    public s_weaponWheel m_weaponWheel;
     [SerializeField, Tooltip("A reference to a s_pausemenu class, which handles opening events etc")]
     s_pauseMenu m_pauseMenu;
     [SerializeField, Tooltip("A reference to a s_hud class, to toggle it when the pause menu opens")]
