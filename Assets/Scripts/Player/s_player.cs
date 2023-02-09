@@ -681,5 +681,16 @@ IEnumerator DashDelay(float delay)
         m_weaponWheel.Close();
     }
 
+    public void OpenVictoryMenu()
+    {
+        m_playerInput.SwitchCurrentActionMap("UI");
+
+        m_leftHand.Cancel();
+        m_rightHand.Cancel();
+        m_weaponWheel.Close();
+        m_hud.Close();
+        m_victoryMenu.Open();
+    }
+
     #endregion
 }
