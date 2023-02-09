@@ -22,11 +22,14 @@ public class s_grenadeShot : s_stickyProjectile
                 m_stuck = Stick(other);  //Stick to whatever we hit
             }
         }
-        if (other.transform.root.gameObject.tag == "Trigger"&&m_canTrigger)
+        if (other.transform.parent != null)
         {
-            m_button = other.transform.root.gameObject.GetComponent<s_trigger>();
-            m_button.Trigger();
-            m_canTrigger = false;
+            if (other.transform.parent.gameObject.tag == "Trigger" && m_canTrigger)
+            {
+                m_button = other.transform.parent.gameObject.GetComponent<s_trigger>();
+                m_button.Trigger();
+                m_canTrigger = false;
+            }
         }
 
 

@@ -22,11 +22,12 @@ public class s_stickyProjectile : MonoBehaviour
     /// <returns>Whether or not the grenade is stuck</returns>
 	virtual protected bool Stick(Collision other)
     {
-        if (other.gameObject.transform.root.gameObject.tag != "Player" && other.gameObject.transform.root.gameObject.tag != "Projectile" && other.gameObject.transform.root.gameObject.tag != "EnemyBullet")
+        if (other.gameObject.tag != "Player" && other.gameObject.tag != "Projectile" && other.gameObject.tag != "EnemyBullet")
         {
             if (m_stuck != true)
             {
-                if (other.gameObject.transform.root.gameObject.tag == "Untagged")
+                //Debug.Log(other.gameObject.transform.parent.gameObject);
+                if (other.gameObject.tag == "Untagged")
                 {
                     m_rigidbody.isKinematic = true;
                     return true;
@@ -42,7 +43,6 @@ public class s_stickyProjectile : MonoBehaviour
 
                     Vector3 offset = colisionPoint - other.gameObject.transform.position;
 
-                    Debug.Log(other.gameObject);
                     constraintSource.weight = 1;
                     constraint.constraintActive = true;
                     gameObject.transform.position = colisionPoint;

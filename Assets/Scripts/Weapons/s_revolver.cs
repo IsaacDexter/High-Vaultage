@@ -26,7 +26,7 @@ public class s_revolver : s_chargingWeapon
     [Header("Weapon Settings")]
 	/// <summary>The speed for time to move at while the weapon is charging.</summary>
 	[SerializeField] private float m_timeDilation;
-
+	s_trigger m_button;
 
 
 	/// <summary></summary>
@@ -47,8 +47,11 @@ public class s_revolver : s_chargingWeapon
     public override void Cancel()
     {
         base.Cancel();
-		Time.timeScale = 1f;
-		Time.fixedDeltaTime = 0.02F * Time.timeScale;
+		if (m_charging)
+		{
+			Time.timeScale = 1f;
+			Time.fixedDeltaTime = 0.02F * Time.timeScale;
+		}
 	}
 
     private void SpawnProjectile(Vector3 point)
@@ -85,12 +88,16 @@ public class s_revolver : s_chargingWeapon
 							furthestHit = i;
 						}
 					}
-					else if (hit[i].transform.root.gameObject.tag == "Trigger" && m_canSwitch == true)
+					if (hit[i].transform.parent != null)
 					{
-						s_trigger button = hit[i].transform.root.gameObject.GetComponent<s_trigger>();
-						button.Trigger();
-						furthestHit = i;
-						m_canSwitch = false;
+						if (hit[i].transform.parent.gameObject.tag == "Trigger" && m_canSwitch == true)
+						{
+							m_button = hit[i].transform.parent.gameObject.GetComponent<s_trigger>();
+							m_button.Trigger();
+							m_button.Detrigger();
+							furthestHit = i;
+							m_canSwitch = false;
+						}
 					}
 				}
 			}

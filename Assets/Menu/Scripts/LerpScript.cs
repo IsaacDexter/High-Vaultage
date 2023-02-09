@@ -32,12 +32,12 @@ public class LerpScript : MonoBehaviour
     {
         // First Lerp
         elapsedTime = 0;
-        desiredDuration = (elapsedTime + 3f);
+        desiredDuration = (elapsedTime + 1.5f);
         startPosition = transform.position;
         endPosition = new Vector3(547.12f, 167.17f, -390.43f);
 
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         if (transform.position != endPosition)
         {
@@ -46,11 +46,11 @@ public class LerpScript : MonoBehaviour
 
         // Second Lerp
         elapsedTime = 0;
-        desiredDuration = (elapsedTime + 3f);
+        desiredDuration = (elapsedTime + 1.5f);
         startPosition = transform.position;
         endPosition = new Vector3(550.35f, 167.17f, -390.43f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         if (transform.position != endPosition)
         {
@@ -60,11 +60,11 @@ public class LerpScript : MonoBehaviour
 
         // Third Lerp
         elapsedTime = 0;
-        desiredDuration = (elapsedTime + 3f);
+        desiredDuration = (elapsedTime + 1.5f);
         startPosition = transform.position;
         endPosition = new Vector3(550.35f, 166.83f, -389.54f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
 
         if (transform.position != endPosition)
         {
@@ -72,6 +72,7 @@ public class LerpScript : MonoBehaviour
         }
 
         UILevel.enabled = true;
+
     }
 
 
@@ -83,7 +84,6 @@ public class LerpScript : MonoBehaviour
         startPosition = transform.position;
         endPosition = new Vector3(550.35f, 167.17f, -390.43f);
 
-
         yield return new WaitForSeconds(3f);
 
         if (transform.position != endPosition)
@@ -91,8 +91,8 @@ public class LerpScript : MonoBehaviour
             yield return new WaitForSeconds(.5f);
         }
 
-
         Player.SetActive(true);
         gameObject.SetActive(false);
+
     }
 }

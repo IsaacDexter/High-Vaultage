@@ -96,7 +96,11 @@ public class s_grenadeGun : s_weapon
 	/// <summary>Destroy active grenades, then the weapon</summary>
     public override void Dequip()
     {
-		ReleaseProjectile();
+		if (m_grenadeScript != null)
+		{
+			m_grenadeScript.Detonate(m_explosionForce, m_explosionRadius, m_grenadeDamage);
+		}
+		//ReleaseProjectile();
         base.Dequip();
     }
 }
