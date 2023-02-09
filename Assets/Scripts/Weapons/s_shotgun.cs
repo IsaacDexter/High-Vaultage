@@ -67,6 +67,5 @@ public class s_shotgun : s_weapon
         Vector3 direction = m_camera.forward;                               //Get the camera's forward vector.
         direction *= -1;                                                    //Flip it
         m_rigidBody.AddForce(direction * m_kickback, ForceMode.Impulse);    //Apply a force in the opposite direction the camera according to the shotguns kickback force
-
     }
 }

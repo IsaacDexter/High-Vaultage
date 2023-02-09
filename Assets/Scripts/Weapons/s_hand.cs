@@ -17,13 +17,18 @@ public class s_hand : MonoBehaviour
     [SerializeField] public GameObject m_meleeBox;
 
     public bool m_killOnHit;
+	private void Awake()
+	{
+        m_player = gameObject.transform.parent.parent.gameObject.GetComponent<s_player>();  
+	}
 
+	public void SetInvincable(bool invincable)
+    { 
+        m_player.m_canBeHit = invincable; 
+    }
 
-    
-
-
-	/// <summary>Will call press on the currently held weapon</summary>
-	public void PullTrigger()
+    /// <summary>Will call press on the currently held weapon</summary>
+    public void PullTrigger()
     {
         if (m_weapon != null)   //Check we are holding a weapon
         {
@@ -85,5 +90,6 @@ public class s_hand : MonoBehaviour
 	private void Update()
 	{
         Regen();  //Attempt to regenerate ammo
+
 	}
 }

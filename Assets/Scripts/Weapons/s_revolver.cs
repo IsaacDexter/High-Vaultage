@@ -11,7 +11,7 @@ public class s_revolver : s_chargingWeapon
 	[SerializeField] float m_revolverMaxDamage;
 
 	/// <summary>The position to spawn projectiles at.</summary>
-	private Transform m_firePoint;
+	[SerializeField] Transform m_firePoint;
 	private bool m_canSwitch;
 	List<GameObject> targets = new List<GameObject>();
 

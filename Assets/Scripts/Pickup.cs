@@ -17,12 +17,22 @@ public class Pickup : MonoBehaviour
         m_clip = m_audioSource.clip;
     }
 
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.tag=="Player")
+		{
+			m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Pick up Sound
+			Destroy(gameObject);
+			collision.gameObject.GetComponent<s_player>().m_skipperCount += 1;
+		}
+	}
 
-    public void OnCollisionEnter(Collider other)
-    {
-        if (other.CompareTag(LookForTag))
-        {
-            m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Pick up Sound
-        }
-    }
+
+	//public void OnCollisionEnter(Collider other)
+	//{
+	//	if (other.CompareTag(LookForTag))
+	//	{
+	//		m_audioSource.PlayOneShot(m_clip, m_volume); //Plays Pick up Sound
+	//	}
+	//}
 }
