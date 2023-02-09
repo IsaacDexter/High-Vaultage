@@ -34,7 +34,6 @@ public class MainMenu : s_menu
     void Update()
     {
 
-        
     }
 
     public void StartGame()
@@ -44,7 +43,7 @@ public class MainMenu : s_menu
         SceneManager.LoadScene("levelCor1");
         SceneManager.LoadScene("PlayerControllerScene");
         
-        // StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
+        //StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()

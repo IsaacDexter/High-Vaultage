@@ -65,15 +65,44 @@ public class s_PlayerAnimator : MonoBehaviour
 
     private void HandleWeaponAnimations()
     {
-        switch (m_leftHand.m_weapon.name)
+
+        if (m_rightHand.m_weapon)
         {
-            case "aaa":
+            switch (m_rightHand.m_weapon.name.ToLower().Replace("(clone)",""))
+            {
+                case "p_glove":
+                    //Debug.Log("glove");
+                    m_rightAnimator.SetTrigger("HoldGlove");
+                    break;
+                case "p_grenadeGun":
+                    Debug.Log("gGun");
+                    m_rightAnimator.SetTrigger("HoldRanged");
+                    break;
+                case "p_harpoon":
+                    Debug.Log("harpoon");
+                    m_rightAnimator.SetTrigger("HoldSpear");
+                    break;
+                case "p_revolver":
+                    Debug.Log("revolver");
+                    m_rightAnimator.SetTrigger("HoldRanged");
+                    break;
+                case "p_shield":
+                    Debug.Log("shield");
+                    m_rightAnimator.SetTrigger("HoldRanged");
+                    break;
+                case "p_shotgun":
+                    Debug.Log("shotgun");
+                    m_rightAnimator.SetTrigger("HoldRanged");
+                    break;
+                case "p_sword":
+                    Debug.Log("sword");
+                    m_rightAnimator.SetTrigger("HoldSword");
+                    break;
 
-                break;
-
-            default:
-                Debug.Log(m_leftHand.m_weapon.name);
-                break;
+                default:
+                    Debug.Log(m_rightHand.m_weapon.name);
+                    break;
+            }
         }
     }
 }
