@@ -30,11 +30,6 @@ public class s_weaponUnlock : MonoBehaviour
             else
             {
                 player.Lock(m_weapon);
-                if (m_message)
-                {
-                    player.ShowMessage(m_weapon.GetType().Name.Replace("s_", "") + " locked!");
-                    m_message=false;
-                }
             }
 
         }
