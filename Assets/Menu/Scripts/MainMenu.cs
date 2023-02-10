@@ -69,7 +69,8 @@ public class MainMenu : s_menu
     {
         UI2.enabled = true;
         UILevel.enabled = false;
-        loadTrigger.GetComponent<s_loadFirst>().loadLevelName = levelLists[LevelNumber-1];
+        //loadTrigger.GetComponent<s_loadFirst>().loadLevelName = levelLists[LevelNumber-1];
+        loadTrigger.GetComponent<s_loadFirst>().loadLevelName = "levelCor1";
         StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectedLerp(Player));
     }
 }

@@ -10,15 +10,16 @@ public class s_sceneManager : MonoBehaviour
 
     [SerializeField] public GameObject player;
 
-    IEnumerator loadTriggerScene()
+    IEnumerator LoadSelectedLevel()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TriggersScene", LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(player.GetComponent<s_levelLoader>().loadingLevel, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
+        // Wait as we need the relative position from the triggers/ loaded level
         if (asyncLoad.isDone)
         {
             foreach (var obj in SceneManager.GetSceneByName("TriggersScene").GetRootGameObjects())
@@ -31,12 +32,30 @@ public class s_sceneManager : MonoBehaviour
                     {
                         if (obj2.name == "p_player")
                         {
-                            Debug.Log("Got player");    
-                            obj2.gameObject.transform.position = obj.transform.position;
+                            Debug.Log(obj.transform.position);
+                            //obj2.transform.position = obj.transform.position;
+
+                            //obj2.GetComponent<s_player>().LoadIntoSelectedLevel(obj.transform.position);
                         }
                     }
                 }
             }
+        }
+    }
+
+    IEnumerator loadTriggerScene()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("TriggersScene", LoadSceneMode.Additive);
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        if (asyncLoad.isDone)
+        {
+            // Triggers loaded, we can load the level now
+            StartCoroutine(LoadSelectedLevel());
         }
     }
 
@@ -48,7 +67,7 @@ public class s_sceneManager : MonoBehaviour
             SceneManager.UnloadSceneAsync("MainMenuScene");
         }
 
-        SceneManager.LoadSceneAsync(player.GetComponent<s_levelLoader>().loadingLevel, LoadSceneMode.Additive);
+        //SceneManager.LoadSceneAsync(player.GetComponent<s_levelLoader>().loadingLevel, LoadSceneMode.Additive);
         StartCoroutine(loadTriggerScene());
     }
 }
