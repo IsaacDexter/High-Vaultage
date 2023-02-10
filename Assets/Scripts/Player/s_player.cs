@@ -135,7 +135,7 @@ public class s_player : MonoBehaviour
     #region Look Settings
     [Header("Looking")]
     Vector2 m_delta;
-    float m_lookMultiplier = 0.01f;
+    float m_lookMultiplier = 0.001f;
     float m_xRotation;
     float m_yRotation;
     #endregion
