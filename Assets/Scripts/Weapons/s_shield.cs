@@ -9,7 +9,7 @@ public class s_shield : s_chargingWeapon
 	override protected void Fire()
 	{
 		m_rigidBody.useGravity = true;  //Reenable gravity
-		m_hand.SetInvincable(false);
+		m_hand.SetCanBeHit(true);
 	}
 
 	/// <summary>Disengages gravity and resets the y velocity</summary>
@@ -18,7 +18,7 @@ public class s_shield : s_chargingWeapon
         base.Press();
 		m_rigidBody.useGravity = false;
 		m_rigidBody.velocity = new Vector3(m_rigidBody.velocity.x, 0, m_rigidBody.velocity.z);
-		m_hand.SetInvincable(true);
+		m_hand.SetCanBeHit(false);
 	}
 
 	/// <summary>Reenables gravity when released</summary>

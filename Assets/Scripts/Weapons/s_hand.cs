@@ -22,7 +22,7 @@ public class s_hand : MonoBehaviour
         m_player = gameObject.transform.parent.parent.gameObject.GetComponent<s_player>();  
 	}
 
-	public void SetInvincable(bool invincable)
+	public void SetCanBeHit(bool invincable)
     { 
         m_player.m_canBeHit = invincable; 
     }
