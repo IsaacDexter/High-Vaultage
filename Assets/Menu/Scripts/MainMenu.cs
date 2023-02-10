@@ -44,10 +44,10 @@ public class MainMenu : s_menu
     {
         UI.enabled = false;
 
-        //SceneManager.LoadScene("levelCor1");
-        //SceneManager.LoadScene("PlayerControllerScene");
+        SceneManager.LoadScene("levelCor1");
+        SceneManager.LoadScene("PlayerControllerScene");
         
-        StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
+        //StartCoroutine(LerpScript.GetComponent<LerpScript>().LevelSelectLerp(UILevel));
     }
 
     public void OpenOptions()
