@@ -82,7 +82,7 @@ public class LerpScript : MonoBehaviour
         elapsedTime = 0;
         desiredDuration = (elapsedTime + 3f);
         startPosition = transform.position;
-        endPosition = new Vector3(550.35f, 167.17f, -390.43f);
+        endPosition = new Vector3(547.12f, 167.17f, -390.43f);
 
         yield return new WaitForSeconds(3f);
 
