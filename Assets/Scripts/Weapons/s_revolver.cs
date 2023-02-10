@@ -77,16 +77,19 @@ public class s_revolver : s_chargingWeapon
 			int furthestHit = 0;
 			for (int i = 0; i < hit.Length; i++)
 			{
-				if (!targets.Contains(hit[i].transform.root.gameObject))
-				{
-					targets.Add(hit[i].transform.root.gameObject);
-					if (hit[i].rigidbody != null)          //...and the hit object has a rigidbody...
+				if (!targets.Contains(hit[i].transform.parent.gameObject))
+				{ 
+					targets.Add(hit[i].transform.parent.gameObject);
+					if (hit[i].collider != null)          //...and the hit object has a rigidbody...
 					{
-						Hit(hit[i].rigidbody.transform.root.gameObject);   //...call hit on that enemy
-						if (hit[i].rigidbody.gameObject.transform.root.gameObject.layer != 8 && hit[i].rigidbody.gameObject.transform.root.gameObject.layer != 7)
-						{
-							furthestHit = i;
-						}
+						//if (hit[i].collider.gameObject.layer ==8 )
+						//{
+							Hit(hit[i].collider.transform.parent.gameObject);   //...call hit on that enemy
+							if (hit[i].collider.gameObject.transform.parent.gameObject.layer != 8 && hit[i].collider.gameObject.transform.parent.gameObject.layer != 7)
+							{
+								furthestHit = i;
+							}
+						//}
 					}
 					if (hit[i].transform.parent != null)
 					{
