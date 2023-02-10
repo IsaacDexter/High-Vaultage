@@ -9,6 +9,13 @@ public class s_levelLoader : MonoBehaviour
     LevelStreamer streamer = new LevelStreamer();
     string m_currentLevel;
 
+    [SerializeField] public string loadingLevel;
+
+    void Start()
+    {
+
+    }
+
     /// <summary>loads scene, regardless of whether or not it already exists, and sets m_currentLevel to scene. </summary>
     /// <param name="scene">The string name of the scene to load. The scene needs to be in build settings or it can't be loaded (File > Build Settings).</param>
     /// <returns>Whether the scene was loaded successfully. always true</returns>
