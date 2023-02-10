@@ -595,7 +595,6 @@ IEnumerator DashDelay(float delay)
         GetComponent<s_levelLoader>().ReloadLevel();    //Call the level loader to reload the current level. Will not reload the corridor though, luckily.
     }
 
-
 	#endregion
 
 	#region Recovering
