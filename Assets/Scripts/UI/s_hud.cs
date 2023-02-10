@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class s_hud : MonoBehaviour
 {
     public s_hand m_leftHand;
     public s_hand m_rightHand;
+    public TextMeshProUGUI m_messager;
     [SerializeField] private Image m_leftCharge;
     [SerializeField] private Image m_rightCharge;
     [SerializeField] Color m_leftColor = Color.green;
@@ -65,5 +67,17 @@ public class s_hud : MonoBehaviour
     public void Close()
     {
         gameObject.SetActive(false);
+    }
+
+    public void ShowMessage(string message, float lifetime = 2.0f)
+    {
+        m_messager.text = message;
+        StartCoroutine(ClearMessage(lifetime));
+    }
+
+    public IEnumerator ClearMessage(float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        m_messager.text = "";
     }
 }

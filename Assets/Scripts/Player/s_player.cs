@@ -699,5 +699,20 @@ IEnumerator DashDelay(float delay)
         m_victoryScreen.Open();
     }
 
+    public void Unlock(s_weapon weapon)
+    {
+        m_weaponWheel.Unlock(weapon);
+    }
+
+    public void Lock(s_weapon weapon)
+    {
+        m_weaponWheel.Lock(weapon);
+    }
+
+    public void ShowMessage(string message, float lifetime = 2.0f)
+    {
+        m_hud.ShowMessage(message, lifetime);
+    }
+
     #endregion
 }
