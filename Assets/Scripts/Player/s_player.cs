@@ -595,6 +595,11 @@ IEnumerator DashDelay(float delay)
         GetComponent<s_levelLoader>().ReloadLevel();    //Call the level loader to reload the current level. Will not reload the corridor though, luckily.
     }
 
+    public void LoadIntoSelectedLevel(Vector3 levelSpawn)
+    {
+        m_damaged = false;
+        gameObject.transform.position = levelSpawn;
+    }
 
 	#endregion
 
