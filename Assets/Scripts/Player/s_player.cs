@@ -529,7 +529,7 @@ public class s_player : MonoBehaviour
 
     #region Damaging
 
-    public bool m_canBeHit = true;
+    public bool m_canBeHit ;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -537,7 +537,7 @@ public class s_player : MonoBehaviour
         {
             Debug.Log("OWW");
             Destroy(collision.gameObject); //Destroy that bullet
-            if (!m_canBeHit)
+            if (m_canBeHit)
             {
                 Damage();   //Take damage.
             }
