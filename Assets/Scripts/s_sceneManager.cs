@@ -68,6 +68,8 @@ public class s_sceneManager : MonoBehaviour
         }
 
         SceneManager.LoadSceneAsync("levelCor1", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("TriggersScene", LoadSceneMode.Additive);
+
         //StartCoroutine(loadTriggerScene());
     }
 }
