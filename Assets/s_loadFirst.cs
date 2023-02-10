@@ -8,6 +8,7 @@ public class s_loadFirst : MonoBehaviour
 {
     LevelStreamer streamer = new LevelStreamer();
     [SerializeField] public string loadLevelName;
+    [SerializeField] public GameObject player;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,8 +21,8 @@ public class s_loadFirst : MonoBehaviour
 
             if (levelLoader != null)    //once we have it,
             {
-                SceneManager.LoadScene(loadLevelName);
-                StartCoroutine(streamer.AsyncLoadScene("PlayerControllerScene", true));
+                SceneManager.LoadScene("PlayerControllerScene");
+                player.GetComponent<s_levelLoader>().loadingLevel = loadLevelName;
 
                 gameObject.SetActive(false); //Destroy the load volume so we no longer have to worry about loading twice.
             }
